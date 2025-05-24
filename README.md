@@ -9,6 +9,12 @@ Esta es una aplicación de ejemplo para Android escrita en **Kotlin**. Utiliza l
 - **minSdk**: 24
 - **JVM target**: 11
 
+Las versiones de estas dependencias se definen en
+`gradle/libs.versions.toml` y el wrapper de Gradle está configurado en
+`gradle/wrapper/gradle-wrapper.properties`. Si necesitas compilar sin
+conexión a Internet, asegúrate de contar con la distribución de Gradle
+de forma local o modifica `distributionUrl` a una ruta `file://`.
+
 La aplicación implementa tres pantallas simples (Home, Gallery y Slideshow) que muestran texto estático y pueden navegarse mediante el menú lateral.
 
 ## Estructura
