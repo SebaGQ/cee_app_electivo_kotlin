@@ -10,9 +10,6 @@ kotlin {
     jvmToolchain(11)
 }
 
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     implementation(libs.hibernate.core)
