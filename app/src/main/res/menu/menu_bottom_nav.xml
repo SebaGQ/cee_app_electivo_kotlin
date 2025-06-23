@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_elections"
+        android:title="Elections"
+        android:icon="@drawable/ic_menu_camera" />
+    <item
+        android:id="@+id/menu_results"
+        android:title="Results"
+        android:enabled="false"
+        android:icon="@drawable/ic_menu_gallery" />
+</menu>

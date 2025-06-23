@@ -3,13 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/electionsFragment">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.kotlin.cee_app.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/electionsFragment"
+        android:name="com.kotlin.cee_app.ui.elections.ElectionsFragment"
+        android:label="Elections"
+        tools:layout="@layout/fragment_elections">
+        <action
+            android:id="@+id/action_elections_to_voteDetail"
+            app:destination="@id/voteDetailFragment" />
+        <action
+            android:id="@+id/action_elections_to_createElection"
+            app:destination="@id/createElectionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createElectionFragment"
+        android:name="com.kotlin.cee_app.ui.elections.CreateElectionFragment"
+        android:label="Create Election"
+        tools:layout="@layout/fragment_create_election" />
+
+    <fragment
+        android:id="@+id/voteDetailFragment"
+        android:name="com.kotlin.cee_app.ui.elections.VoteDetailFragment"
+        android:label="Vote"
+        tools:layout="@layout/fragment_vote_detail">
+        <argument
+            android:name="votacionId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_voteDetail_to_voteConfirmation"
+            app:destination="@id/voteConfirmationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/voteConfirmationFragment"
+        android:name="com.kotlin.cee_app.ui.elections.VoteConfirmationFragment"
+        android:label="Confirmation"
+        tools:layout="@layout/fragment_vote_confirmation" />
 
     <fragment
         android:id="@+id/nav_gallery"
