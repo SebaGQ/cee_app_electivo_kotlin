@@ -11,6 +11,7 @@ import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
+import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.databinding.FragmentCreateElectionBinding
 
@@ -35,7 +36,7 @@ class CreateElectionFragment : Fragment() {
             val chip = Chip(requireContext()).apply {
                 text = "Opcion ${counter++}"
                 isCloseIconVisible = true
-                chipSurfaceColor = ColorStateList.valueOf(
+                chipBackgroundColor = ColorStateList.valueOf(
                     ContextCompat.getColor(context, R.color.background_gray)
                 )
                 chipStrokeColor = ColorStateList.valueOf(

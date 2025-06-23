@@ -30,55 +30,24 @@ class ElectionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentElectionsBinding.inflate(inflater, container, false)
-        TopBar.setup(binding.topBar, R.string.title_elections)
-
-        val activeAdapter = VotacionAdapter { votacion ->
+        TopBar.setup(binding.includeTopBar.topBar, R.string.title_elections)
+        val adapter = VotacionAdapter { votacion ->
             findNavController().navigate(
                 R.id.action_elections_to_voteDetail,
                 Bundle().apply { putString("votacionId", votacion.id) }
             )
         }
-        val pastAdapter = VotacionAdapter { }
-        binding.recyclerActive.adapter = activeAdapter
-        binding.recyclerPast.adapter = pastAdapter
+        binding.recyclerActive.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.active.collectLatest { list ->
-                binding.textNoActive.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
-                activeAdapter.submit(
-                    list,
-                    viewModel.progress.value,
-                    viewModel.totalUsers.value
-                )
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.past.collectLatest { list ->
-                pastAdapter.submit(
-                    list,
-                    emptyMap(),
-                    viewModel.totalUsers.value,
-                    viewModel.winners.value
-                )
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.progress.collectLatest { map ->
-                activeAdapter.submit(viewModel.active.value, map, viewModel.totalUsers.value)
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.winners.collectLatest { map ->
-                pastAdapter.submit(viewModel.past.value, emptyMap(), viewModel.totalUsers.value, map)
+            viewModel.votaciones.collectLatest { list ->
+                adapter.submit(list, viewModel.progress.value, viewModel.totalUsers.value)
             }
         }
 
         if (SessionManager.isAdmin()) {
             TopBar.setup(
-                binding.topBar,
+                binding.includeTopBar.topBar,
                 R.string.title_elections,
                 R.menu.menu_elections
             ) {
