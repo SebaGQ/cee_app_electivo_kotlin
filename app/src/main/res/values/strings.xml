@@ -4,4 +4,9 @@
     <string name="title_elections">Elections</string>
     <string name="title_results">Results</string>
     <string name="vote_saved">¡Voto registrado!</string>
+    <string name="title_home">Home</string>
+    <string name="title_upcoming">Upcoming</string>
+    <string name="add_option">ADD OPTION</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
 </resources>

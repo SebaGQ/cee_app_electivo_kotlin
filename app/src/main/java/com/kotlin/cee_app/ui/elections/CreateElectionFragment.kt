@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kotlin.cee_app.ui.elections.viewmodel.CreateElectionViewModel
+import android.content.res.ColorStateList
+import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.data.SessionManager
@@ -33,6 +35,12 @@ class CreateElectionFragment : Fragment() {
             val chip = Chip(requireContext()).apply {
                 text = "Opcion ${counter++}"
                 isCloseIconVisible = true
+                chipSurfaceColor = ColorStateList.valueOf(
+                    ContextCompat.getColor(context, R.color.background_gray)
+                )
+                chipStrokeColor = ColorStateList.valueOf(
+                    ContextCompat.getColor(context, R.color.primary_blue)
+                )
                 setOnCloseIconClickListener {
                     binding.chipGroup.removeView(this)
                     viewModel.opciones.remove(text.toString())
@@ -57,3 +65,4 @@ class CreateElectionFragment : Fragment() {
         _binding = null
     }
 }
+
