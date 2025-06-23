@@ -1,4 +1,4 @@
-package com.kotlin.cee_app.ui.elections
+package com.kotlin.cee_app.ui.elections.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
