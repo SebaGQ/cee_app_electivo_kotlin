@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.kotlin.cee_app.ui.components.TopBar
+import com.kotlin.cee_app.ui.elections.adapter.VotacionAdapter
+import com.kotlin.cee_app.ui.elections.viewmodel.ElectionsViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -27,6 +30,8 @@ class ElectionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentElectionsBinding.inflate(inflater, container, false)
+        TopBar.setup(binding.topBar, R.string.title_elections)
+
         val adapter = VotacionAdapter { votacion ->
             findNavController().navigate(
                 R.id.action_elections_to_voteDetail,
@@ -42,8 +47,11 @@ class ElectionsFragment : Fragment() {
         }
 
         if (SessionManager.isAdmin()) {
-            binding.toolbar.inflateMenu(R.menu.menu_elections)
-            binding.toolbar.setOnMenuItemClickListener {
+            TopBar.setup(
+                binding.topBar,
+                R.string.title_elections,
+                R.menu.menu_elections
+            ) {
                 if (it.itemId == R.id.action_add_election) {
                     findNavController().navigate(R.id.action_elections_to_createElection)
                     true

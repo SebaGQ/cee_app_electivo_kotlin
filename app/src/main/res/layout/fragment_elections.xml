@@ -6,13 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F5F6F7">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#0A4E84"
-        android:title="Ceecinf"
-        android:titleTextColor="@android:color/white" />
+    <include layout="@layout/include_top_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"

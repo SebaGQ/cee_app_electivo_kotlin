@@ -1,4 +1,4 @@
-package com.kotlin.cee_app.ui.elections
+package com.kotlin.cee_app.ui.elections.adapter
 
 import android.view.LayoutInflater
 import android.view.View

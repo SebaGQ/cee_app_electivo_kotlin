@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.kotlin.cee_app.ui.elections.viewmodel.CreateElectionViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.data.SessionManager
