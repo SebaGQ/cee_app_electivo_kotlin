@@ -3,14 +3,18 @@ package com.kotlin.cee_app.ui.elections.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.VotacionEntity
 
 class VotacionAdapter(
-    private val onClick: (VotacionEntity) -> Unit
+    private val onClick: (VotacionEntity) -> Unit,
+    private val onEdit: (VotacionEntity) -> Unit,
+    private val onDelete: (VotacionEntity) -> Unit,
 ) : RecyclerView.Adapter<VotacionAdapter.Vh>() {
 
     private var data: List<VotacionEntity> = emptyList()
@@ -64,6 +68,18 @@ class VotacionAdapter(
             }
         }
         holder.itemView.setOnClickListener { onClick(item) }
+        holder.menu.setOnClickListener { v ->
+            val popup = PopupMenu(v.context, v)
+            popup.inflate(R.menu.menu_votacion_item)
+            popup.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.action_edit -> { onEdit(item); true }
+                    R.id.action_delete -> { onDelete(item); true }
+                    else -> false
+                }
+            }
+            popup.show()
+        }
     }
 
     override fun getItemCount(): Int = data.size
@@ -73,6 +89,7 @@ class VotacionAdapter(
         val estado: TextView = itemView.findViewById(R.id.textEstado)
         val progress: ProgressBar = itemView.findViewById(R.id.progressVotos)
         val winner: TextView = itemView.findViewById(R.id.textWinner)
+        val menu: ImageView = itemView.findViewById(R.id.iconInfo)
     }
 }
 

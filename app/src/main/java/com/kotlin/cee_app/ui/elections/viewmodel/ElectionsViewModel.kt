@@ -63,4 +63,10 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
         }
         _winners.value = map
     }
+
+    fun eliminar(votacion: VotacionEntity) {
+        viewModelScope.launch {
+            repo.eliminarVotacion(votacion.id)
+        }
+    }
 }

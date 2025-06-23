@@ -22,7 +22,12 @@
         android:id="@+id/createElectionFragment"
         android:name="com.kotlin.cee_app.ui.elections.CreateElectionFragment"
         android:label="Create"
-        tools:layout="@layout/fragment_create_election" />
+        tools:layout="@layout/fragment_create_election">
+        <argument
+            android:name="votacionId"
+            app:argType="string"
+            android:nullable="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/voteDetailFragment"

@@ -16,6 +16,18 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
     suspend fun insertarVotacion(votacion: VotacionEntity) =
         db.votacionDao().insert(votacion)
 
+    suspend fun actualizarVotacion(votacion: VotacionEntity) =
+        db.votacionDao().update(votacion)
+
+    suspend fun eliminarVotacion(id: String) {
+        db.votoDao().deleteByVotacionId(id)
+        db.opcionDao().deleteByVotacionId(id)
+        db.votacionDao().deleteById(id)
+    }
+
+    suspend fun eliminarOpciones(votacionId: String) =
+        db.opcionDao().deleteByVotacionId(votacionId)
+
     suspend fun obtenerVotacion(id: String) =
         db.votacionDao().findById(id)
 
