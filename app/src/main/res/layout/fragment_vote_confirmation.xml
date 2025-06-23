@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageCheck"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:tint="#1FB76C"
+        android:src="@android:drawable/checkbox_on_background" />
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:text="¡Voto registrado!"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/buttonResults"
+        android:text="Ver resultados"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

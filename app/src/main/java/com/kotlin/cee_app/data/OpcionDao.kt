@@ -12,4 +12,7 @@ interface OpcionDao {
 
     @Query("SELECT * FROM opciones")
     fun getAll(): Flow<List<OpcionEntity>>
+
+    @Query("SELECT * FROM opciones WHERE votacionId = :votacionId")
+    fun getByVotacionId(votacionId: String): Flow<List<OpcionEntity>>
 }

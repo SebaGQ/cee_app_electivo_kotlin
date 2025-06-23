@@ -12,4 +12,7 @@ interface UsuarioDao {
 
     @Query("SELECT * FROM usuarios")
     fun getAll(): Flow<List<UsuarioEntity>>
+
+    @Query("SELECT COUNT(*) FROM usuarios")
+    suspend fun countAll(): Int
 }
