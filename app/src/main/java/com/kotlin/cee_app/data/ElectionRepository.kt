@@ -28,6 +28,9 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
     suspend fun contarVotos(votacionId: String) =
         db.votoDao().countByVotacion(votacionId)
 
+    suspend fun opcionGanadora(votacionId: String): OpcionEntity? =
+        db.opcionDao().getWinnerForVotacion(votacionId)
+
     suspend fun totalUsuarios() = db.usuarioDao().countAll()
 
     companion object {
