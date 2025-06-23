@@ -12,4 +12,7 @@ interface VotacionDao {
 
     @Query("SELECT * FROM votaciones")
     fun getAll(): Flow<List<VotacionEntity>>
+
+    @Query("SELECT * FROM votaciones WHERE id = :id")
+    suspend fun findById(id: String): VotacionEntity?
 }
