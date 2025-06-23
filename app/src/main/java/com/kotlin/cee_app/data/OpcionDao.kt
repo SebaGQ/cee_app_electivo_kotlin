@@ -16,6 +16,9 @@ interface OpcionDao {
     @Query("SELECT * FROM opciones WHERE votacionId = :votacionId")
     fun getByVotacionId(votacionId: String): Flow<List<OpcionEntity>>
 
+    @Query("DELETE FROM opciones WHERE votacionId = :votacionId")
+    suspend fun deleteByVotacionId(votacionId: String)
+
     @Query(
         "SELECT o.* FROM opciones o LEFT JOIN votos v ON o.id = v.opcionId " +
             "WHERE o.votacionId = :votacionId " +

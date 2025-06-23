@@ -31,12 +31,23 @@ class ElectionsFragment : Fragment() {
     ): View {
         _binding = FragmentElectionsBinding.inflate(inflater, container, false)
         TopBar.setup(binding.includeTopBar.topBar, R.string.title_elections)
-        val adapter = VotacionAdapter { votacion ->
-            findNavController().navigate(
-                R.id.action_elections_to_voteDetail,
-                Bundle().apply { putString("votacionId", votacion.id) }
-            )
-        }
+        val adapter = VotacionAdapter(
+            onClick = { votacion ->
+                findNavController().navigate(
+                    R.id.action_elections_to_voteDetail,
+                    Bundle().apply { putString("votacionId", votacion.id) }
+                )
+            },
+            onEdit = { votacion ->
+                findNavController().navigate(
+                    R.id.action_elections_to_createElection,
+                    Bundle().apply { putString("votacionId", votacion.id) }
+                )
+            },
+            onDelete = { votacion ->
+                viewModel.eliminar(votacion)
+            }
+        )
         binding.recyclerActive.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -46,16 +57,18 @@ class ElectionsFragment : Fragment() {
         }
 
         if (SessionManager.isAdmin()) {
-            TopBar.setup(
-                binding.includeTopBar.topBar,
-                R.string.title_elections,
-                R.menu.menu_elections
-            ) {
-                if (it.itemId == R.id.action_add_election) {
-                    findNavController().navigate(R.id.action_elections_to_createElection)
-                    true
-                } else false
+            binding.fabMain.visibility = View.VISIBLE
+            binding.fabMain.setOnClickListener {
+                binding.fabCreate.visibility =
+                    if (binding.fabCreate.visibility == View.VISIBLE) View.GONE else View.VISIBLE
             }
+            binding.fabCreate.setOnClickListener {
+                binding.fabCreate.visibility = View.GONE
+                findNavController().navigate(R.id.action_elections_to_createElection)
+            }
+        } else {
+            binding.fabMain.visibility = View.GONE
+            binding.fabCreate.visibility = View.GONE
         }
 
         binding.bottomNav.setOnItemSelectedListener { item ->
