@@ -5,11 +5,16 @@
     android:layout_height="match_parent"
     android:background="@color/background_gray">
 
-    <LinearLayout
-        android:id="@+id/contentLayout"
-        android:orientation="vertical"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/contentLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <include
         android:id="@+id/includeTopBar"
@@ -49,7 +54,8 @@
         android:layout_height="wrap_content"
         app:menu="@menu/menu_bottom" />
 
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabMain"

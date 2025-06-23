@@ -11,6 +11,7 @@ import androidx.lifecycle.asLiveData
 import com.kotlin.cee_app.ui.elections.viewmodel.CreateElectionViewModel
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.R
@@ -92,6 +93,7 @@ class CreateElectionFragment : Fragment() {
             val desc = binding.editDescription.text.toString()
             viewModel.guardar(title, desc)
             Snackbar.make(binding.root, "Guardado", Snackbar.LENGTH_SHORT).show()
+            findNavController().navigateUp()
         }
 
         return binding.root
