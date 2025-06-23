@@ -46,13 +46,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            app:srcCompat="@android:drawable/ic_menu_save" />
+
     </LinearLayout>
 </ScrollView>
 
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/fabSave"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom|end"
-    android:layout_margin="16dp"
-    app:srcCompat="@android:drawable/ic_menu_save" />
+
