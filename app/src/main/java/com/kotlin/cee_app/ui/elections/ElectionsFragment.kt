@@ -10,6 +10,7 @@ import com.kotlin.cee_app.ui.components.TopBar
 import com.kotlin.cee_app.ui.elections.adapter.VotacionAdapter
 import com.kotlin.cee_app.ui.elections.viewmodel.ElectionsViewModel
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.R
@@ -31,6 +32,10 @@ class ElectionsFragment : Fragment() {
     ): View {
         _binding = FragmentElectionsBinding.inflate(inflater, container, false)
         TopBar.setup(binding.includeTopBar.topBar, R.string.title_elections)
+
+        binding.recyclerActive.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerPast.layoutManager = LinearLayoutManager(requireContext())
+
         val adapter = VotacionAdapter(
             onClick = { votacion ->
                 findNavController().navigate(
@@ -50,9 +55,35 @@ class ElectionsFragment : Fragment() {
         )
         binding.recyclerActive.adapter = adapter
 
+        val pastAdapter = VotacionAdapter(
+            onClick = { votacion ->
+                findNavController().navigate(
+                    R.id.action_elections_to_voteDetail,
+                    Bundle().apply { putString("votacionId", votacion.id) }
+                )
+            },
+            onEdit = { votacion ->
+                findNavController().navigate(
+                    R.id.action_elections_to_createElection,
+                    Bundle().apply { putString("votacionId", votacion.id) }
+                )
+            },
+            onDelete = { votacion ->
+                viewModel.eliminar(votacion)
+            }
+        )
+        binding.recyclerPast.adapter = pastAdapter
+
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.votaciones.collectLatest { list ->
+            viewModel.active.collectLatest { list ->
                 adapter.submit(list, viewModel.progress.value, viewModel.totalUsers.value)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.past.collectLatest { list ->
+                pastAdapter.submit(list, emptyMap(), viewModel.totalUsers.value, viewModel.winners.value)
+                binding.textPastHeader.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
             }
         }
 
