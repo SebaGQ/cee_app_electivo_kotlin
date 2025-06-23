@@ -34,6 +34,10 @@ class VotacionAdapter(
         val item = data[position]
         holder.title.text = item.titulo
         holder.estado.text = item.estado
+        holder.estado.setTextColor(
+            if (item.estado == "Abierta") holder.itemView.context.getColor(R.color.primary_blue)
+            else holder.itemView.context.getColor(R.color.black)
+        )
         val count = progress[item.id] ?: 0
         if (item.estado == "Abierta") {
             holder.progress.visibility = View.VISIBLE
@@ -53,3 +57,4 @@ class VotacionAdapter(
         val progress: ProgressBar = itemView.findViewById(R.id.progressVotos)
     }
 }
+

@@ -3,5 +3,6 @@
     android:id="@+id/topBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#0A4E84"
-    android:titleTextColor="@android:color/white" />
+    android:background="?attr/colorPrimary"
+    android:titleTextColor="@android:color/white"
+    app:popupTheme="@style/ThemeOverlay.Material3.Light" />

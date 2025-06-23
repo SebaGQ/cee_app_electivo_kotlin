@@ -4,6 +4,8 @@ import android.view.MenuItem
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import com.kotlin.cee_app.R
 
 object TopBar {
     fun setup(
@@ -13,6 +15,9 @@ object TopBar {
         onMenuItemClick: ((MenuItem) -> Boolean)? = null
     ) {
         toolbar.setTitle(titleRes)
+        toolbar.setTitleTextColor(
+            ContextCompat.getColor(toolbar.context, R.color.white)
+        )
         menuRes?.let {
             toolbar.menu.clear()
             toolbar.inflateMenu(it)

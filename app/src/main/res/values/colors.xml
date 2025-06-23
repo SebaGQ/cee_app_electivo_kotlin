@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary_blue">#0A4E84</color>
     <color name="background_gray">#F5F6F7</color>
+    <color name="success_green">#1FB76C</color>
+    <color name="text_secondary">#555555</color>
 </resources>
