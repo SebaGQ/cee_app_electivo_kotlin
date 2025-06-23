@@ -9,7 +9,6 @@ import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.data.VotacionEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.UUID
 
@@ -35,6 +34,8 @@ class CreateElectionViewModel(application: Application) : AndroidViewModel(appli
                 _titulo.value = it.titulo
                 _descripcion.value = it.descripcion
             }
+        }
+        viewModelScope.launch {
             repo.opcionesDeVotacion(id).collect { list ->
                 _opciones.value = list.map { it.descripcion }
             }
@@ -47,27 +48,25 @@ class CreateElectionViewModel(application: Application) : AndroidViewModel(appli
     private val _descripcion = MutableStateFlow("")
     val descripcion: StateFlow<String> = _descripcion
 
-    fun guardar(titulo: String, descripcion: String) {
-        viewModelScope.launch {
-            val id = editId ?: UUID.randomUUID().toString()
-            val votacion = VotacionEntity(
-                id = id,
-                titulo = titulo,
-                descripcion = descripcion,
-                fechaInicio = LocalDate.now(),
-                fechaFin = LocalDate.now(),
-                estado = "Abierta",
-                adminId = SessionManager.currentUserId
-            )
-            if (editId == null) {
-                repo.insertarVotacion(votacion)
-            } else {
-                repo.actualizarVotacion(votacion)
-                repo.eliminarOpciones(id)
-            }
-            _opciones.value.forEach {
-                repo.insertarOpcion(OpcionEntity(descripcion = it, votacionId = id))
-            }
+    suspend fun guardar(titulo: String, descripcion: String) {
+        val id = editId ?: UUID.randomUUID().toString()
+        val votacion = VotacionEntity(
+            id = id,
+            titulo = titulo,
+            descripcion = descripcion,
+            fechaInicio = LocalDate.now(),
+            fechaFin = LocalDate.now(),
+            estado = "Abierta",
+            adminId = SessionManager.currentUserId
+        )
+        if (editId == null) {
+            repo.insertarVotacion(votacion)
+        } else {
+            repo.actualizarVotacion(votacion)
+            repo.eliminarOpciones(id)
+        }
+        _opciones.value.forEach {
+            repo.insertarOpcion(OpcionEntity(descripcion = it, votacionId = id))
         }
     }
 }

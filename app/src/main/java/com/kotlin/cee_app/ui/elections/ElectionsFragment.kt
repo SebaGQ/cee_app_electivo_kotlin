@@ -56,6 +56,13 @@ class ElectionsFragment : Fragment() {
             }
         }
 
+        binding.swipeRefresh.setOnRefreshListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.refrescar()
+                binding.swipeRefresh.isRefreshing = false
+            }
+        }
+
         if (SessionManager.isAdmin()) {
             binding.fabMain.visibility = View.VISIBLE
             binding.fabMain.setOnClickListener {

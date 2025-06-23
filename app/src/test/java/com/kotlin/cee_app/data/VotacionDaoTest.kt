@@ -44,4 +44,32 @@ class VotacionDaoTest {
         assertEquals(1, list.size)
         assertEquals("Eleccion", list.first().titulo)
     }
+
+    @Test
+    fun flow_emits_after_second_insert() = runBlocking {
+        val v1 = VotacionEntity(
+            id = "v1",
+            titulo = "A",
+            descripcion = "d",
+            fechaInicio = LocalDate.now(),
+            fechaFin = LocalDate.now(),
+            estado = "ABIERTA",
+            adminId = "a1",
+        )
+        dao.insert(v1)
+        assertEquals(1, dao.getAll().first().size)
+
+        val v2 = VotacionEntity(
+            id = "v2",
+            titulo = "B",
+            descripcion = "d",
+            fechaInicio = LocalDate.now(),
+            fechaFin = LocalDate.now(),
+            estado = "ABIERTA",
+            adminId = "a1",
+        )
+        dao.insert(v2)
+        val list = dao.getAll().first()
+        assertEquals(2, list.size)
+    }
 }

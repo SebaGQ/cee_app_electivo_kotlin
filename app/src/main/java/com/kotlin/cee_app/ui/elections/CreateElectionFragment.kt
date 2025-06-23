@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import com.kotlin.cee_app.ui.elections.viewmodel.CreateElectionViewModel
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
@@ -90,8 +92,11 @@ class CreateElectionFragment : Fragment() {
         binding.fabSave.setOnClickListener {
             val title = binding.editTitle.text.toString()
             val desc = binding.editDescription.text.toString()
-            viewModel.guardar(title, desc)
-            Snackbar.make(binding.root, "Guardado", Snackbar.LENGTH_SHORT).show()
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.guardar(title, desc)
+                Snackbar.make(binding.root, "Guardado", Snackbar.LENGTH_SHORT).show()
+                findNavController().navigateUp()
+            }
         }
 
         return binding.root

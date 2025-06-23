@@ -7,6 +7,7 @@ import com.kotlin.cee_app.data.ElectionRepository
 import com.kotlin.cee_app.data.VotacionEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class ElectionsViewModel(application: Application) : AndroidViewModel(application) {
@@ -68,5 +69,15 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             repo.eliminarVotacion(votacion.id)
         }
+    }
+
+    suspend fun refrescar() {
+        val list = repo.votaciones.first()
+        _votaciones.value = list
+        _active.value = list.filter { it.estado == "Abierta" }
+        val pastList = list.filter { it.estado != "Abierta" }
+        _past.value = pastList
+        updateProgress(_active.value)
+        updateWinners(pastList)
     }
 }
