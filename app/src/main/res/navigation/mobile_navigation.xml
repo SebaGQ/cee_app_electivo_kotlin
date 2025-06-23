@@ -25,7 +25,8 @@
         tools:layout="@layout/fragment_create_election">
         <argument
             android:name="votacionId"
-            app:argType="string"/>
+            app:argType="string"
+            android:defaultValue="@null" />
     </fragment>
 
     <fragment
