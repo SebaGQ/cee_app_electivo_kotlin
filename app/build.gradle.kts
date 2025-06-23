@@ -5,16 +5,15 @@ plugins {
 }
 
 android {
-    namespace = "com.kotlin.cee_app"
+    namespace  = "com.kotlin.cee_app"
     compileSdk = 35
 
     defaultConfig {
         applicationId = "com.kotlin.cee_app"
-        minSdk = 24
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
-
+        minSdk        = 24
+        targetSdk     = 35
+        versionCode   = 1
+        versionName   = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -27,20 +26,23 @@ android {
             )
         }
     }
+
+    /* Alinea Java/Kotlin a 17 */
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures {
-        viewBinding = true
-    }
+    kotlinOptions { jvmTarget = "17" }
+
+    buildFeatures { viewBinding = true }
+}
+
+/* Evita la colisión de anotaciones duplicadas */
+configurations.configureEach {
+    exclude(group = "com.intellij", module = "annotations")
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -53,6 +55,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     kapt(libs.androidx.room.compiler)
     implementation(libs.kotlinx.coroutines.core)
+
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
