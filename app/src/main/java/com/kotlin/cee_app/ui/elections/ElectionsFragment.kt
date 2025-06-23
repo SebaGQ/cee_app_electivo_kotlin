@@ -32,17 +32,47 @@ class ElectionsFragment : Fragment() {
         _binding = FragmentElectionsBinding.inflate(inflater, container, false)
         TopBar.setup(binding.topBar, R.string.title_elections)
 
-        val adapter = VotacionAdapter { votacion ->
+        val activeAdapter = VotacionAdapter { votacion ->
             findNavController().navigate(
                 R.id.action_elections_to_voteDetail,
                 Bundle().apply { putString("votacionId", votacion.id) }
             )
         }
-        binding.recycler.adapter = adapter
+        val pastAdapter = VotacionAdapter { }
+        binding.recyclerActive.adapter = activeAdapter
+        binding.recyclerPast.adapter = pastAdapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.votaciones.collectLatest { list ->
-                adapter.submit(list, viewModel.progress.value, viewModel.totalUsers.value)
+            viewModel.active.collectLatest { list ->
+                binding.textNoActive.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+                activeAdapter.submit(
+                    list,
+                    viewModel.progress.value,
+                    viewModel.totalUsers.value
+                )
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.past.collectLatest { list ->
+                pastAdapter.submit(
+                    list,
+                    emptyMap(),
+                    viewModel.totalUsers.value,
+                    viewModel.winners.value
+                )
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.progress.collectLatest { map ->
+                activeAdapter.submit(viewModel.active.value, map, viewModel.totalUsers.value)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.winners.collectLatest { map ->
+                pastAdapter.submit(viewModel.past.value, emptyMap(), viewModel.totalUsers.value, map)
             }
         }
 

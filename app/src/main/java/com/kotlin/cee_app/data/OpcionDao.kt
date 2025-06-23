@@ -15,4 +15,11 @@ interface OpcionDao {
 
     @Query("SELECT * FROM opciones WHERE votacionId = :votacionId")
     fun getByVotacionId(votacionId: String): Flow<List<OpcionEntity>>
+
+    @Query(
+        "SELECT o.* FROM opciones o LEFT JOIN votos v ON o.id = v.opcionId " +
+            "WHERE o.votacionId = :votacionId " +
+            "GROUP BY o.id ORDER BY COUNT(v.id) DESC LIMIT 1"
+    )
+    suspend fun getWinnerForVotacion(votacionId: String): OpcionEntity?
 }

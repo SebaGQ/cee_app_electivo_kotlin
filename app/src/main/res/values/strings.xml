@@ -9,4 +9,7 @@
     <string name="add_option">ADD OPTION</string>
     <string name="start_date">Start Date</string>
     <string name="end_date">End Date</string>
+    <string name="no_active_elections">No hay elecciones activas</string>
+    <string name="past_elections_header">Elecciones pasadas</string>
+    <string name="winner_label">Ganador: %1$s</string>
 </resources>

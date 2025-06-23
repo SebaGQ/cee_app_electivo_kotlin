@@ -16,11 +16,18 @@ class VotacionAdapter(
     private var data: List<VotacionEntity> = emptyList()
     private var progress: Map<String, Int> = emptyMap()
     private var totalUsers: Int = 1
+    private var winners: Map<String, String> = emptyMap()
 
-    fun submit(list: List<VotacionEntity>, progressMap: Map<String, Int>, total: Int) {
+    fun submit(
+        list: List<VotacionEntity>,
+        progressMap: Map<String, Int>,
+        total: Int,
+        winnersMap: Map<String, String> = emptyMap()
+    ) {
         data = list
         progress = progressMap
         totalUsers = if (total == 0) 1 else total
+        winners = winnersMap
         notifyDataSetChanged()
     }
 
@@ -43,8 +50,18 @@ class VotacionAdapter(
             holder.progress.visibility = View.VISIBLE
             holder.progress.max = totalUsers
             holder.progress.progress = count
+            holder.winner.visibility = View.GONE
         } else {
             holder.progress.visibility = View.GONE
+            val w = winners[item.id]
+            if (w != null) {
+                holder.winner.visibility = View.VISIBLE
+                holder.winner.text = holder.itemView.context.getString(
+                    R.string.winner_label, w
+                )
+            } else {
+                holder.winner.visibility = View.GONE
+            }
         }
         holder.itemView.setOnClickListener { onClick(item) }
     }
@@ -55,6 +72,7 @@ class VotacionAdapter(
         val title: TextView = itemView.findViewById(R.id.textTitle)
         val estado: TextView = itemView.findViewById(R.id.textEstado)
         val progress: ProgressBar = itemView.findViewById(R.id.progressVotos)
+        val winner: TextView = itemView.findViewById(R.id.textWinner)
     }
 }
 
