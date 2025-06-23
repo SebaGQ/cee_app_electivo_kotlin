@@ -31,7 +31,8 @@ class ElectionsFragment : Fragment() {
     ): View {
         _binding = FragmentElectionsBinding.inflate(inflater, container, false)
         TopBar.setup(binding.includeTopBar.topBar, R.string.title_elections)
-        val adapter = VotacionAdapter(
+
+        val activeAdapter = VotacionAdapter(
             onClick = { votacion ->
                 findNavController().navigate(
                     R.id.action_elections_to_voteDetail,
@@ -48,11 +49,51 @@ class ElectionsFragment : Fragment() {
                 viewModel.eliminar(votacion)
             }
         )
-        binding.recyclerActive.adapter = adapter
+
+        val pastAdapter = VotacionAdapter(
+            onClick = { votacion ->
+                findNavController().navigate(
+                    R.id.action_elections_to_voteDetail,
+                    Bundle().apply { putString("votacionId", votacion.id) }
+                )
+            },
+            onEdit = { votacion ->
+                findNavController().navigate(
+                    R.id.action_elections_to_createElection,
+                    Bundle().apply { putString("votacionId", votacion.id) }
+                )
+            },
+            onDelete = { votacion ->
+                viewModel.eliminar(votacion)
+            }
+        )
+
+        binding.recyclerActive.adapter = activeAdapter
+        binding.recyclerPast.adapter = pastAdapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.votaciones.collectLatest { list ->
-                adapter.submit(list, viewModel.progress.value, viewModel.totalUsers.value)
+            viewModel.active.collectLatest { list ->
+                binding.textNoActive.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+                activeAdapter.submit(list, viewModel.progress.value, viewModel.totalUsers.value)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.past.collectLatest { list ->
+                binding.textPastHeader.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
+                pastAdapter.submit(list, emptyMap(), viewModel.totalUsers.value, viewModel.winners.value)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.progress.collectLatest { map ->
+                activeAdapter.submit(viewModel.active.value, map, viewModel.totalUsers.value)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.winners.collectLatest { map ->
+                pastAdapter.submit(viewModel.past.value, emptyMap(), viewModel.totalUsers.value, map)
             }
         }
 
