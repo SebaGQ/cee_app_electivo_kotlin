@@ -12,6 +12,8 @@ import com.kotlin.cee_app.data.OpcionPercent
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.VotacionEntity
+import com.kotlin.cee_app.data.isActive
+import java.time.LocalDate
 
 class VotacionAdapter(
     private val onClick: (VotacionEntity) -> Unit,
@@ -92,7 +94,8 @@ class VotacionAdapter(
             notifyItemChanged(position)
         }
 
-        holder.buttonVote.visibility = if (item.estado == "Abierta") View.VISIBLE else View.GONE
+        val isActive = item.isActive(LocalDate.now())
+        holder.buttonVote.visibility = if (isActive) View.VISIBLE else View.GONE
         holder.buttonVote.setOnClickListener { onClick(item) }
 
         holder.expandable.visibility = if (isExpanded) View.VISIBLE else View.GONE
@@ -100,6 +103,11 @@ class VotacionAdapter(
             if (isExpanded) R.drawable.ic_expand_less
             else R.drawable.ic_expand_more
         )
+        holder.expandIcon.visibility = if (isExpanded) View.VISIBLE else View.GONE
+
+        val padding = (16 * holder.itemView.resources.displayMetrics.density).toInt()
+        val bottom = if (isExpanded) padding else 0
+        holder.container.setPadding(padding, padding, padding, bottom)
 
 
         holder.menu.setOnClickListener { v ->
@@ -119,6 +127,7 @@ class VotacionAdapter(
     override fun getItemCount(): Int = data.size
 
     class Vh(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val container: View = itemView.findViewById(R.id.layoutContainer)
         val title: TextView = itemView.findViewById(R.id.textTitle)
         val estado: TextView = itemView.findViewById(R.id.textEstado)
         val progress: ProgressBar = itemView.findViewById(R.id.progressVotos)

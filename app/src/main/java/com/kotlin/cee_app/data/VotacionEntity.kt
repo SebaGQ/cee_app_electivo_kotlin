@@ -15,3 +15,9 @@ data class VotacionEntity(
     val estado: String,
     val adminId: String,
 )
+
+fun VotacionEntity.isActive(today: LocalDate = LocalDate.now()): Boolean {
+    return estado.equals("Abierta", ignoreCase = true) &&
+        !today.isBefore(fechaInicio) &&
+        !today.isAfter(fechaFin)
+}
