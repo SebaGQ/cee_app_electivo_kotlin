@@ -7,7 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!-- Text sizes -->
-    <dimen name="text_size_heading">18sp</dimen>
+    <dimen name="text_size_heading">22sp</dimen>
     <dimen name="text_size_body">16sp</dimen>
     <dimen name="text_size_button">14sp</dimen>
     <dimen name="text_size_hint">14sp</dimen>

@@ -36,9 +36,15 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain.includeTopBar.topBar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_elections, R.id.nav_results, R.id.nav_users))
+        val topLevel = if (SessionManager.isAdmin()) {
+            setOf(R.id.nav_elections, R.id.nav_results, R.id.nav_users)
+        } else {
+            setOf(R.id.nav_elections, R.id.nav_results)
+        }
+        appBarConfiguration = AppBarConfiguration(topLevel)
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.appBarMain.bottomNav.setupWithNavController(navController)
+        binding.appBarMain.bottomNav.menu.findItem(R.id.nav_users).isVisible = SessionManager.isAdmin()
     }
 
     override fun onSupportNavigateUp(): Boolean {
