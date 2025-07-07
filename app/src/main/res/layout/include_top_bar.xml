@@ -4,6 +4,8 @@
     android:id="@+id/topBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
     android:background="?attr/colorPrimary"
-    android:titleTextColor="@android:color/white"
-    app:popupTheme="@style/ThemeOverlay.Material3.Light" />
+    android:titleTextColor="@color/white"
+    android:theme="@style/Theme.CEEAPP.AppBarOverlay"
+    app:popupTheme="@style/Theme.CEEAPP.PopupOverlay" />

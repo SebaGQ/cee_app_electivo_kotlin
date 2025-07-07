@@ -3,9 +3,9 @@
     <item
         android:id="@+id/nav_elections"
         android:icon="@android:drawable/ic_menu_agenda"
-        android:title="Elections" />
+        android:title="@string/title_elections" />
     <item
         android:id="@+id/nav_results"
         android:icon="@android:drawable/ic_menu_view"
-        android:title="Results" />
+        android:title="@string/title_results" />
 </menu>

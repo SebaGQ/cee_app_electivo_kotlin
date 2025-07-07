@@ -10,18 +10,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/contentLayout"
-            android:orientation="vertical"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <LinearLayout
+                android:id="@+id/contentLayout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/textActiveHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/active_elections_header"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_heading"
+        android:padding="8dp"
+        android:layout_marginTop="16dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/textNoActive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/no_active_elections"
+        android:textSize="@dimen/text_size_body"
         android:gravity="center"
         android:padding="16dp"
         android:visibility="gone" />
@@ -29,7 +46,26 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerActive"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <TextView
+        android:id="@+id/textUpcomingHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/upcoming_elections_header"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_heading"
+        android:padding="8dp"
+        android:layout_marginTop="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerUpcoming"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <TextView
         android:id="@+id/textPastHeader"
@@ -37,15 +73,19 @@
         android:layout_height="wrap_content"
         android:text="@string/past_elections_header"
         android:textStyle="bold"
-        android:padding="8dp" />
+        android:textSize="@dimen/text_size_heading"
+        android:padding="8dp"
+        android:layout_marginTop="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerPast"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -64,6 +104,11 @@
         android:layout_margin="16dp"
         android:visibility="gone"
         android:text="@string/create_new_election"
-        app:icon="@android:drawable/ic_menu_edit" />
+        android:textSize="@dimen/text_size_button"
+        android:textColor="@color/white"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:icon="@android:drawable/ic_menu_edit"
+        app:iconTint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -39,6 +39,10 @@ class CreateElectionViewModel(application: Application) : AndroidViewModel(appli
     fun eliminarOpcion(text: String) {
         _opciones.value = _opciones.value - text
     }
+
+    fun actualizarOpcion(old: String, new: String) {
+        _opciones.value = _opciones.value.map { if (it == old) new else it }
+    }
     private var editId: String? = null
 
     fun cargar(id: String) {
@@ -66,6 +70,10 @@ class CreateElectionViewModel(application: Application) : AndroidViewModel(appli
     fun guardar(titulo: String, descripcion: String, onError: () -> Unit, onSuccess: () -> Unit) {
         viewModelScope.launch {
             val id = editId ?: UUID.randomUUID().toString()
+            if (_opciones.value.size < 2) {
+                onError()
+                return@launch
+            }
             if (_fechaFin.value.isBefore(_fechaInicio.value)) {
                 onError()
                 return@launch

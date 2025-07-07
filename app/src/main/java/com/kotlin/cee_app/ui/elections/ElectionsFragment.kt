@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.databinding.FragmentElectionsBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -43,7 +44,33 @@ class ElectionsFragment : Fragment() {
                 )
             },
             onDelete = { votacion ->
-                viewModel.eliminar(votacion)
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage(R.string.confirm_delete)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show()
+            }
+        )
+
+        val upcomingAdapter = VotacionAdapter(
+            onClick = { votacion ->
+                findNavController().navigate(
+                    R.id.action_elections_to_voteDetail,
+                    Bundle().apply { putString("votacionId", votacion.id) }
+                )
+            },
+            onEdit = { votacion ->
+                findNavController().navigate(
+                    R.id.action_elections_to_createElection,
+                    Bundle().apply { putString("votacionId", votacion.id) }
+                )
+            },
+            onDelete = { votacion ->
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage(R.string.confirm_delete)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show()
             }
         )
 
@@ -61,36 +88,93 @@ class ElectionsFragment : Fragment() {
                 )
             },
             onDelete = { votacion ->
-                viewModel.eliminar(votacion)
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage(R.string.confirm_delete)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show()
             }
         )
 
         binding.recyclerActive.adapter = activeAdapter
+        binding.recyclerUpcoming.adapter = upcomingAdapter
         binding.recyclerPast.adapter = pastAdapter
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.active.collectLatest { list ->
+                binding.textActiveHeader.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
                 binding.textNoActive.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
-                activeAdapter.submit(list, viewModel.progress.value, viewModel.totalUsers.value)
+                activeAdapter.submit(
+                    list,
+                    viewModel.progress.value,
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value
+                )
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.upcoming.collectLatest { list ->
+                binding.textUpcomingHeader.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
+                upcomingAdapter.submit(
+                    list,
+                    emptyMap(),
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value
+                )
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.past.collectLatest { list ->
                 binding.textPastHeader.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
-                pastAdapter.submit(list, emptyMap(), viewModel.totalUsers.value, viewModel.winners.value)
+                pastAdapter.submit(
+                    list,
+                    emptyMap(),
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value
+                )
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.progress.collectLatest { map ->
-                activeAdapter.submit(viewModel.active.value, map, viewModel.totalUsers.value)
+                activeAdapter.submit(
+                    viewModel.active.value,
+                    map,
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value
+                )
+                pastAdapter.submit(
+                    viewModel.past.value,
+                    map,
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value
+                )
             }
         }
 
+
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.winners.collectLatest { map ->
-                pastAdapter.submit(viewModel.past.value, emptyMap(), viewModel.totalUsers.value, map)
+            viewModel.optionsPercent.collectLatest { opts ->
+                activeAdapter.submit(
+                    viewModel.active.value,
+                    viewModel.progress.value,
+                    opts,
+                    viewModel.totalUsers.value
+                )
+                upcomingAdapter.submit(
+                    viewModel.upcoming.value,
+                    emptyMap(),
+                    opts,
+                    viewModel.totalUsers.value
+                )
+                pastAdapter.submit(
+                    viewModel.past.value,
+                    viewModel.progress.value,
+                    opts,
+                    viewModel.totalUsers.value
+                )
             }
         }
 
