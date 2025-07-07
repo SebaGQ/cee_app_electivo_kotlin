@@ -54,8 +54,8 @@ class VotacionAdapter(
             if (item.estado == "Abierta") holder.itemView.context.getColor(R.color.primary_blue)
             else holder.itemView.context.getColor(R.color.black)
         )
-        val count = progress[item.id] ?: 0
-        if (item.estado == "Abierta") {
+        val count = progress[item.id]
+        if (count != null) {
             holder.progress.visibility = View.VISIBLE
             holder.progress.max = totalUsers
             holder.progress.progress = count

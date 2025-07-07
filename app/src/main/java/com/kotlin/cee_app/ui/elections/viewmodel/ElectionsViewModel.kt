@@ -21,6 +21,9 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
     private val _active = MutableStateFlow<List<VotacionEntity>>(emptyList())
     val active: StateFlow<List<VotacionEntity>> = _active
 
+    private val _future = MutableStateFlow<List<VotacionEntity>>(emptyList())
+    val future: StateFlow<List<VotacionEntity>> = _future
+
     private val _past = MutableStateFlow<List<VotacionEntity>>(emptyList())
     val past: StateFlow<List<VotacionEntity>> = _past
 
@@ -36,14 +39,17 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
     private val _optionsPercent = MutableStateFlow<Map<String, List<OpcionPercent>>>(emptyMap())
     val optionsPercent: StateFlow<Map<String, List<OpcionPercent>>> = _optionsPercent
 
+
     init {
         viewModelScope.launch {
             repo.votaciones.collect { list ->
                 _votaciones.value = list
-                _active.value = list.filter { it.estado == "Abierta" }
+                val (act, fut) = splitActiveFuture(list)
+                _active.value = act
+                _future.value = fut
                 val pastList = list.filter { it.estado != "Abierta" }
                 _past.value = pastList
-                updateProgress(_active.value)
+                updateProgress(act)
                 updateWinners(pastList)
                 updateOptions(list)
             }
@@ -94,10 +100,12 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             val list = repo.votaciones.first()
             _votaciones.value = list
-            _active.value = list.filter { it.estado == "Abierta" }
+            val (act, fut) = splitActiveFuture(list)
+            _active.value = act
+            _future.value = fut
             val pastList = list.filter { it.estado != "Abierta" }
             _past.value = pastList
-            updateProgress(_active.value)
+            updateProgress(act)
             updateWinners(pastList)
             updateOptions(list)
         }

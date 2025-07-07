@@ -11,6 +11,7 @@
     <string name="end_date">Fecha de Fin</string>
     <string name="no_active_elections">No hay elecciones activas</string>
     <string name="past_elections_header">Elecciones pasadas</string>
+    <string name="future_elections_header">Próximas votaciones</string>
     <string name="winner_label">Ganador: %1$s</string>
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
