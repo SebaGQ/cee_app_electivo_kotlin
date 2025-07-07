@@ -79,7 +79,9 @@
             tools:layout="@layout/fragment_results">
             <argument
                 android:name="votacionId"
-                app:argType="string" />
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
         </fragment>
     </navigation>
 
