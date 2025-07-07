@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.databinding.FragmentElectionsBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -43,7 +44,11 @@ class ElectionsFragment : Fragment() {
                 )
             },
             onDelete = { votacion ->
-                viewModel.eliminar(votacion)
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage(R.string.confirm_delete)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show()
             }
         )
 
@@ -61,7 +66,11 @@ class ElectionsFragment : Fragment() {
                 )
             },
             onDelete = { votacion ->
-                viewModel.eliminar(votacion)
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage(R.string.confirm_delete)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show()
             }
         )
 
@@ -79,7 +88,11 @@ class ElectionsFragment : Fragment() {
                 )
             },
             onDelete = { votacion ->
-                viewModel.eliminar(votacion)
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage(R.string.confirm_delete)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show()
             }
         )
 

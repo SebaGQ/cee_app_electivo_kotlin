@@ -29,4 +29,8 @@
     <string name="admin_only">Solo admin</string>
     <string name="expand">Expandir</string>
     <string name="collapse">Contraer</string>
+    <string name="need_two_options">Ingrese al menos dos opciones</string>
+    <string name="option_name">Nombre de la opción</string>
+    <string name="confirm_discard_changes">¿Salir sin guardar los cambios?</string>
+    <string name="confirm_delete">¿Eliminar la votación?</string>
 </resources>

@@ -17,6 +17,9 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import android.widget.EditText
+import androidx.activity.addCallback
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.databinding.FragmentCreateElectionBinding
@@ -27,6 +30,7 @@ class CreateElectionFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: CreateElectionViewModel by viewModels()
     private val args: CreateElectionFragmentArgs by navArgs()
+    private var saved = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +41,18 @@ class CreateElectionFragment : Fragment() {
             Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.admin_only, Snackbar.LENGTH_SHORT).show()
         }
         _binding = FragmentCreateElectionBinding.inflate(inflater, container, false)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (!saved) {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage(R.string.confirm_discard_changes)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> findNavController().navigateUp() }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show()
+            } else {
+                findNavController().navigateUp()
+            }
+        }
 
         args.votacionId?.let { id ->
             viewModel.cargar(id)
@@ -60,7 +76,6 @@ class CreateElectionFragment : Fragment() {
         }
         viewModel.opciones.asLiveData().observe(viewLifecycleOwner) { list ->
             binding.chipGroup.removeAllViews()
-            var counter = 1
             list.forEach { text ->
                 val chip = Chip(requireContext()).apply {
                     this.text = text
@@ -75,30 +90,40 @@ class CreateElectionFragment : Fragment() {
                         binding.chipGroup.removeView(this)
                         viewModel.eliminarOpcion(text.toString())
                     }
+                    setOnClickListener {
+                        showOptionDialog(text) { newText ->
+                            viewModel.actualizarOpcion(text, newText)
+                        }
+                    }
                 }
                 binding.chipGroup.addView(chip)
-                counter++
             }
         }
 
-        var counter = 1
         binding.buttonAddOption.setOnClickListener {
-            val chip = Chip(requireContext()).apply {
-                text = "Opcion ${counter++}"
-                isCloseIconVisible = true
-                chipBackgroundColor = ColorStateList.valueOf(
-                    ContextCompat.getColor(context, R.color.background_gray)
-                )
-                chipStrokeColor = ColorStateList.valueOf(
-                    ContextCompat.getColor(context, R.color.primary_blue)
-                )
-                setOnCloseIconClickListener {
-                    binding.chipGroup.removeView(this)
-                    viewModel.eliminarOpcion(text.toString())
+            showOptionDialog("") { text ->
+                val chip = Chip(requireContext()).apply {
+                    this.text = text
+                    isCloseIconVisible = true
+                    chipBackgroundColor = ColorStateList.valueOf(
+                        ContextCompat.getColor(context, R.color.background_gray)
+                    )
+                    chipStrokeColor = ColorStateList.valueOf(
+                        ContextCompat.getColor(context, R.color.primary_blue)
+                    )
+                    setOnCloseIconClickListener {
+                        binding.chipGroup.removeView(this)
+                        viewModel.eliminarOpcion(text.toString())
+                    }
+                    setOnClickListener {
+                        showOptionDialog(this.text.toString()) { newText ->
+                            viewModel.actualizarOpcion(this.text.toString(), newText)
+                        }
+                    }
                 }
+                binding.chipGroup.addView(chip)
+                viewModel.agregarOpcion(chip.text.toString())
             }
-            binding.chipGroup.addView(chip)
-            viewModel.agregarOpcion(chip.text.toString())
         }
 
         binding.editStartDate.setOnClickListener {
@@ -122,12 +147,17 @@ class CreateElectionFragment : Fragment() {
         binding.fabSave.setOnClickListener {
             val title = binding.editTitle.text.toString()
             val desc = binding.editDescription.text.toString()
+            if (viewModel.opciones.value.size < 2) {
+                Snackbar.make(binding.root, R.string.need_two_options, Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             viewModel.guardar(title, desc,
                 onError = {
                     Snackbar.make(binding.root, R.string.invalid_dates, Snackbar.LENGTH_SHORT).show()
                 },
                 onSuccess = {
                     Snackbar.make(binding.root, R.string.saved, Snackbar.LENGTH_SHORT).show()
+                    saved = true
                     findNavController().navigateUp()
                 }
             )
@@ -139,6 +169,16 @@ class CreateElectionFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showOptionDialog(text: String, onSave: (String) -> Unit) {
+        val input = EditText(requireContext()).apply { setText(text) }
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.option_name)
+            .setView(input)
+            .setPositiveButton(android.R.string.ok) { _, _ -> onSave(input.text.toString()) }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
     }
 }
 

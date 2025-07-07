@@ -20,4 +20,16 @@ class CreateElectionViewModelTest {
         vm.guardar("t", "d", { ok = false }, { ok = true })
         assertTrue(ok)
     }
+
+    @Test
+    fun require_two_options() {
+        val vm = CreateElectionViewModel(ApplicationProvider.getApplicationContext())
+        vm.agregarOpcion("A")
+        var ok = true
+        vm.guardar("t","d",{ ok = false }, { ok = true })
+        assertFalse(ok)
+        vm.agregarOpcion("B")
+        vm.guardar("t","d",{ ok = false }, { ok = true })
+        assertTrue(ok)
+    }
 }
