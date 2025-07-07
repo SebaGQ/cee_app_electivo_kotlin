@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.kotlin.cee_app.ui.components.TopBar
 import com.kotlin.cee_app.ui.elections.adapter.VotacionAdapter
 import com.kotlin.cee_app.ui.elections.viewmodel.ElectionsViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.databinding.FragmentElectionsBinding
@@ -30,7 +28,6 @@ class ElectionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentElectionsBinding.inflate(inflater, container, false)
-        TopBar.setup(binding.includeTopBar.topBar, R.string.title_elections)
 
         val activeAdapter = VotacionAdapter(
             onClick = { votacion ->
@@ -119,12 +116,6 @@ class ElectionsFragment : Fragment() {
             binding.fabCreate.visibility = View.GONE
         }
 
-        binding.bottomNav.setOnItemSelectedListener { item ->
-            if (item.itemId == R.id.nav_results) {
-                Snackbar.make(binding.root, "Results sin implementar", Snackbar.LENGTH_SHORT).show()
-                true
-            } else true
-        }
         return binding.root
     }
 
