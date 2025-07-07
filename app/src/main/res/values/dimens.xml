@@ -11,4 +11,9 @@
     <dimen name="text_size_body">16sp</dimen>
     <dimen name="text_size_button">14sp</dimen>
     <dimen name="text_size_hint">14sp</dimen>
+
+    <!-- Dialog constraints -->
+    <dimen name="dialog_width">320dp</dimen>
+    <dimen name="dialog_height">480dp</dimen>
 </resources>
+

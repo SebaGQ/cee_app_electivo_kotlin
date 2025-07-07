@@ -65,6 +65,14 @@ class VoteDialogFragment : DialogFragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(
+            resources.getDimensionPixelSize(R.dimen.dialog_width),
+            resources.getDimensionPixelSize(R.dimen.dialog_height)
+        )
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -76,3 +84,4 @@ class VoteDialogFragment : DialogFragment() {
             VoteDialogFragment().apply { arguments = bundleOf(ARG_VOTACION to votacionId) }
     }
 }
+
