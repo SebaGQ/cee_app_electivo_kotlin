@@ -55,6 +55,7 @@ class VoteDialogFragment : DialogFragment() {
                     onSuccess = {
                         binding.layoutVote.visibility = View.GONE
                         binding.layoutConfirmation.visibility = View.VISIBLE
+                        parentFragmentManager.setFragmentResult(RESULT_KEY, Bundle())
                     }
                 )
             }
@@ -80,6 +81,7 @@ class VoteDialogFragment : DialogFragment() {
 
     companion object {
         private const val ARG_VOTACION = "votacionId"
+        const val RESULT_KEY = "vote_done"
         fun newInstance(votacionId: String) =
             VoteDialogFragment().apply { arguments = bundleOf(ARG_VOTACION to votacionId) }
     }
