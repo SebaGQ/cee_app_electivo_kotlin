@@ -23,19 +23,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/iconExpand"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/arrow_down_float"
-            android:contentDescription="@string/expand"
-            app:layout_constraintEnd_toStartOf="@id/iconInfo"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
             android:id="@+id/iconInfo"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@android:drawable/ic_dialog_info"
+            android:src="@android:drawable/ic_menu_more"
             android:contentDescription="@string/action_settings"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -83,6 +74,15 @@
                 android:layout_marginTop="8dp"
                 android:visibility="gone"
                 android:progressTint="@color/primary_blue" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonVote"
+                style="?attr/materialButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/button_vote"
+                android:textSize="@dimen/text_size_button" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
