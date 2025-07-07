@@ -3,6 +3,7 @@ package com.kotlin.cee_app
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.core.content.ContextCompat
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -20,6 +21,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.includeTopBar.topBar)
+        binding.appBarMain.includeTopBar.topBar.setTitleTextColor(
+            ContextCompat.getColor(this, R.color.white)
+        )
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_elections, R.id.nav_results))
