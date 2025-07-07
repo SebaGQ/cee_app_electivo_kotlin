@@ -33,8 +33,15 @@ class ElectionRepositoryHasVotedTest {
             adminId = "a1",
         )
         db.votacionDao().insert(votacion)
-        val opcionId = db.opcionDao().insert(OpcionEntity("A", "v1"))
-        db.votoDao().insert(VotoEntity(LocalDate.now(), opcionId, "u1", "v1"))
+        val opcionId = db.opcionDao().insert(OpcionEntity(descripcion = "A", votacionId = "v1"))
+        db.votoDao().insert(
+            VotoEntity(
+                fechaVoto = LocalDate.now(),
+                opcionId = opcionId,
+                usuarioId = "u1",
+                votacionId = "v1"
+            )
+        )
 
         assertTrue(repo.haVotado("v1", "u1"))
         assertFalse(repo.haVotado("v1", "u2"))

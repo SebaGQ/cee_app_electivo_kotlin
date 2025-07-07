@@ -45,9 +45,23 @@ class VotoDaoUniqueTest {
         votacionDao.insert(votacion)
         val opcion = opcionDao.insert(OpcionEntity(descripcion = "A", votacionId = "v1"))
 
-        votoDao.insert(VotoEntity(LocalDate.now(), opcion, "u1", "v1"))
+        votoDao.insert(
+            VotoEntity(
+                fechaVoto = LocalDate.now(),
+                opcionId = opcion,
+                usuarioId = "u1",
+                votacionId = "v1"
+            )
+        )
         try {
-            votoDao.insert(VotoEntity(LocalDate.now(), opcion, "u1", "v1"))
+            votoDao.insert(
+                VotoEntity(
+                    fechaVoto = LocalDate.now(),
+                    opcionId = opcion,
+                    usuarioId = "u1",
+                    votacionId = "v1"
+                )
+            )
         } catch (_: Exception) {
         }
         val count = votoDao.countByVotacion("v1")
