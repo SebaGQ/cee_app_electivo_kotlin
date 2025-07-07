@@ -60,7 +60,11 @@
                 app:argType="string" />
             <action
                 android:id="@+id/action_confirmation_to_results"
-                app:destination="@id/resultsFragment" />
+                app:destination="@id/resultsFragment">
+                <argument
+                    android:name="votacionId"
+                    app:argType="string" />
+            </action>
         </fragment>
     </navigation>
 
