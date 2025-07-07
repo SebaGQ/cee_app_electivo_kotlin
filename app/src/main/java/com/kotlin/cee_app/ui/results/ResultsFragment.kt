@@ -42,10 +42,6 @@ class ResultsFragment : Fragment() {
                 adapter.submit(list)
             }
         } else {
-            binding.buttonBack.visibility = View.VISIBLE
-            binding.buttonBack.setOnClickListener {
-                findNavController().navigateUp()
-            }
             binding.chart.visibility = View.VISIBLE
             binding.recyclerOpciones.visibility = View.VISIBLE
             val adapter = OpcionResultAdapter()
