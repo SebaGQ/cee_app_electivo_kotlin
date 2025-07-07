@@ -1,74 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:maxWidth="@dimen/dialog_max_width"
+    android:maxHeight="@dimen/dialog_max_height"
+    android:fillViewport="true">
 
-    <LinearLayout
-        android:id="@+id/layoutVote"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/textPregunta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_body"
-            android:textStyle="bold" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonVote"
-            style="?attr/materialButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/button_vote"
-            android:textSize="@dimen/text_size_button"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutConfirmation"
-        android:orientation="vertical"
-        android:gravity="center"
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:fillViewport="true">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageCheck"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            app:srcCompat="@drawable/ic_baseline_check_circle_24"
-            app:strokeColor="@color/primary_blue"
-            android:tint="@color/primary_blue" />
-
-        <TextView
-            android:id="@+id/textConfirmation"
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="16dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/vote_saved"
-            android:textSize="@dimen/text_size_heading"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonOk"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_ok"
-            android:textSize="@dimen/text_size_button"
-            android:layout_marginTop="16dp"
-            app:strokeColor="@color/primary_blue" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layoutVote"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/textPregunta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_body"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonVote"
+                    style="?attr/materialButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/button_vote"
+                    android:textSize="@dimen/text_size_button"
+                    android:layout_marginTop="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutConfirmation"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageCheck"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    app:srcCompat="@drawable/ic_baseline_check_circle_24"
+                    app:strokeColor="@color/primary_blue"
+                    android:tint="@color/primary_blue" />
+
+                <TextView
+                    android:id="@+id/textConfirmation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vote_saved"
+                    android:textSize="@dimen/text_size_heading"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonOk"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_ok"
+                    android:textSize="@dimen/text_size_button"
+                    android:layout_marginTop="16dp"
+                    app:strokeColor="@color/primary_blue" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</ScrollView>
