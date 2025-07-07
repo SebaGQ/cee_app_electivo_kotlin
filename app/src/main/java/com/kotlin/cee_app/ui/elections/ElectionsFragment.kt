@@ -71,26 +71,66 @@ class ElectionsFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.active.collectLatest { list ->
                 binding.textNoActive.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
-                activeAdapter.submit(list, viewModel.progress.value, viewModel.totalUsers.value)
+                activeAdapter.submit(
+                    list,
+                    viewModel.progress.value,
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value
+                )
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.past.collectLatest { list ->
                 binding.textPastHeader.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
-                pastAdapter.submit(list, emptyMap(), viewModel.totalUsers.value, viewModel.winners.value)
+                pastAdapter.submit(
+                    list,
+                    emptyMap(),
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value,
+                    viewModel.winners.value
+                )
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.progress.collectLatest { map ->
-                activeAdapter.submit(viewModel.active.value, map, viewModel.totalUsers.value)
+                activeAdapter.submit(
+                    viewModel.active.value,
+                    map,
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value
+                )
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.winners.collectLatest { map ->
-                pastAdapter.submit(viewModel.past.value, emptyMap(), viewModel.totalUsers.value, map)
+                pastAdapter.submit(
+                    viewModel.past.value,
+                    emptyMap(),
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value,
+                    map
+                )
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.optionsPercent.collectLatest { opts ->
+                activeAdapter.submit(
+                    viewModel.active.value,
+                    viewModel.progress.value,
+                    opts,
+                    viewModel.totalUsers.value
+                )
+                pastAdapter.submit(
+                    viewModel.past.value,
+                    emptyMap(),
+                    opts,
+                    viewModel.totalUsers.value,
+                    viewModel.winners.value
+                )
             }
         }
 
