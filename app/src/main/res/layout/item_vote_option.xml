@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:radius="8dp">
+
+    <RadioButton
+        android:id="@+id/radioOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textSize="@dimen/text_size_body"
+        android:buttonTint="@color/primary_blue" />
+</androidx.cardview.widget.CardView>
