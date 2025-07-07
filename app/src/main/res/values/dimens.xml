@@ -11,4 +11,8 @@
     <dimen name="text_size_body">16sp</dimen>
     <dimen name="text_size_button">14sp</dimen>
     <dimen name="text_size_hint">14sp</dimen>
+
+    <!-- Dialog size limits -->
+    <dimen name="vote_dialog_max_width">320dp</dimen>
+    <dimen name="vote_dialog_max_height">480dp</dimen>
 </resources>

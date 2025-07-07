@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import com.google.android.material.snackbar.Snackbar
+import kotlin.math.min
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.databinding.DialogVoteBinding
 import com.kotlin.cee_app.ui.elections.viewmodel.VoteDetailViewModel
@@ -68,6 +69,20 @@ class VoteDialogFragment : DialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val metrics = resources.displayMetrics
+        val width = min(
+            (metrics.widthPixels * 0.9).toInt(),
+            resources.getDimensionPixelSize(R.dimen.vote_dialog_max_width)
+        )
+        val height = min(
+            (metrics.heightPixels * 0.9).toInt(),
+            resources.getDimensionPixelSize(R.dimen.vote_dialog_max_height)
+        )
+        dialog?.window?.setLayout(width, height)
     }
 
     companion object {
