@@ -36,11 +36,11 @@ class VoteDialogFragment : DialogFragment() {
         viewModel.opciones.asLiveData().observe(viewLifecycleOwner) { list ->
             binding.radioGroup.removeAllViews()
             list.forEach { opcion ->
-                val view = layoutInflater.inflate(R.layout.item_vote_option, binding.radioGroup, false)
-                val rb = view.findViewById<RadioButton>(R.id.radioOption)
+                val rb = layoutInflater
+                    .inflate(R.layout.item_vote_option, binding.radioGroup, false) as RadioButton
                 rb.text = opcion.descripcion
                 rb.tag = opcion.id
-                binding.radioGroup.addView(view)
+                binding.radioGroup.addView(rb)
             }
         }
 
