@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.PopupMenu
+import android.widget.LinearLayout
+import com.kotlin.cee_app.data.OpcionPercent
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.VotacionEntity
@@ -19,17 +21,20 @@ class VotacionAdapter(
 
     private var data: List<VotacionEntity> = emptyList()
     private var progress: Map<String, Int> = emptyMap()
+    private var options: Map<String, List<OpcionPercent>> = emptyMap()
     private var totalUsers: Int = 1
     private var winners: Map<String, String> = emptyMap()
 
     fun submit(
         list: List<VotacionEntity>,
         progressMap: Map<String, Int>,
+        optionsMap: Map<String, List<OpcionPercent>>,
         total: Int,
         winnersMap: Map<String, String> = emptyMap()
     ) {
         data = list
         progress = progressMap
+        options = optionsMap
         totalUsers = if (total == 0) 1 else total
         winners = winnersMap
         notifyDataSetChanged()
@@ -67,6 +72,16 @@ class VotacionAdapter(
                 holder.winner.visibility = View.GONE
             }
         }
+
+        holder.optionsContainer.removeAllViews()
+        val opts = options[item.id] ?: emptyList()
+        opts.forEach { op ->
+            val view = LayoutInflater.from(holder.itemView.context)
+                .inflate(R.layout.item_result_option, holder.optionsContainer, false)
+            view.findViewById<TextView>(R.id.textOption).text = op.descripcion
+            view.findViewById<TextView>(R.id.textPercent).text = "${op.porcentaje}%"
+            holder.optionsContainer.addView(view)
+        }
         holder.itemView.setOnClickListener { onClick(item) }
         holder.menu.setOnClickListener { v ->
             val popup = PopupMenu(v.context, v)
@@ -89,6 +104,7 @@ class VotacionAdapter(
         val estado: TextView = itemView.findViewById(R.id.textEstado)
         val progress: ProgressBar = itemView.findViewById(R.id.progressVotos)
         val winner: TextView = itemView.findViewById(R.id.textWinner)
+        val optionsContainer: LinearLayout = itemView.findViewById(R.id.layoutOptions)
         val menu: ImageView = itemView.findViewById(R.id.iconInfo)
     }
 }

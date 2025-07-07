@@ -50,6 +50,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textEstado" />
 
+        <LinearLayout
+            android:id="@+id/layoutOptions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textWinner" />
+
         <ProgressBar
             android:id="@+id/progressVotos"
             style="?android:attr/progressBarStyleHorizontal"
@@ -60,7 +70,7 @@
             android:progressTint="@color/primary_blue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textWinner"
+            app:layout_constraintTop_toBottomOf="@id/layoutOptions"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

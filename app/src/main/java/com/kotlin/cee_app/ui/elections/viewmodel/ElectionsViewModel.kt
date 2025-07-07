@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlin.cee_app.data.ElectionRepository
+import com.kotlin.cee_app.data.OpcionPercent
 import com.kotlin.cee_app.data.VotacionEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,6 +33,9 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
     private val _totalUsers = MutableStateFlow(0)
     val totalUsers: StateFlow<Int> = _totalUsers
 
+    private val _optionsPercent = MutableStateFlow<Map<String, List<OpcionPercent>>>(emptyMap())
+    val optionsPercent: StateFlow<Map<String, List<OpcionPercent>>> = _optionsPercent
+
     init {
         viewModelScope.launch {
             repo.votaciones.collect { list ->
@@ -41,6 +45,7 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
                 _past.value = pastList
                 updateProgress(_active.value)
                 updateWinners(pastList)
+                updateOptions(list)
             }
         }
         viewModelScope.launch {
@@ -65,6 +70,20 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
         _winners.value = map
     }
 
+    private suspend fun updateOptions(list: List<VotacionEntity>) {
+        val map = mutableMapOf<String, List<OpcionPercent>>()
+        list.forEach { v ->
+            val conteos = repo.resultados(v.id)
+            val total = conteos.sumOf { it.total }
+            val opciones = conteos.map {
+                val pct = if (total == 0) 0 else (it.total * 100 / total)
+                OpcionPercent(it.descripcion, pct)
+            }
+            map[v.id] = opciones
+        }
+        _optionsPercent.value = map
+    }
+
     fun eliminar(votacion: VotacionEntity) {
         viewModelScope.launch {
             repo.eliminarVotacion(votacion.id)
@@ -80,6 +99,7 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
             _past.value = pastList
             updateProgress(_active.value)
             updateWinners(pastList)
+            updateOptions(list)
         }
     }
 }
