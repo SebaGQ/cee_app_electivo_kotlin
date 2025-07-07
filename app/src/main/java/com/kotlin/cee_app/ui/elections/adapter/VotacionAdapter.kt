@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.PopupMenu
 import android.widget.LinearLayout
+import android.content.res.ColorStateList
 import java.time.LocalDate
 import com.kotlin.cee_app.data.OpcionPercent
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +26,7 @@ class VotacionAdapter(
     private var options: Map<String, List<OpcionPercent>> = emptyMap()
     private var totalUsers: Int = 1
     private var winners: Map<String, String> = emptyMap()
+    private var voted: Map<String, Boolean> = emptyMap()
     private val expanded: MutableSet<String> = mutableSetOf()
 
     private fun isActive(v: VotacionEntity): Boolean {
@@ -39,13 +41,15 @@ class VotacionAdapter(
         progressMap: Map<String, Int>,
         optionsMap: Map<String, List<OpcionPercent>>,
         total: Int,
-        winnersMap: Map<String, String> = emptyMap()
+        winnersMap: Map<String, String> = emptyMap(),
+        votedMap: Map<String, Boolean> = emptyMap()
     ) {
         data = list
         progress = progressMap
         options = optionsMap
         totalUsers = if (total == 0) 1 else total
         winners = winnersMap
+        voted = votedMap
         expanded.clear()
         notifyDataSetChanged()
     }
@@ -100,6 +104,14 @@ class VotacionAdapter(
         }
 
         holder.buttonVote.visibility = if (isActive(item)) View.VISIBLE else View.GONE
+        val already = voted[item.id] == true
+        holder.buttonVote.isEnabled = !already
+        if (already) {
+            holder.buttonVote.backgroundTintList =
+                ColorStateList.valueOf(holder.itemView.context.getColor(R.color.disabled_gray))
+        } else {
+            holder.buttonVote.backgroundTintList = null
+        }
         holder.buttonVote.setOnClickListener { onClick(item) }
 
         holder.expandable.visibility = if (isExpanded) View.VISIBLE else View.GONE
