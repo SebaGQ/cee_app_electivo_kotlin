@@ -31,6 +31,13 @@ class ElectionsFragment : Fragment() {
     ): View {
         _binding = FragmentElectionsBinding.inflate(inflater, container, false)
 
+        childFragmentManager.setFragmentResultListener(
+            VoteDialogFragment.RESULT_KEY,
+            viewLifecycleOwner
+        ) { _, _ ->
+            viewModel.refresh()
+        }
+
         val activeAdapter = VotacionAdapter(
             onClick = { votacion ->
                 VoteDialogFragment.newInstance(votacion.id)

@@ -14,6 +14,6 @@
 
     <!-- Dialog constraints -->
     <dimen name="dialog_width">320dp</dimen>
-    <dimen name="dialog_height">480dp</dimen>
+    <dimen name="dialog_height">360dp</dimen>
 </resources>
 
