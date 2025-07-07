@@ -112,6 +112,7 @@ class ElectionsFragment : Fragment() {
                     list,
                     viewModel.progress.value,
                     viewModel.optionsPercent.value,
+                    viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
                     votedMap = viewModel.voted.value
                 )
@@ -125,6 +126,7 @@ class ElectionsFragment : Fragment() {
                     list,
                     emptyMap(),
                     viewModel.optionsPercent.value,
+                    viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
                     votedMap = emptyMap()
                 )
@@ -138,6 +140,7 @@ class ElectionsFragment : Fragment() {
                     list,
                     emptyMap(),
                     viewModel.optionsPercent.value,
+                    viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
                     votedMap = emptyMap()
                 )
@@ -150,6 +153,7 @@ class ElectionsFragment : Fragment() {
                     viewModel.active.value,
                     map,
                     viewModel.optionsPercent.value,
+                    viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
                     votedMap = viewModel.voted.value
                 )
@@ -157,6 +161,7 @@ class ElectionsFragment : Fragment() {
                     viewModel.past.value,
                     map,
                     viewModel.optionsPercent.value,
+                    viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
                     votedMap = viewModel.voted.value
                 )
@@ -170,6 +175,7 @@ class ElectionsFragment : Fragment() {
                     viewModel.active.value,
                     viewModel.progress.value,
                     opts,
+                    viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
                     votedMap = viewModel.voted.value
                 )
@@ -177,6 +183,7 @@ class ElectionsFragment : Fragment() {
                     viewModel.upcoming.value,
                     emptyMap(),
                     opts,
+                    viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
                     votedMap = emptyMap()
                 )
@@ -184,6 +191,7 @@ class ElectionsFragment : Fragment() {
                     viewModel.past.value,
                     viewModel.progress.value,
                     opts,
+                    viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
                     votedMap = viewModel.voted.value
                 )
@@ -196,6 +204,7 @@ class ElectionsFragment : Fragment() {
                     viewModel.active.value,
                     viewModel.progress.value,
                     viewModel.optionsPercent.value,
+                    viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
                     votedMap = votedMap
                 )
@@ -203,6 +212,7 @@ class ElectionsFragment : Fragment() {
                     viewModel.past.value,
                     viewModel.progress.value,
                     viewModel.optionsPercent.value,
+                    viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
                     votedMap = votedMap
                 )

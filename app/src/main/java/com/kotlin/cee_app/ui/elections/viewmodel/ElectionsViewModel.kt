@@ -5,10 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlin.cee_app.data.ElectionRepository
 import com.kotlin.cee_app.data.OpcionPercent
+import com.kotlin.cee_app.data.ConteoOpcion
 import com.kotlin.cee_app.data.VotacionEntity
 import com.kotlin.cee_app.data.SessionManager
 import java.time.LocalDate
 import com.kotlin.cee_app.ui.elections.viewmodel.splitActiveUpcomingPast
+import com.kotlin.cee_app.ui.elections.viewmodel.toPercent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
@@ -43,6 +45,9 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
     private val _optionsPercent = MutableStateFlow<Map<String, List<OpcionPercent>>>(emptyMap())
     val optionsPercent: StateFlow<Map<String, List<OpcionPercent>>> = _optionsPercent
 
+    private val _optionsCount = MutableStateFlow<Map<String, List<ConteoOpcion>>>(emptyMap())
+    val optionsCount: StateFlow<Map<String, List<ConteoOpcion>>> = _optionsCount
+
     init {
         viewModelScope.launch {
             repo.votaciones.collect { list ->
@@ -71,17 +76,15 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
 
 
     private suspend fun updateOptions(list: List<VotacionEntity>) {
-        val map = mutableMapOf<String, List<OpcionPercent>>()
+        val percentMap = mutableMapOf<String, List<OpcionPercent>>()
+        val countMap = mutableMapOf<String, List<ConteoOpcion>>()
         list.forEach { v ->
             val conteos = repo.resultados(v.id)
-            val total = conteos.sumOf { it.total }
-            val opciones = conteos.map {
-                val pct = if (total == 0) 0 else (it.total * 100 / total)
-                OpcionPercent(it.descripcion, pct)
-            }
-            map[v.id] = opciones
+            countMap[v.id] = conteos
+            percentMap[v.id] = toPercent(conteos)
         }
-        _optionsPercent.value = map
+        _optionsPercent.value = percentMap
+        _optionsCount.value = countMap
     }
 
     private suspend fun updateVoted(list: List<VotacionEntity>) {
