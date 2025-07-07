@@ -10,6 +10,7 @@
     <string name="start_date">Fecha de Inicio</string>
     <string name="end_date">Fecha de Fin</string>
     <string name="no_active_elections">No hay elecciones activas</string>
+    <string name="active_elections_header">Elecciones en curso</string>
     <string name="upcoming_elections_header">Próximas elecciones</string>
     <string name="past_elections_header">Elecciones finalizadas</string>
     <string name="winner_label">Ganador: %1$s</string>

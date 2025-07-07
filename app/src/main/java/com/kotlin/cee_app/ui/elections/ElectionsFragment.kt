@@ -89,6 +89,7 @@ class ElectionsFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.active.collectLatest { list ->
+                binding.textActiveHeader.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
                 binding.textNoActive.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
                 activeAdapter.submit(
                     list,
