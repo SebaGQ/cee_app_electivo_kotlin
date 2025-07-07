@@ -24,6 +24,7 @@
     <string name="switch_open">Abierta</string>
     <string name="button_vote">Votar</string>
     <string name="button_view_results">Ver resultados</string>
+    <string name="button_ok">Vale</string>
     <string name="button_back">Volver</string>
     <string name="saved">Guardado</string>
     <string name="admin_only">Solo admin</string>
