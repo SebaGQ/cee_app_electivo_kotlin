@@ -66,6 +66,10 @@
         android:layout_margin="16dp"
         android:visibility="gone"
         android:text="@string/create_new_election"
-        app:icon="@android:drawable/ic_menu_edit" />
+        android:textColor="@color/white"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:icon="@android:drawable/ic_menu_edit"
+        app:iconTint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

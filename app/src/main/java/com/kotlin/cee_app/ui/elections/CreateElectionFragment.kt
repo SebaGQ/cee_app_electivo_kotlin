@@ -38,10 +38,6 @@ class CreateElectionFragment : Fragment() {
         }
         _binding = FragmentCreateElectionBinding.inflate(inflater, container, false)
 
-        binding.buttonBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
-
         args.votacionId?.let { id ->
             viewModel.cargar(id)
         }

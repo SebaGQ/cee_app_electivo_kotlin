@@ -15,12 +15,16 @@ object TopBar {
         onMenuItemClick: ((MenuItem) -> Boolean)? = null
     ) {
         toolbar.setTitle(titleRes)
-        toolbar.setTitleTextColor(
-            ContextCompat.getColor(toolbar.context, R.color.white)
-        )
+        val white = ContextCompat.getColor(toolbar.context, R.color.white)
+        toolbar.setTitleTextColor(white)
+        toolbar.navigationIcon?.setTint(white)
+        toolbar.overflowIcon?.setTint(white)
         menuRes?.let {
             toolbar.menu.clear()
             toolbar.inflateMenu(it)
+            for (i in 0 until toolbar.menu.size()) {
+                toolbar.menu.getItem(i).icon?.setTint(white)
+            }
             onMenuItemClick?.let { listener ->
                 toolbar.setOnMenuItemClickListener(listener)
             }
