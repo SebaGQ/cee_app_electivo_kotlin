@@ -4,8 +4,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.kotlin.cee_app.ui.elections.viewmodel.CreateElectionViewModel
 import org.junit.Test
 import java.time.LocalDate
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import org.junit.Assert.*
 
 class CreateElectionViewModelTest {
     @Test

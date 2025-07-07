@@ -6,8 +6,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import org.junit.Assert.*
 
 class ElectionRepositoryHasVotedTest {
     private lateinit var repo: ElectionRepository

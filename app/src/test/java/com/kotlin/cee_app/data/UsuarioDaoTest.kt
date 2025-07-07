@@ -7,7 +7,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import kotlin.test.assertEquals
+import org.junit.Assert.*
 
 class UsuarioDaoTest {
     private lateinit var db: AppDatabase

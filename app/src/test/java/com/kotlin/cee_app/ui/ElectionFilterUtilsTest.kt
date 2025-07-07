@@ -4,7 +4,7 @@ import com.kotlin.cee_app.data.VotacionEntity
 import com.kotlin.cee_app.ui.elections.viewmodel.splitActiveUpcomingPast
 import org.junit.Test
 import java.time.LocalDate
-import kotlin.test.assertEquals
+import org.junit.Assert.*
 
 class ElectionFilterUtilsTest {
     @Test

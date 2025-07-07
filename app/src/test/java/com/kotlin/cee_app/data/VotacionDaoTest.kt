@@ -8,7 +8,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
-import kotlin.test.assertEquals
+import org.junit.Assert.*
 
 class VotacionDaoTest {
     private lateinit var db: AppDatabase
