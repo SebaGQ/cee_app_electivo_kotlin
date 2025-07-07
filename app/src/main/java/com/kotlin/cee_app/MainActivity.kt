@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain.includeTopBar.topBar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_elections, R.id.nav_results))
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_elections, R.id.nav_results, R.id.nav_users))
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.appBarMain.bottomNav.setupWithNavController(navController)
     }

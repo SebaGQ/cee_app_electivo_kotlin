@@ -9,5 +9,6 @@ data class UsuarioEntity(
     val id: String,
     val nombre: String,
     val correo: String,
+    val password: String,
     val rol: String,
 )

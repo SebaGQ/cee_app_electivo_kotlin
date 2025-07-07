@@ -34,4 +34,10 @@
     <string name="option_name">Nombre de la opción</string>
     <string name="confirm_discard_changes">¿Salir sin guardar los cambios?</string>
     <string name="confirm_delete">¿Eliminar la votación?</string>
+    <string name="title_users">Usuarios</string>
+    <string name="create_user">Crear usuario</string>
+    <string name="hint_name">Nombre</string>
+    <string name="hint_email">Correo</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_role">Rol</string>
 </resources>
