@@ -112,7 +112,8 @@ class ElectionsFragment : Fragment() {
                     list,
                     viewModel.progress.value,
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.totalUsers.value,
+                    viewModel.hasVoted.value
                 )
             }
         }
@@ -124,7 +125,8 @@ class ElectionsFragment : Fragment() {
                     list,
                     emptyMap(),
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.totalUsers.value,
+                    emptyMap()
                 )
             }
         }
@@ -136,7 +138,8 @@ class ElectionsFragment : Fragment() {
                     list,
                     emptyMap(),
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.totalUsers.value,
+                    emptyMap()
                 )
             }
         }
@@ -147,13 +150,15 @@ class ElectionsFragment : Fragment() {
                     viewModel.active.value,
                     map,
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.totalUsers.value,
+                    viewModel.hasVoted.value
                 )
                 pastAdapter.submit(
                     viewModel.past.value,
                     map,
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.totalUsers.value,
+                    emptyMap()
                 )
             }
         }
@@ -165,19 +170,22 @@ class ElectionsFragment : Fragment() {
                     viewModel.active.value,
                     viewModel.progress.value,
                     opts,
-                    viewModel.totalUsers.value
+                    viewModel.totalUsers.value,
+                    viewModel.hasVoted.value
                 )
                 upcomingAdapter.submit(
                     viewModel.upcoming.value,
                     emptyMap(),
                     opts,
-                    viewModel.totalUsers.value
+                    viewModel.totalUsers.value,
+                    emptyMap()
                 )
                 pastAdapter.submit(
                     viewModel.past.value,
                     viewModel.progress.value,
                     opts,
-                    viewModel.totalUsers.value
+                    viewModel.totalUsers.value,
+                    emptyMap()
                 )
             }
         }
