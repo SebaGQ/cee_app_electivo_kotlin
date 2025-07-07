@@ -7,7 +7,7 @@ import com.kotlin.cee_app.data.ElectionRepository
 import com.kotlin.cee_app.data.OpcionPercent
 import com.kotlin.cee_app.data.VotacionEntity
 import java.time.LocalDate
-import com.kotlin.cee_app.ui.elections.viewmodel.splitActiveUpcoming
+import com.kotlin.cee_app.ui.elections.viewmodel.splitActiveUpcomingPast
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
@@ -26,6 +26,9 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
     private val _upcoming = MutableStateFlow<List<VotacionEntity>>(emptyList())
     val upcoming: StateFlow<List<VotacionEntity>> = _upcoming
 
+    private val _past = MutableStateFlow<List<VotacionEntity>>(emptyList())
+    val past: StateFlow<List<VotacionEntity>> = _past
+
     private val _progress = MutableStateFlow<Map<String, Int>>(emptyMap())
     val progress: StateFlow<Map<String, Int>> = _progress
 
@@ -40,11 +43,12 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             repo.votaciones.collect { list ->
                 _votaciones.value = list
-                val (act, upcomingList) = splitActiveUpcoming(list, LocalDate.now())
+                val (act, upcomingList, pastList) = splitActiveUpcomingPast(list, LocalDate.now())
                 _active.value = act
                 _upcoming.value = upcomingList
-                updateProgress(act + upcomingList)
-                updateOptions(act + upcomingList)
+                _past.value = pastList
+                updateProgress(act + pastList)
+                updateOptions(act + pastList)
             }
         }
         viewModelScope.launch {
@@ -85,11 +89,12 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             val list = repo.votaciones.first()
             _votaciones.value = list
-            val (act, upcomingList) = splitActiveUpcoming(list, LocalDate.now())
+            val (act, upcomingList, pastList) = splitActiveUpcomingPast(list, LocalDate.now())
             _active.value = act
             _upcoming.value = upcomingList
-            updateProgress(act + upcomingList)
-            updateOptions(act + upcomingList)
+            _past.value = pastList
+            updateProgress(act + pastList)
+            updateOptions(act + pastList)
         }
     }
 }
