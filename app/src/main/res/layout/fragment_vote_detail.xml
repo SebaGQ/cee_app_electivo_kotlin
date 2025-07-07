@@ -33,35 +33,12 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textFechas"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/start_date"
-            android:layout_marginTop="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editStartDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_body"
-                android:focusable="false"
-                android:clickable="false" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/end_date"
-            android:layout_marginTop="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editEndDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_body"
-                android:focusable="false"
-                android:clickable="false" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:textSize="@dimen/text_size_body"
+            android:layout_marginTop="4dp" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -76,7 +53,8 @@
             android:layout_height="48dp"
             android:text="@string/button_vote"
             android:textSize="@dimen/text_size_button"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:enabled="false" />
 
     </LinearLayout>
 </ScrollView>

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.google.android.material.chip.Chip
 import android.widget.PopupMenu
 import android.widget.LinearLayout
 import java.time.LocalDate
@@ -127,7 +128,7 @@ class VotacionAdapter(
 
     class Vh(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.textTitle)
-        val estado: TextView = itemView.findViewById(R.id.textEstado)
+        val estado: Chip = itemView.findViewById(R.id.textEstado)
         val progress: ProgressBar = itemView.findViewById(R.id.progressVotos)
         val winner: TextView = itemView.findViewById(R.id.textWinner)
         val optionsContainer: LinearLayout = itemView.findViewById(R.id.layoutOptions)

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import java.time.format.DateTimeFormatter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kotlin.cee_app.ui.elections.viewmodel.VoteDetailViewModel
@@ -31,8 +32,23 @@ class VoteDetailFragment : Fragment() {
         _binding = FragmentVoteDetailBinding.inflate(inflater, container, false)
         viewModel.cargar(args.votacionId)
 
+        binding.buttonVote.isEnabled = false
+
+        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            binding.buttonVote.isEnabled = checkedId != View.NO_ID
+        }
+
         viewModel.votacion.asLiveData().observe(viewLifecycleOwner) { v ->
             binding.textPregunta.text = v?.titulo ?: ""
+            v?.let {
+                val formatter = DateTimeFormatter.ISO_DATE
+                val fechas = getString(
+                    R.string.date_range,
+                    it.fechaInicio.format(formatter),
+                    it.fechaFin.format(formatter)
+                )
+                binding.textFechas.text = fechas
+            }
         }
 
         binding.buttonVote.setOnClickListener {
