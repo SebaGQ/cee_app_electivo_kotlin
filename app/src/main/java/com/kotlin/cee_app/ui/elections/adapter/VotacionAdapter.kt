@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.PopupMenu
 import android.widget.LinearLayout
+import java.time.LocalDate
 import com.kotlin.cee_app.data.OpcionPercent
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
@@ -26,6 +27,13 @@ class VotacionAdapter(
     private var winners: Map<String, String> = emptyMap()
     private val expanded: MutableSet<String> = mutableSetOf()
 
+    private fun isActive(v: VotacionEntity): Boolean {
+        val today = LocalDate.now()
+        return v.estado.equals("Abierta", ignoreCase = true) &&
+            !today.isBefore(v.fechaInicio) &&
+            !today.isAfter(v.fechaFin)
+    }
+
     fun submit(
         list: List<VotacionEntity>,
         progressMap: Map<String, Int>,
@@ -39,7 +47,6 @@ class VotacionAdapter(
         totalUsers = if (total == 0) 1 else total
         winners = winnersMap
         expanded.clear()
-        expanded.addAll(list.map { it.id })
         notifyDataSetChanged()
     }
 
@@ -92,7 +99,7 @@ class VotacionAdapter(
             notifyItemChanged(position)
         }
 
-        holder.buttonVote.visibility = if (item.estado == "Abierta") View.VISIBLE else View.GONE
+        holder.buttonVote.visibility = if (isActive(item)) View.VISIBLE else View.GONE
         holder.buttonVote.setOnClickListener { onClick(item) }
 
         holder.expandable.visibility = if (isExpanded) View.VISIBLE else View.GONE
