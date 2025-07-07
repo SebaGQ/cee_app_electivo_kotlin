@@ -15,6 +15,7 @@ import com.kotlin.cee_app.ui.elections.VoteDetailFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.databinding.FragmentVoteDetailBinding
+import java.time.format.DateTimeFormatter
 
 class VoteDetailFragment : Fragment() {
 
@@ -33,6 +34,15 @@ class VoteDetailFragment : Fragment() {
 
         viewModel.votacion.asLiveData().observe(viewLifecycleOwner) { v ->
             binding.textPregunta.text = v?.titulo ?: ""
+            v?.let {
+                val fmt = DateTimeFormatter.ISO_DATE
+                binding.textFechas.text =
+                    getString(R.string.date_range, it.fechaInicio.format(fmt), it.fechaFin.format(fmt))
+            }
+        }
+
+        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            binding.buttonVote.isEnabled = checkedId != View.NO_ID
         }
 
         binding.buttonVote.setOnClickListener {

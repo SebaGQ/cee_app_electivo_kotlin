@@ -34,4 +34,5 @@
     <string name="option_name">Nombre de la opción</string>
     <string name="confirm_discard_changes">¿Salir sin guardar los cambios?</string>
     <string name="confirm_delete">¿Eliminar la votación?</string>
+    <string name="date_range">Del %1$s al %2$s</string>
 </resources>
