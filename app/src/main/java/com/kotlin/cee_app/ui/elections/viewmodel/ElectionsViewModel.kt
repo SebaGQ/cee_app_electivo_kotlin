@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.kotlin.cee_app.data.ElectionRepository
 import com.kotlin.cee_app.data.OpcionPercent
 import com.kotlin.cee_app.data.VotacionEntity
+import com.kotlin.cee_app.data.SessionManager
 import java.time.LocalDate
 import com.kotlin.cee_app.ui.elections.viewmodel.splitActiveUpcomingPast
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,6 +40,9 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
     private val _optionsPercent = MutableStateFlow<Map<String, List<OpcionPercent>>>(emptyMap())
     val optionsPercent: StateFlow<Map<String, List<OpcionPercent>>> = _optionsPercent
 
+    private val _hasVoted = MutableStateFlow<Set<String>>(emptySet())
+    val hasVoted: StateFlow<Set<String>> = _hasVoted
+
     init {
         viewModelScope.launch {
             repo.votaciones.collect { list ->
@@ -49,6 +53,7 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
                 _past.value = pastList
                 updateProgress(act + pastList)
                 updateOptions(act + pastList)
+                updateHasVoted(act)
             }
         }
         viewModelScope.launch {
@@ -79,6 +84,14 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
         _optionsPercent.value = map
     }
 
+    private suspend fun updateHasVoted(list: List<VotacionEntity>) {
+        val set = mutableSetOf<String>()
+        list.forEach { v ->
+            if (repo.haVotado(v.id, SessionManager.currentUserId)) set.add(v.id)
+        }
+        _hasVoted.value = set
+    }
+
     fun eliminar(votacion: VotacionEntity) {
         viewModelScope.launch {
             repo.eliminarVotacion(votacion.id)
@@ -95,6 +108,7 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
             _past.value = pastList
             updateProgress(act + pastList)
             updateOptions(act + pastList)
+            updateHasVoted(act)
         }
     }
 }

@@ -112,7 +112,8 @@ class ElectionsFragment : Fragment() {
                     list,
                     viewModel.progress.value,
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.totalUsers.value,
+                    viewModel.hasVoted.value
                 )
             }
         }
@@ -147,7 +148,8 @@ class ElectionsFragment : Fragment() {
                     viewModel.active.value,
                     map,
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.totalUsers.value,
+                    viewModel.hasVoted.value
                 )
                 pastAdapter.submit(
                     viewModel.past.value,
@@ -165,7 +167,8 @@ class ElectionsFragment : Fragment() {
                     viewModel.active.value,
                     viewModel.progress.value,
                     opts,
-                    viewModel.totalUsers.value
+                    viewModel.totalUsers.value,
+                    viewModel.hasVoted.value
                 )
                 upcomingAdapter.submit(
                     viewModel.upcoming.value,
@@ -178,6 +181,18 @@ class ElectionsFragment : Fragment() {
                     viewModel.progress.value,
                     opts,
                     viewModel.totalUsers.value
+                )
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.hasVoted.collectLatest { set ->
+                activeAdapter.submit(
+                    viewModel.active.value,
+                    viewModel.progress.value,
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value,
+                    set
                 )
             }
         }

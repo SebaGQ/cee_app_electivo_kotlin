@@ -8,11 +8,13 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.PopupMenu
 import android.widget.LinearLayout
+import android.content.res.ColorStateList
 import java.time.LocalDate
 import com.kotlin.cee_app.data.OpcionPercent
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.VotacionEntity
+import com.google.android.material.button.MaterialButton
 
 class VotacionAdapter(
     private val onClick: (VotacionEntity) -> Unit,
@@ -25,6 +27,7 @@ class VotacionAdapter(
     private var options: Map<String, List<OpcionPercent>> = emptyMap()
     private var totalUsers: Int = 1
     private var winners: Map<String, String> = emptyMap()
+    private var voted: Set<String> = emptySet()
     private val expanded: MutableSet<String> = mutableSetOf()
 
     private fun isActive(v: VotacionEntity): Boolean {
@@ -39,13 +42,15 @@ class VotacionAdapter(
         progressMap: Map<String, Int>,
         optionsMap: Map<String, List<OpcionPercent>>,
         total: Int,
-        winnersMap: Map<String, String> = emptyMap()
+        winnersMap: Map<String, String> = emptyMap(),
+        votedSet: Set<String> = emptySet()
     ) {
         data = list
         progress = progressMap
         options = optionsMap
         totalUsers = if (total == 0) 1 else total
         winners = winnersMap
+        voted = votedSet
         expanded.clear()
         notifyDataSetChanged()
     }
@@ -99,8 +104,17 @@ class VotacionAdapter(
             notifyItemChanged(position)
         }
 
-        holder.buttonVote.visibility = if (isActive(item)) View.VISIBLE else View.GONE
-        holder.buttonVote.setOnClickListener { onClick(item) }
+        val active = isActive(item)
+        holder.buttonVote.visibility = if (active) View.VISIBLE else View.GONE
+        val already = voted.contains(item.id)
+        holder.buttonVote.isEnabled = active && !already
+        if (already) {
+            (holder.buttonVote as? MaterialButton)?.backgroundTintList =
+                ColorStateList.valueOf(holder.itemView.context.getColor(R.color.disabled_gray))
+        } else {
+            (holder.buttonVote as? MaterialButton)?.backgroundTintList = null
+        }
+        holder.buttonVote.setOnClickListener { if (holder.buttonVote.isEnabled) onClick(item) }
 
         holder.expandable.visibility = if (isExpanded) View.VISIBLE else View.GONE
         holder.expandIcon.setImageResource(
@@ -134,7 +148,7 @@ class VotacionAdapter(
         val menu: ImageView = itemView.findViewById(R.id.iconInfo)
         val expandIcon: ImageView = itemView.findViewById(R.id.iconExpand)
         val expandable: LinearLayout = itemView.findViewById(R.id.layoutExpandable)
-        val buttonVote: View = itemView.findViewById(R.id.buttonVotar)
+        val buttonVote: MaterialButton = itemView.findViewById(R.id.buttonVotar)
     }
 }
 
