@@ -7,4 +7,5 @@
     android:layout_marginTop="8dp"
     android:background="?attr/colorPrimary"
     android:titleTextColor="@color/white"
+    android:theme="@style/Theme.CEEAPP.AppBarOverlay"
     app:popupTheme="@style/Theme.CEEAPP.PopupOverlay" />
