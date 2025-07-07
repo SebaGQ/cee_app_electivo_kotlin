@@ -2,6 +2,7 @@ package com.kotlin.cee_app.data
 
 import android.content.Context
 import kotlinx.coroutines.flow.Flow
+import com.kotlin.cee_app.data.ConteoOpcion
 
 /**
  * Acceso a datos de votaciones y opciones.
@@ -34,14 +35,24 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
     suspend fun insertarOpcion(opcion: OpcionEntity) =
         db.opcionDao().insert(opcion)
 
-    suspend fun insertarVoto(voto: VotoEntity) =
-        db.votoDao().insert(voto)
+    suspend fun insertarVoto(voto: VotoEntity): Boolean {
+        val count = db.votoDao().countByVotacionAndUsuario(voto.votacionId, voto.usuarioId)
+        return if (count > 0) {
+            false
+        } else {
+            db.votoDao().insert(voto)
+            true
+        }
+    }
 
     suspend fun contarVotos(votacionId: String) =
         db.votoDao().countByVotacion(votacionId)
 
     suspend fun opcionGanadora(votacionId: String): OpcionEntity? =
         db.opcionDao().getWinnerForVotacion(votacionId)
+
+    suspend fun resultados(votacionId: String): List<ConteoOpcion> =
+        db.votoDao().conteoPorOpcion(votacionId)
 
     suspend fun totalUsuarios() = db.usuarioDao().countAll()
 

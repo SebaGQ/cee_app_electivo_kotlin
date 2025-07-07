@@ -12,6 +12,9 @@ import com.kotlin.cee_app.ui.elections.viewmodel.CreateElectionViewModel
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
+import android.app.DatePickerDialog
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.R
@@ -44,6 +47,16 @@ class CreateElectionFragment : Fragment() {
         }
         viewModel.descripcion.asLiveData().observe(viewLifecycleOwner) {
             binding.editDescription.setText(it)
+        }
+        val formatter = DateTimeFormatter.ISO_DATE
+        viewModel.fechaInicio.asLiveData().observe(viewLifecycleOwner) {
+            binding.editStartDate.setText(it.format(formatter))
+        }
+        viewModel.fechaFin.asLiveData().observe(viewLifecycleOwner) {
+            binding.editEndDate.setText(it.format(formatter))
+        }
+        viewModel.estado.asLiveData().observe(viewLifecycleOwner) {
+            binding.switchEstado.isChecked = it == "Abierta"
         }
         viewModel.opciones.asLiveData().observe(viewLifecycleOwner) { list ->
             binding.chipGroup.removeAllViews()
@@ -88,12 +101,36 @@ class CreateElectionFragment : Fragment() {
             viewModel.agregarOpcion(chip.text.toString())
         }
 
+        binding.editStartDate.setOnClickListener {
+            val date = viewModel.fechaInicio.value
+            DatePickerDialog(requireContext(), { _, y, m, d ->
+                viewModel.setFechaInicio(LocalDate.of(y, m + 1, d))
+            }, date.year, date.monthValue - 1, date.dayOfMonth).show()
+        }
+
+        binding.editEndDate.setOnClickListener {
+            val date = viewModel.fechaFin.value
+            DatePickerDialog(requireContext(), { _, y, m, d ->
+                viewModel.setFechaFin(LocalDate.of(y, m + 1, d))
+            }, date.year, date.monthValue - 1, date.dayOfMonth).show()
+        }
+
+        binding.switchEstado.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setEstado(isChecked)
+        }
+
         binding.fabSave.setOnClickListener {
             val title = binding.editTitle.text.toString()
             val desc = binding.editDescription.text.toString()
-            viewModel.guardar(title, desc)
-            Snackbar.make(binding.root, "Guardado", Snackbar.LENGTH_SHORT).show()
-            findNavController().navigateUp()
+            viewModel.guardar(title, desc,
+                onError = {
+                    Snackbar.make(binding.root, R.string.invalid_dates, Snackbar.LENGTH_SHORT).show()
+                },
+                onSuccess = {
+                    Snackbar.make(binding.root, "Guardado", Snackbar.LENGTH_SHORT).show()
+                    findNavController().navigateUp()
+                }
+            )
         }
 
         return binding.root

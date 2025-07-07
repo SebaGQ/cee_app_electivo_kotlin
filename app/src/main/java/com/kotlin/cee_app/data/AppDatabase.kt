@@ -23,7 +23,7 @@ import com.kotlin.cee_app.data.VotoEntity
         OpcionEntity::class,
         VotoEntity::class,
     ],
-    version = 1,
+    version = 2,
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -44,7 +44,8 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
-                ).build()
+                ).fallbackToDestructiveMigration()
+                 .build()
                 INSTANCE = instance
                 instance
             }

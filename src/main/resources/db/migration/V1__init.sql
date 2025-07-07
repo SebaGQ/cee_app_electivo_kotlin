@@ -25,5 +25,7 @@ CREATE TABLE votos (
     id SERIAL PRIMARY KEY,
     opcion_id INT REFERENCES opciones(id),
     usuario_id VARCHAR(50) REFERENCES usuarios(id),
-    fecha_voto DATE NOT NULL
+    votacion_id VARCHAR(50) REFERENCES votaciones(id),
+    fecha_voto DATE NOT NULL,
+    CONSTRAINT uq_voto UNIQUE(votacion_id, usuario_id)
 );

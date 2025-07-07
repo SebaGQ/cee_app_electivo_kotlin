@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.google.material)
     implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.mpandroidchart)
     kapt(libs.androidx.room.compiler)
     implementation(libs.kotlinx.coroutines.core)
 

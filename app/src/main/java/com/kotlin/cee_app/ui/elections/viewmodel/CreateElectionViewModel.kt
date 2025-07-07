@@ -19,6 +19,19 @@ class CreateElectionViewModel(application: Application) : AndroidViewModel(appli
     private val _opciones = MutableStateFlow<List<String>>(emptyList())
     val opciones: StateFlow<List<String>> = _opciones
 
+    private val _fechaInicio = MutableStateFlow(LocalDate.now())
+    val fechaInicio: StateFlow<LocalDate> = _fechaInicio
+
+    private val _fechaFin = MutableStateFlow(LocalDate.now())
+    val fechaFin: StateFlow<LocalDate> = _fechaFin
+
+    private val _estado = MutableStateFlow("Abierta")
+    val estado: StateFlow<String> = _estado
+
+    fun setFechaInicio(date: LocalDate) { _fechaInicio.value = date }
+    fun setFechaFin(date: LocalDate) { _fechaFin.value = date }
+    fun setEstado(open: Boolean) { _estado.value = if (open) "Abierta" else "Cerrada" }
+
     fun agregarOpcion(text: String) {
         _opciones.value = _opciones.value + text
     }
@@ -34,6 +47,9 @@ class CreateElectionViewModel(application: Application) : AndroidViewModel(appli
             repo.obtenerVotacion(id)?.let {
                 _titulo.value = it.titulo
                 _descripcion.value = it.descripcion
+                _fechaInicio.value = it.fechaInicio
+                _fechaFin.value = it.fechaFin
+                _estado.value = it.estado
             }
             repo.opcionesDeVotacion(id).collect { list ->
                 _opciones.value = list.map { it.descripcion }
@@ -47,16 +63,21 @@ class CreateElectionViewModel(application: Application) : AndroidViewModel(appli
     private val _descripcion = MutableStateFlow("")
     val descripcion: StateFlow<String> = _descripcion
 
-    fun guardar(titulo: String, descripcion: String) {
+    fun guardar(titulo: String, descripcion: String, onError: () -> Unit, onSuccess: () -> Unit) {
         viewModelScope.launch {
             val id = editId ?: UUID.randomUUID().toString()
+            if (_fechaFin.value.isBefore(_fechaInicio.value)) {
+                onError()
+                return@launch
+            }
+
             val votacion = VotacionEntity(
                 id = id,
                 titulo = titulo,
                 descripcion = descripcion,
-                fechaInicio = LocalDate.now(),
-                fechaFin = LocalDate.now(),
-                estado = "Abierta",
+                fechaInicio = _fechaInicio.value,
+                fechaFin = _fechaFin.value,
+                estado = _estado.value,
                 adminId = SessionManager.currentUserId
             )
             if (editId == null) {
@@ -68,6 +89,7 @@ class CreateElectionViewModel(application: Application) : AndroidViewModel(appli
             _opciones.value.forEach {
                 repo.insertarOpcion(OpcionEntity(descripcion = it, votacionId = id))
             }
+            onSuccess()
         }
     }
 }
