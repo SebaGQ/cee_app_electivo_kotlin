@@ -11,4 +11,5 @@
     <color name="background_gray">#F5F6F7</color>
     <color name="success_green">#1FB76C</color>
     <color name="text_secondary">#555555</color>
+    <color name="disabled_gray">#CCCCCC</color>
 </resources>

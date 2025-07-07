@@ -23,9 +23,13 @@ class VoteDetailViewModel(application: Application) : AndroidViewModel(applicati
     private val _votacion = MutableStateFlow<VotacionEntity?>(null)
     val votacion: StateFlow<VotacionEntity?> = _votacion
 
+    private val _yaVoto = MutableStateFlow(false)
+    val yaVoto: StateFlow<Boolean> = _yaVoto
+
     fun cargar(votacionId: String) {
         viewModelScope.launch {
             _votacion.value = repo.obtenerVotacion(votacionId)
+            _yaVoto.value = repo.haVotado(votacionId, SessionManager.currentUserId)
         }
         viewModelScope.launch {
             repo.opcionesDeVotacion(votacionId).collect {
@@ -45,7 +49,10 @@ class VoteDetailViewModel(application: Application) : AndroidViewModel(applicati
                     votacionId = votacionId,
                 )
             )
-            if (ok) onSuccess() else onDuplicate()
+            if (ok) {
+                _yaVoto.value = true
+                onSuccess()
+            } else onDuplicate()
         }
     }
 }
