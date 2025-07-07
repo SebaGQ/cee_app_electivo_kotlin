@@ -14,10 +14,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+        <ImageButton
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_media_previous"
+            android:contentDescription="@string/button_back" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title">
+            android:hint="@string/hint_title">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTitle"
@@ -28,7 +36,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Description"
+            android:hint="@string/hint_description"
             android:layout_marginTop="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -67,7 +75,7 @@
             android:id="@+id/switchEstado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Abierta"
+            android:text="@string/switch_open"
             android:layout_marginTop="8dp" />
 
         <com.google.android.material.chip.ChipGroup

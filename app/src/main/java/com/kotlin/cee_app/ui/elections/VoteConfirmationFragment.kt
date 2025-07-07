@@ -21,6 +21,9 @@ class VoteConfirmationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentVoteConfirmationBinding.inflate(inflater, container, false)
+        binding.buttonBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
         binding.buttonResults.setOnClickListener {
             val action = VoteConfirmationFragmentDirections.actionConfirmationToResults(args.votacionId)
             findNavController().navigate(action)
