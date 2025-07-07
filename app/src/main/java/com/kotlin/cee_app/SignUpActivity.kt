@@ -33,7 +33,7 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             lifecycleScope.launch {
-                val rol = if (binding.switchAdmin.isChecked) "ADMIN" else "SIMPLE"
+                val rol = if (binding.switchAdmin.isChecked) "ADMIN" else "USER"
                 val user = UsuarioEntity(
                     id = UUID.randomUUID().toString(),
                     nombre = nombre,
