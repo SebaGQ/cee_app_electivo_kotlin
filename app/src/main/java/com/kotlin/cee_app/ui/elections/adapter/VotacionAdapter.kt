@@ -97,8 +97,8 @@ class VotacionAdapter(
 
         holder.expandable.visibility = if (isExpanded) View.VISIBLE else View.GONE
         holder.expandIcon.setImageResource(
-            if (isExpanded) android.R.drawable.arrow_up_float
-            else android.R.drawable.arrow_down_float
+            if (isExpanded) R.drawable.ic_expand_less
+            else R.drawable.ic_expand_more
         )
 
 
