@@ -14,5 +14,7 @@
     <string name="winner_label">Ganador: %1$s</string>
     <string name="edit">Editar</string>
     <string name="delete">Eliminar</string>
+    <string name="already_voted">Ya has votado</string>
+    <string name="invalid_dates">La fecha fin debe ser posterior al inicio</string>
     <string name="create_new_election">Crear nueva votación</string>
 </resources>
