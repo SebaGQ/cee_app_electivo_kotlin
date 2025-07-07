@@ -5,18 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.kotlin.cee_app.ui.elections.viewmodel.VoteDetailViewModel
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.lifecycle.asLiveData
-import com.kotlin.cee_app.ui.elections.VoteDetailFragmentDirections
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.databinding.FragmentVoteDetailBinding
 
-class VoteDetailFragment : Fragment() {
+class VoteDetailFragment : DialogFragment() {
 
     private var _binding: FragmentVoteDetailBinding? = null
     private val binding get() = _binding!!
@@ -44,8 +42,8 @@ class VoteDetailFragment : Fragment() {
                         Snackbar.make(binding.root, R.string.already_voted, Snackbar.LENGTH_SHORT).show()
                     },
                     onSuccess = {
-                        val action = VoteDetailFragmentDirections.actionVoteToConfirmation(args.votacionId)
-                        findNavController().navigate(action)
+                        binding.layoutVote.visibility = View.GONE
+                        binding.layoutConfirmation.visibility = View.VISIBLE
                     }
                 )
             }
@@ -54,12 +52,15 @@ class VoteDetailFragment : Fragment() {
         viewModel.opciones.asLiveData().observe(viewLifecycleOwner) { list ->
             binding.radioGroup.removeAllViews()
             list.forEach { opcion ->
-                val rb = RadioButton(requireContext())
+                val view = inflater.inflate(R.layout.item_vote_option, binding.radioGroup, false)
+                val rb = view.findViewById<RadioButton>(R.id.radioOption)
                 rb.text = opcion.descripcion
                 rb.tag = opcion.id
                 binding.radioGroup.addView(rb)
             }
         }
+
+        binding.buttonClose.setOnClickListener { dismiss() }
 
         return binding.root
     }

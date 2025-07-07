@@ -10,6 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:id="@+id/layoutVote"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
 
 
         <com.google.android.material.card.MaterialCardView
@@ -77,6 +83,43 @@
             android:text="@string/button_vote"
             android:textSize="@dimen/text_size_button"
             android:layout_marginTop="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutConfirmation"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageCheck"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                app:srcCompat="@drawable/ic_baseline_check_circle_24"
+                app:strokeColor="@color/primary_blue" />
+
+            <TextView
+                android:id="@+id/textConfirmation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vote_saved"
+                android:textSize="@dimen/text_size_heading"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonClose"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_ok"
+                android:textSize="@dimen/text_size_button"
+                android:layout_marginTop="16dp"
+                app:strokeColor="@color/primary_blue" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
