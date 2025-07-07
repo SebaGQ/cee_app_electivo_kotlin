@@ -4,6 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_media_previous"
+        android:contentDescription="@string/button_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageCheck"
         android:layout_width="160dp"
@@ -29,7 +40,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonResults"
         style="?attr/materialButtonOutlinedStyle"
-        android:text="Ver resultados"
+        android:text="@string/button_view_results"
         android:layout_marginTop="16dp"
         app:strokeColor="@color/primary_blue"
         app:layout_constraintTop_toBottomOf="@id/textConfirmation"

@@ -34,9 +34,13 @@ class CreateElectionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         if (!SessionManager.isAdmin()) {
-            Snackbar.make(requireActivity().findViewById(android.R.id.content), "Solo admin", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.admin_only, Snackbar.LENGTH_SHORT).show()
         }
         _binding = FragmentCreateElectionBinding.inflate(inflater, container, false)
+
+        binding.buttonBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         args.votacionId?.let { id ->
             viewModel.cargar(id)
@@ -127,7 +131,7 @@ class CreateElectionFragment : Fragment() {
                     Snackbar.make(binding.root, R.string.invalid_dates, Snackbar.LENGTH_SHORT).show()
                 },
                 onSuccess = {
-                    Snackbar.make(binding.root, "Guardado", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, R.string.saved, Snackbar.LENGTH_SHORT).show()
                     findNavController().navigateUp()
                 }
             )

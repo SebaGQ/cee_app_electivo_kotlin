@@ -31,6 +31,10 @@ class VoteDetailFragment : Fragment() {
         _binding = FragmentVoteDetailBinding.inflate(inflater, container, false)
         viewModel.cargar(args.votacionId)
 
+        binding.buttonBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         viewModel.votacion.asLiveData().observe(viewLifecycleOwner) { v ->
             binding.textPregunta.text = v?.titulo ?: ""
         }

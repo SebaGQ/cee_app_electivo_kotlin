@@ -17,4 +17,12 @@
     <string name="already_voted">Ya has votado</string>
     <string name="invalid_dates">La fecha fin debe ser posterior al inicio</string>
     <string name="create_new_election">Crear nueva votación</string>
+    <string name="hint_title">Título</string>
+    <string name="hint_description">Descripción</string>
+    <string name="switch_open">Abierta</string>
+    <string name="button_vote">Votar</string>
+    <string name="button_view_results">Ver resultados</string>
+    <string name="button_back">Volver</string>
+    <string name="saved">Guardado</string>
+    <string name="admin_only">Solo admin</string>
 </resources>
