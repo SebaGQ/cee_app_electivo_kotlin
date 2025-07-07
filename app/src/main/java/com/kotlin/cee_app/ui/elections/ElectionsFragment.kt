@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.databinding.FragmentElectionsBinding
+import com.kotlin.cee_app.ui.elections.VoteDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -32,10 +33,8 @@ class ElectionsFragment : Fragment() {
 
         val activeAdapter = VotacionAdapter(
             onClick = { votacion ->
-                findNavController().navigate(
-                    R.id.action_elections_to_voteDetail,
-                    Bundle().apply { putString("votacionId", votacion.id) }
-                )
+                VoteDialogFragment.newInstance(votacion.id)
+                    .show(childFragmentManager, "vote")
             },
             onEdit = { votacion ->
                 findNavController().navigate(
@@ -54,10 +53,8 @@ class ElectionsFragment : Fragment() {
 
         val upcomingAdapter = VotacionAdapter(
             onClick = { votacion ->
-                findNavController().navigate(
-                    R.id.action_elections_to_voteDetail,
-                    Bundle().apply { putString("votacionId", votacion.id) }
-                )
+                VoteDialogFragment.newInstance(votacion.id)
+                    .show(childFragmentManager, "vote")
             },
             onEdit = { votacion ->
                 findNavController().navigate(
