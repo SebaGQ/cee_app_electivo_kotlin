@@ -45,9 +45,30 @@ class OpcionDaoWinnerTest {
         votacionDao.insert(votacion)
         val idA = opcionDao.insert(OpcionEntity(descripcion = "A", votacionId = "v1"))
         val idB = opcionDao.insert(OpcionEntity(descripcion = "B", votacionId = "v1"))
-        votoDao.insert(VotoEntity(LocalDate.now(), idA, "u1"))
-        votoDao.insert(VotoEntity(LocalDate.now(), idA, "u2"))
-        votoDao.insert(VotoEntity(LocalDate.now(), idB, "u3"))
+        votoDao.insert(
+            VotoEntity(
+                fechaVoto = LocalDate.now(),
+                opcionId = idA,
+                usuarioId = "u1",
+                votacionId = "v1"
+            )
+        )
+        votoDao.insert(
+            VotoEntity(
+                fechaVoto = LocalDate.now(),
+                opcionId = idA,
+                usuarioId = "u2",
+                votacionId = "v1"
+            )
+        )
+        votoDao.insert(
+            VotoEntity(
+                fechaVoto = LocalDate.now(),
+                opcionId = idB,
+                usuarioId = "u3",
+                votacionId = "v1"
+            )
+        )
 
         val winner = opcionDao.getWinnerForVotacion("v1")
         assertEquals("A", winner?.descripcion)
