@@ -66,7 +66,7 @@
                     app:argType="string" />
             </action>
         </fragment>
-    </navigation>
+</navigation>
 
     <navigation
         android:id="@+id/nav_results"
@@ -79,6 +79,33 @@
             tools:layout="@layout/fragment_results">
             <argument
                 android:name="votacionId"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </fragment>
+    </navigation>
+
+    <navigation
+        android:id="@+id/nav_users"
+        app:startDestination="@id/usersFragment">
+
+        <fragment
+            android:id="@+id/usersFragment"
+            android:name="com.kotlin.cee_app.ui.users.UsersFragment"
+            android:label="@string/title_users"
+            tools:layout="@layout/fragment_users">
+            <action
+                android:id="@+id/action_users_to_createUser"
+                app:destination="@id/createUserFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/createUserFragment"
+            android:name="com.kotlin.cee_app.ui.users.CreateUserFragment"
+            android:label="@string/create_user"
+            tools:layout="@layout/fragment_create_user">
+            <argument
+                android:name="userId"
                 app:argType="string"
                 app:nullable="true"
                 android:defaultValue="@null" />
