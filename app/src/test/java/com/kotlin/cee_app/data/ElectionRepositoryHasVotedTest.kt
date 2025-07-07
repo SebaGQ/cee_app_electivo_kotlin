@@ -1,0 +1,42 @@
+package com.kotlin.cee_app.data
+
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
+import kotlinx.coroutines.runBlocking
+import org.junit.Before
+import org.junit.Test
+import java.time.LocalDate
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
+
+class ElectionRepositoryHasVotedTest {
+    private lateinit var repo: ElectionRepository
+    private lateinit var db: AppDatabase
+
+    @Before
+    fun setup() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        repo = ElectionRepository.getInstance(context)
+        db = AppDatabase.getDatabase(context)
+        db.clearAllTables()
+    }
+
+    @Test
+    fun hasVoted_returns_correct_value() = runBlocking {
+        val votacion = VotacionEntity(
+            id = "v1",
+            titulo = "t",
+            descripcion = "d",
+            fechaInicio = LocalDate.now(),
+            fechaFin = LocalDate.now(),
+            estado = "Abierta",
+            adminId = "a1",
+        )
+        db.votacionDao().insert(votacion)
+        val opcionId = db.opcionDao().insert(OpcionEntity("A", "v1"))
+        db.votoDao().insert(VotoEntity(LocalDate.now(), opcionId, "u1", "v1"))
+
+        assertTrue(repo.haVotado("v1", "u1"))
+        assertFalse(repo.haVotado("v1", "u2"))
+    }
+}

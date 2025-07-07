@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import android.content.res.ColorStateList
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.databinding.DialogVoteBinding
@@ -28,6 +29,14 @@ class VoteDialogFragment : DialogFragment() {
         _binding = DialogVoteBinding.inflate(inflater, container, false)
         val votacionId = requireArguments().getString(ARG_VOTACION) ?: ""
         viewModel.cargar(votacionId)
+
+        viewModel.yaVoto.asLiveData().observe(viewLifecycleOwner) { voted ->
+            binding.buttonVote.isEnabled = !voted
+            if (voted) {
+                binding.buttonVote.backgroundTintList =
+                    ColorStateList.valueOf(requireContext().getColor(R.color.disabled_gray))
+            }
+        }
 
         viewModel.votacion.asLiveData().observe(viewLifecycleOwner) { v ->
             binding.textPregunta.text = v?.titulo ?: ""

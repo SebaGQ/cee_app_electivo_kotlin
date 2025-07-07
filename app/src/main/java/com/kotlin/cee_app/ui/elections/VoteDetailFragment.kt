@@ -11,6 +11,7 @@ import com.kotlin.cee_app.ui.elections.viewmodel.VoteDetailViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.lifecycle.asLiveData
+import android.content.res.ColorStateList
 import com.kotlin.cee_app.ui.elections.VoteDetailFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.R
@@ -30,6 +31,14 @@ class VoteDetailFragment : Fragment() {
     ): View {
         _binding = FragmentVoteDetailBinding.inflate(inflater, container, false)
         viewModel.cargar(args.votacionId)
+
+        viewModel.yaVoto.asLiveData().observe(viewLifecycleOwner) { voted ->
+            binding.buttonVote.isEnabled = !voted
+            if (voted) {
+                binding.buttonVote.backgroundTintList =
+                    ColorStateList.valueOf(requireContext().getColor(R.color.disabled_gray))
+            }
+        }
 
         viewModel.votacion.asLiveData().observe(viewLifecycleOwner) { v ->
             binding.textPregunta.text = v?.titulo ?: ""
