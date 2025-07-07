@@ -65,8 +65,27 @@ class ElectionsFragment : Fragment() {
             }
         )
 
+        val pastAdapter = VotacionAdapter(
+            onClick = { votacion ->
+                findNavController().navigate(
+                    R.id.action_elections_to_results,
+                    Bundle().apply { putString("votacionId", votacion.id) }
+                )
+            },
+            onEdit = { votacion ->
+                findNavController().navigate(
+                    R.id.action_elections_to_createElection,
+                    Bundle().apply { putString("votacionId", votacion.id) }
+                )
+            },
+            onDelete = { votacion ->
+                viewModel.eliminar(votacion)
+            }
+        )
+
         binding.recyclerActive.adapter = activeAdapter
         binding.recyclerUpcoming.adapter = upcomingAdapter
+        binding.recyclerPast.adapter = pastAdapter
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.active.collectLatest { list ->
@@ -93,9 +112,27 @@ class ElectionsFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.past.collectLatest { list ->
+                binding.textPastHeader.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
+                pastAdapter.submit(
+                    list,
+                    emptyMap(),
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value
+                )
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.progress.collectLatest { map ->
                 activeAdapter.submit(
                     viewModel.active.value,
+                    map,
+                    viewModel.optionsPercent.value,
+                    viewModel.totalUsers.value
+                )
+                pastAdapter.submit(
+                    viewModel.past.value,
                     map,
                     viewModel.optionsPercent.value,
                     viewModel.totalUsers.value
@@ -115,6 +152,12 @@ class ElectionsFragment : Fragment() {
                 upcomingAdapter.submit(
                     viewModel.upcoming.value,
                     emptyMap(),
+                    opts,
+                    viewModel.totalUsers.value
+                )
+                pastAdapter.submit(
+                    viewModel.past.value,
+                    viewModel.progress.value,
                     opts,
                     viewModel.totalUsers.value
                 )
