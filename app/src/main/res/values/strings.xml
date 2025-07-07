@@ -27,4 +27,6 @@
     <string name="button_back">Volver</string>
     <string name="saved">Guardado</string>
     <string name="admin_only">Solo admin</string>
+    <string name="expand">Expandir</string>
+    <string name="collapse">Contraer</string>
 </resources>

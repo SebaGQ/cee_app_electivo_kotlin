@@ -24,6 +24,7 @@ class VotacionAdapter(
     private var options: Map<String, List<OpcionPercent>> = emptyMap()
     private var totalUsers: Int = 1
     private var winners: Map<String, String> = emptyMap()
+    private val expanded: MutableSet<String> = mutableSetOf()
 
     fun submit(
         list: List<VotacionEntity>,
@@ -83,6 +84,19 @@ class VotacionAdapter(
             holder.optionsContainer.addView(view)
         }
         holder.itemView.setOnClickListener { onClick(item) }
+
+        val isExpanded = expanded.contains(item.id)
+        holder.expandable.visibility = if (isExpanded) View.VISIBLE else View.GONE
+        holder.expandIcon.setImageResource(
+            if (isExpanded) android.R.drawable.arrow_up_float
+            else android.R.drawable.arrow_down_float
+        )
+
+        holder.expandIcon.setOnClickListener {
+            if (isExpanded) expanded.remove(item.id) else expanded.add(item.id)
+            notifyItemChanged(position)
+        }
+
         holder.menu.setOnClickListener { v ->
             val popup = PopupMenu(v.context, v)
             popup.inflate(R.menu.menu_votacion_item)
@@ -106,6 +120,8 @@ class VotacionAdapter(
         val winner: TextView = itemView.findViewById(R.id.textWinner)
         val optionsContainer: LinearLayout = itemView.findViewById(R.id.layoutOptions)
         val menu: ImageView = itemView.findViewById(R.id.iconInfo)
+        val expandIcon: ImageView = itemView.findViewById(R.id.iconExpand)
+        val expandable: LinearLayout = itemView.findViewById(R.id.layoutExpandable)
     }
 }
 
