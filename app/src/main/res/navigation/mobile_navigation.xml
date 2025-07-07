@@ -3,50 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/electionsFragment">
+    app:startDestination="@+id/nav_elections">
 
-    <fragment
-        android:id="@+id/electionsFragment"
-        android:name="com.kotlin.cee_app.ui.elections.ElectionsFragment"
-        android:label="@string/title_elections"
-        tools:layout="@layout/fragment_elections">
-        <action
-            android:id="@+id/action_elections_to_voteDetail"
-            app:destination="@id/voteDetailFragment" />
-        <action
-            android:id="@+id/action_elections_to_createElection"
-            app:destination="@id/createElectionFragment" />
-    </fragment>
+    <navigation
+        android:id="@+id/nav_elections"
+        app:startDestination="@id/electionsFragment">
 
-    <fragment
-        android:id="@+id/createElectionFragment"
-        android:name="com.kotlin.cee_app.ui.elections.CreateElectionFragment"
-        android:label="Create"
-        tools:layout="@layout/fragment_create_election">
-        <argument
-            android:name="votacionId"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
-    </fragment>
+        <fragment
+            android:id="@+id/electionsFragment"
+            android:name="com.kotlin.cee_app.ui.elections.ElectionsFragment"
+            android:label="@string/title_elections"
+            tools:layout="@layout/fragment_elections">
+            <action
+                android:id="@+id/action_elections_to_voteDetail"
+                app:destination="@id/voteDetailFragment" />
+            <action
+                android:id="@+id/action_elections_to_createElection"
+                app:destination="@id/createElectionFragment" />
+        </fragment>
 
-    <fragment
-        android:id="@+id/voteDetailFragment"
-        android:name="com.kotlin.cee_app.ui.elections.VoteDetailFragment"
-        android:label="Vote Detail"
-        tools:layout="@layout/fragment_vote_detail">
-        <argument
-            android:name="votacionId"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_vote_to_confirmation"
-            app:destination="@id/voteConfirmationFragment" />
-    </fragment>
+        <fragment
+            android:id="@+id/createElectionFragment"
+            android:name="com.kotlin.cee_app.ui.elections.CreateElectionFragment"
+            android:label="Create"
+            tools:layout="@layout/fragment_create_election">
+            <argument
+                android:name="votacionId"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </fragment>
 
-    <fragment
-        android:id="@+id/voteConfirmationFragment"
-        android:name="com.kotlin.cee_app.ui.elections.VoteConfirmationFragment"
-        android:label="Confirmation"
-        tools:layout="@layout/fragment_vote_confirmation" />
+        <fragment
+            android:id="@+id/voteDetailFragment"
+            android:name="com.kotlin.cee_app.ui.elections.VoteDetailFragment"
+            android:label="Vote Detail"
+            tools:layout="@layout/fragment_vote_detail">
+            <argument
+                android:name="votacionId"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_vote_to_confirmation"
+                app:destination="@id/voteConfirmationFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/voteConfirmationFragment"
+            android:name="com.kotlin.cee_app.ui.elections.VoteConfirmationFragment"
+            android:label="Confirmation"
+            tools:layout="@layout/fragment_vote_confirmation" />
+
+    </navigation>
+
+    <navigation
+        android:id="@+id/nav_results"
+        app:startDestination="@id/resultsFragment">
+
+        <fragment
+            android:id="@+id/resultsFragment"
+            android:name="com.kotlin.cee_app.ui.results.ResultsFragment"
+            android:label="@string/title_results"
+            tools:layout="@layout/fragment_results" />
+
+    </navigation>
 
 </navigation>
