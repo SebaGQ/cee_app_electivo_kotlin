@@ -45,7 +45,8 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 google-material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
-mpandroidchart = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "mpandroidchart" }
+mpandroidchart = { group = "com.github.PhilJay", name = "MPAndroidChart", version = "v3.1.0" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
