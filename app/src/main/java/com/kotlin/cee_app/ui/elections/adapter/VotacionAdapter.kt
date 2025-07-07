@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.content.res.ColorStateList
 import java.time.LocalDate
 import com.kotlin.cee_app.data.OpcionPercent
+import com.kotlin.cee_app.data.ConteoOpcion
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.VotacionEntity
@@ -24,6 +25,7 @@ class VotacionAdapter(
     private var data: List<VotacionEntity> = emptyList()
     private var progress: Map<String, Int> = emptyMap()
     private var options: Map<String, List<OpcionPercent>> = emptyMap()
+    private var counts: Map<String, List<ConteoOpcion>> = emptyMap()
     private var totalUsers: Int = 1
     private var winners: Map<String, String> = emptyMap()
     private var voted: Map<String, Boolean> = emptyMap()
@@ -40,6 +42,7 @@ class VotacionAdapter(
         list: List<VotacionEntity>,
         progressMap: Map<String, Int>,
         optionsMap: Map<String, List<OpcionPercent>>,
+        countsMap: Map<String, List<ConteoOpcion>>,
         total: Int,
         winnersMap: Map<String, String> = emptyMap(),
         votedMap: Map<String, Boolean> = emptyMap()
@@ -47,6 +50,7 @@ class VotacionAdapter(
         data = list
         progress = progressMap
         options = optionsMap
+        counts = countsMap
         totalUsers = if (total == 0) 1 else total
         winners = winnersMap
         voted = votedMap
@@ -89,11 +93,21 @@ class VotacionAdapter(
 
         holder.optionsContainer.removeAllViews()
         val opts = options[item.id] ?: emptyList()
-        opts.forEach { op ->
+        val countsList = counts[item.id] ?: emptyList()
+        val already = voted[item.id] == true
+        opts.forEachIndexed { index, op ->
             val view = LayoutInflater.from(holder.itemView.context)
                 .inflate(R.layout.item_result_option, holder.optionsContainer, false)
             view.findViewById<TextView>(R.id.textOption).text = op.descripcion
             view.findViewById<TextView>(R.id.textPercent).text = "${op.porcentaje}%"
+            val votesView = view.findViewById<TextView>(R.id.textVotes)
+            if (already) {
+                val count = countsList.getOrNull(index)?.total ?: 0
+                votesView.visibility = View.VISIBLE
+                votesView.text = holder.itemView.context.getString(R.string.votes_count, count)
+            } else {
+                votesView.visibility = View.GONE
+            }
             holder.optionsContainer.addView(view)
         }
 
@@ -104,7 +118,6 @@ class VotacionAdapter(
         }
 
         holder.buttonVote.visibility = if (isActive(item)) View.VISIBLE else View.GONE
-        val already = voted[item.id] == true
         holder.buttonVote.isEnabled = !already
         if (already) {
             holder.buttonVote.backgroundTintList =
