@@ -34,15 +34,18 @@ class VoteDetailViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun votar(opcionId: Long) {
+    fun votar(opcionId: Long, onDuplicate: () -> Unit, onSuccess: () -> Unit) {
+        val votacionId = _votacion.value?.id ?: return
         viewModelScope.launch {
-            repo.insertarVoto(
+            val ok = repo.insertarVoto(
                 VotoEntity(
                     fechaVoto = LocalDate.now(),
                     opcionId = opcionId,
-                    usuarioId = SessionManager.currentUserId
+                    usuarioId = SessionManager.currentUserId,
+                    votacionId = votacionId,
                 )
             )
+            if (ok) onSuccess() else onDuplicate()
         }
     }
 }

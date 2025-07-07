@@ -2,20 +2,34 @@ package com.kotlin.cee_app.data
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.kotlin.cee_app.data.ConteoOpcion
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface VotoDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(voto: VotoEntity): Long
 
     @Query("SELECT * FROM votos")
     fun getAll(): Flow<List<VotoEntity>>
 
-    @Query("SELECT COUNT(*) FROM votos WHERE opcionId IN (SELECT id FROM opciones WHERE votacionId = :votacionId)")
+    @Query("SELECT COUNT(*) FROM votos WHERE votacionId = :votacionId")
     suspend fun countByVotacion(votacionId: String): Int
 
-    @Query("DELETE FROM votos WHERE opcionId IN (SELECT id FROM opciones WHERE votacionId = :votacionId)")
+    @Query(
+        "SELECT COUNT(*) FROM votos WHERE votacionId = :votacionId AND usuarioId = :usuarioId"
+    )
+    suspend fun countByVotacionAndUsuario(votacionId: String, usuarioId: String): Int
+
+    @Query("DELETE FROM votos WHERE votacionId = :votacionId")
     suspend fun deleteByVotacionId(votacionId: String)
+
+    @Query(
+        "SELECT o.descripcion AS descripcion, COUNT(v.id) AS total FROM opciones o " +
+            "LEFT JOIN votos v ON o.id = v.opcionId WHERE o.votacionId = :votacionId " +
+            "GROUP BY o.id ORDER BY o.id"
+    )
+    suspend fun conteoPorOpcion(votacionId: String): List<ConteoOpcion>
 }

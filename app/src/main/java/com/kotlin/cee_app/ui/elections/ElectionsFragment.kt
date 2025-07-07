@@ -50,7 +50,7 @@ class ElectionsFragment : Fragment() {
         val pastAdapter = VotacionAdapter(
             onClick = { votacion ->
                 findNavController().navigate(
-                    R.id.action_elections_to_voteDetail,
+                    R.id.action_elections_to_results,
                     Bundle().apply { putString("votacionId", votacion.id) }
                 )
             },

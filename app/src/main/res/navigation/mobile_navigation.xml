@@ -20,6 +20,9 @@
             <action
                 android:id="@+id/action_elections_to_createElection"
                 app:destination="@id/createElectionFragment" />
+            <action
+                android:id="@+id/action_elections_to_results"
+                app:destination="@id/resultsFragment" />
         </fragment>
 
         <fragment
@@ -51,7 +54,14 @@
             android:id="@+id/voteConfirmationFragment"
             android:name="com.kotlin.cee_app.ui.elections.VoteConfirmationFragment"
             android:label="Confirmation"
-            tools:layout="@layout/fragment_vote_confirmation" />
+            tools:layout="@layout/fragment_vote_confirmation">
+            <argument
+                android:name="votacionId"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_confirmation_to_results"
+                app:destination="@id/resultsFragment" />
+        </fragment>
     </navigation>
 
     <navigation
@@ -62,7 +72,11 @@
             android:id="@+id/resultsFragment"
             android:name="com.kotlin.cee_app.ui.results.ResultsFragment"
             android:label="@string/title_results"
-            tools:layout="@layout/fragment_results" />
+            tools:layout="@layout/fragment_results">
+            <argument
+                android:name="votacionId"
+                app:argType="string" />
+        </fragment>
     </navigation>
 
 </navigation>
