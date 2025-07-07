@@ -65,6 +65,14 @@ class VoteDialogFragment : DialogFragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        val metrics = resources.displayMetrics
+        val width = (metrics.widthPixels * 0.9).toInt()
+        val height = (metrics.heightPixels * 0.7).toInt()
+        dialog?.window?.setLayout(width, height)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
