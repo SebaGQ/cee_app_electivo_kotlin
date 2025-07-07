@@ -25,4 +25,7 @@ interface UsuarioDao {
 
     @Query("SELECT COUNT(*) FROM usuarios")
     suspend fun countAll(): Int
+
+    @Query("SELECT * FROM usuarios WHERE correo = :correo")
+    suspend fun findByCorreo(correo: String): UsuarioEntity?
 }

@@ -40,4 +40,10 @@
     <string name="hint_email">Correo</string>
     <string name="hint_password">Contraseña</string>
     <string name="hint_role">Rol</string>
+    <string name="action_login">Iniciar sesión</string>
+    <string name="action_logout">Cerrar sesión</string>
+    <string name="invalid_credentials">Credenciales inválidas</string>
+    <string name="action_create_account">Crear cuenta</string>
+    <string name="invalid_email">Correo inválido</string>
+    <string name="account_created">Cuenta creada</string>
 </resources>

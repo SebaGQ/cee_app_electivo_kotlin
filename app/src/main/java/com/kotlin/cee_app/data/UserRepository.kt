@@ -19,6 +19,11 @@ class UserRepository private constructor(private val db: AppDatabase) {
     suspend fun obtener(id: String): UsuarioEntity? =
         db.usuarioDao().findById(id)
 
+    suspend fun login(correo: String, password: String): UsuarioEntity? {
+        val user = db.usuarioDao().findByCorreo(correo)
+        return if (user != null && user.password == password) user else null
+    }
+
     companion object {
         @Volatile private var INSTANCE: UserRepository? = null
 
