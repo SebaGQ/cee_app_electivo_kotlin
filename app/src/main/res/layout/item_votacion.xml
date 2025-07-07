@@ -22,20 +22,12 @@
             app:layout_constraintEnd_toStartOf="@id/iconInfo"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/iconExpand"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/arrow_down_float"
-            android:contentDescription="@string/expand"
-            app:layout_constraintEnd_toStartOf="@id/iconInfo"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iconInfo"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_more"
+            android:src="@drawable/ic_more_vert"
             android:contentDescription="@string/action_settings"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -95,5 +87,18 @@
                 android:visibility="gone" />
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iconExpand"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_expand_more"
+            android:contentDescription="@string/expand"
+            app:layout_constraintTop_toBottomOf="@id/layoutExpandable"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
