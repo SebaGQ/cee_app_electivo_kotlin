@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.PopupMenu
 import android.widget.LinearLayout
+import android.widget.Button
 import com.kotlin.cee_app.data.OpcionPercent
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
@@ -24,6 +25,7 @@ class VotacionAdapter(
     private var options: Map<String, List<OpcionPercent>> = emptyMap()
     private var totalUsers: Int = 1
     private var winners: Map<String, String> = emptyMap()
+    private val expanded: MutableSet<String> = mutableSetOf()
 
     fun submit(
         list: List<VotacionEntity>,
@@ -82,7 +84,17 @@ class VotacionAdapter(
             view.findViewById<TextView>(R.id.textPercent).text = "${op.porcentaje}%"
             holder.optionsContainer.addView(view)
         }
-        holder.itemView.setOnClickListener { onClick(item) }
+        val isExpanded = expanded.contains(item.id)
+        holder.expandable.visibility = if (isExpanded) View.VISIBLE else View.GONE
+
+        holder.itemView.setOnClickListener {
+            if (isExpanded) expanded.remove(item.id) else expanded.add(item.id)
+            notifyItemChanged(position)
+        }
+
+        holder.voteButton.visibility = if (item.estado == "Abierta") View.VISIBLE else View.GONE
+        holder.voteButton.setOnClickListener { onClick(item) }
+
         holder.menu.setOnClickListener { v ->
             val popup = PopupMenu(v.context, v)
             popup.inflate(R.menu.menu_votacion_item)
@@ -106,6 +118,8 @@ class VotacionAdapter(
         val winner: TextView = itemView.findViewById(R.id.textWinner)
         val optionsContainer: LinearLayout = itemView.findViewById(R.id.layoutOptions)
         val menu: ImageView = itemView.findViewById(R.id.iconInfo)
+        val expandable: LinearLayout = itemView.findViewById(R.id.layoutExpandable)
+        val voteButton: Button = itemView.findViewById(R.id.buttonVote)
     }
 }
 
