@@ -15,7 +15,7 @@ Las versiones de estas dependencias se definen en
 conexión a Internet, asegúrate de contar con la distribución de Gradle
 de forma local o modifica `distributionUrl` a una ruta `file://`.
 
-La aplicación implementa tres pantallas simples (Home, Gallery y Slideshow) que muestran texto estático y pueden navegarse mediante el menú lateral.
+La aplicación ahora carga únicamente la pantalla de **Elections**, que incluye su propia barra superior y de navegación inferior.
 
 ## Estructura
 
@@ -24,15 +24,7 @@ app/
  ├─ src/main/java/com/kotlin/cee_app/
  │   ├─ MainActivity.kt
  │   └─ ui/
- │       ├─ home/
- │       │   ├─ HomeFragment.kt
- │       │   └─ HomeViewModel.kt
- │       ├─ gallery/
- │       │   ├─ GalleryFragment.kt
- │       │   └─ GalleryViewModel.kt
- │       └─ slideshow/
- │           ├─ SlideshowFragment.kt
- │           └─ SlideshowViewModel.kt
+ │       └─ elections/
  └─ src/test/... (pruebas unitarias)
 ```
 

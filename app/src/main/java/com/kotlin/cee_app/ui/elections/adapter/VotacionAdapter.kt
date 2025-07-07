@@ -1,0 +1,95 @@
+package com.kotlin.cee_app.ui.elections.adapter
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.PopupMenu
+import androidx.recyclerview.widget.RecyclerView
+import com.kotlin.cee_app.R
+import com.kotlin.cee_app.data.VotacionEntity
+
+class VotacionAdapter(
+    private val onClick: (VotacionEntity) -> Unit,
+    private val onEdit: (VotacionEntity) -> Unit,
+    private val onDelete: (VotacionEntity) -> Unit,
+) : RecyclerView.Adapter<VotacionAdapter.Vh>() {
+
+    private var data: List<VotacionEntity> = emptyList()
+    private var progress: Map<String, Int> = emptyMap()
+    private var totalUsers: Int = 1
+    private var winners: Map<String, String> = emptyMap()
+
+    fun submit(
+        list: List<VotacionEntity>,
+        progressMap: Map<String, Int>,
+        total: Int,
+        winnersMap: Map<String, String> = emptyMap()
+    ) {
+        data = list
+        progress = progressMap
+        totalUsers = if (total == 0) 1 else total
+        winners = winnersMap
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Vh {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_votacion, parent, false)
+        return Vh(view)
+    }
+
+    override fun onBindViewHolder(holder: Vh, position: Int) {
+        val item = data[position]
+        holder.title.text = item.titulo
+        holder.estado.text = item.estado
+        holder.estado.setTextColor(
+            if (item.estado == "Abierta") holder.itemView.context.getColor(R.color.primary_blue)
+            else holder.itemView.context.getColor(R.color.black)
+        )
+        val count = progress[item.id] ?: 0
+        if (item.estado == "Abierta") {
+            holder.progress.visibility = View.VISIBLE
+            holder.progress.max = totalUsers
+            holder.progress.progress = count
+            holder.winner.visibility = View.GONE
+        } else {
+            holder.progress.visibility = View.GONE
+            val w = winners[item.id]
+            if (w != null) {
+                holder.winner.visibility = View.VISIBLE
+                holder.winner.text = holder.itemView.context.getString(
+                    R.string.winner_label, w
+                )
+            } else {
+                holder.winner.visibility = View.GONE
+            }
+        }
+        holder.itemView.setOnClickListener { onClick(item) }
+        holder.menu.setOnClickListener { v ->
+            val popup = PopupMenu(v.context, v)
+            popup.inflate(R.menu.menu_votacion_item)
+            popup.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.action_edit -> { onEdit(item); true }
+                    R.id.action_delete -> { onDelete(item); true }
+                    else -> false
+                }
+            }
+            popup.show()
+        }
+    }
+
+    override fun getItemCount(): Int = data.size
+
+    class Vh(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val title: TextView = itemView.findViewById(R.id.textTitle)
+        val estado: TextView = itemView.findViewById(R.id.textEstado)
+        val progress: ProgressBar = itemView.findViewById(R.id.progressVotos)
+        val winner: TextView = itemView.findViewById(R.id.textWinner)
+        val menu: ImageView = itemView.findViewById(R.id.iconInfo)
+    }
+}
+
