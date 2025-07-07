@@ -47,4 +47,5 @@
     <string name="invalid_email">Correo inválido</string>
     <string name="account_created">Cuenta creada</string>
     <string name="votes_count">%1$d votos</string>
+    <string name="label_is_admin">Administrador</string>
 </resources>

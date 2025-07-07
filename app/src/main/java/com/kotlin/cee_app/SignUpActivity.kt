@@ -33,12 +33,13 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             lifecycleScope.launch {
+                val rol = if (binding.switchAdmin.isChecked) "ADMIN" else "SIMPLE"
                 val user = UsuarioEntity(
                     id = UUID.randomUUID().toString(),
                     nombre = nombre,
                     correo = correo,
                     password = password,
-                    rol = "SIMPLE"
+                    rol = rol
                 )
                 repo.insertar(user)
                 Snackbar.make(binding.root, R.string.account_created, Snackbar.LENGTH_SHORT).show()
