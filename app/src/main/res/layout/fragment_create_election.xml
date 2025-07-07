@@ -17,7 +17,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title">
+            android:hint="@string/title_placeholder">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTitle"
@@ -28,7 +28,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Description"
+            android:hint="@string/description_placeholder"
             android:layout_marginTop="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -67,7 +67,7 @@
             android:id="@+id/switchEstado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Abierta"
+            android:text="@string/open_state"
             android:layout_marginTop="8dp" />
 
         <com.google.android.material.chip.ChipGroup

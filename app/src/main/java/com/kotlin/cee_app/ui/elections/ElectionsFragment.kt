@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kotlin.cee_app.ui.elections.adapter.VotacionAdapter
@@ -21,6 +22,17 @@ class ElectionsFragment : Fragment() {
     private var _binding: FragmentElectionsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ElectionsViewModel by viewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.topBar)
+        if (findNavController().previousBackStackEntry != null) {
+            toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+            toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+        } else {
+            toolbar.navigationIcon = null
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -121,6 +133,8 @@ class ElectionsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        requireActivity().findViewById<Toolbar>(R.id.topBar).navigationIcon = null
+        requireActivity().findViewById<Toolbar>(R.id.topBar).setNavigationOnClickListener(null)
         _binding = null
     }
 }

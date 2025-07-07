@@ -70,7 +70,7 @@
             style="?attr/materialButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Votar"
+            android:text="@string/vote_button"
             android:layout_marginTop="16dp" />
 
     </LinearLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -23,6 +24,17 @@ class ResultsFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ResultsViewModel by viewModels()
     private val args: ResultsFragmentArgs by navArgs()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.topBar)
+        if (findNavController().previousBackStackEntry != null) {
+            toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+            toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+        } else {
+            toolbar.navigationIcon = null
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,6 +75,8 @@ class ResultsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        requireActivity().findViewById<Toolbar>(R.id.topBar).navigationIcon = null
+        requireActivity().findViewById<Toolbar>(R.id.topBar).setNavigationOnClickListener(null)
         _binding = null
     }
 }
