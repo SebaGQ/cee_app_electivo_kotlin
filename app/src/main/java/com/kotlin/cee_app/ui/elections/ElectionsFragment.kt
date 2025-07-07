@@ -47,10 +47,10 @@ class ElectionsFragment : Fragment() {
             }
         )
 
-        val pastAdapter = VotacionAdapter(
+        val upcomingAdapter = VotacionAdapter(
             onClick = { votacion ->
                 findNavController().navigate(
-                    R.id.action_elections_to_results,
+                    R.id.action_elections_to_voteDetail,
                     Bundle().apply { putString("votacionId", votacion.id) }
                 )
             },
@@ -66,7 +66,7 @@ class ElectionsFragment : Fragment() {
         )
 
         binding.recyclerActive.adapter = activeAdapter
-        binding.recyclerPast.adapter = pastAdapter
+        binding.recyclerUpcoming.adapter = upcomingAdapter
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.active.collectLatest { list ->
@@ -81,14 +81,13 @@ class ElectionsFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.past.collectLatest { list ->
-                binding.textPastHeader.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
-                pastAdapter.submit(
+            viewModel.upcoming.collectLatest { list ->
+                binding.textUpcomingHeader.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
+                upcomingAdapter.submit(
                     list,
                     emptyMap(),
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value,
-                    viewModel.winners.value
+                    viewModel.totalUsers.value
                 )
             }
         }
@@ -104,17 +103,6 @@ class ElectionsFragment : Fragment() {
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.winners.collectLatest { map ->
-                pastAdapter.submit(
-                    viewModel.past.value,
-                    emptyMap(),
-                    viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value,
-                    map
-                )
-            }
-        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.optionsPercent.collectLatest { opts ->
@@ -124,12 +112,11 @@ class ElectionsFragment : Fragment() {
                     opts,
                     viewModel.totalUsers.value
                 )
-                pastAdapter.submit(
-                    viewModel.past.value,
+                upcomingAdapter.submit(
+                    viewModel.upcoming.value,
                     emptyMap(),
                     opts,
-                    viewModel.totalUsers.value,
-                    viewModel.winners.value
+                    viewModel.totalUsers.value
                 )
             }
         }
