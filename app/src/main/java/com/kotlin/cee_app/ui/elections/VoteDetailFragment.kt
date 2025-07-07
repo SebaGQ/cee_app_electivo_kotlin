@@ -13,6 +13,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.lifecycle.asLiveData
 import android.content.res.ColorStateList
 import com.kotlin.cee_app.ui.elections.VoteDetailFragmentDirections
+import androidx.fragment.app.setFragmentResult
+import com.kotlin.cee_app.ui.elections.VoteDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.databinding.FragmentVoteDetailBinding
@@ -48,11 +50,16 @@ class VoteDetailFragment : Fragment() {
             val checked = binding.radioGroup.checkedRadioButtonId
             if (checked != View.NO_ID) {
                 val tag = binding.radioGroup.findViewById<RadioButton>(checked).tag as Long
-                viewModel.votar(tag,
+                viewModel.votar(
+                    tag,
                     onDuplicate = {
                         Snackbar.make(binding.root, R.string.already_voted, Snackbar.LENGTH_SHORT).show()
                     },
                     onSuccess = {
+                        parentFragmentManager.setFragmentResult(
+                            VoteDialogFragment.RESULT_KEY,
+                            Bundle()
+                        )
                         val action = VoteDetailFragmentDirections.actionVoteToConfirmation(args.votacionId)
                         findNavController().navigate(action)
                     }

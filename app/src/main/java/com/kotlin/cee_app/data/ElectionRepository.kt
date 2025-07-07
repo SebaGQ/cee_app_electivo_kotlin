@@ -36,12 +36,11 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
         db.opcionDao().insert(opcion)
 
     suspend fun insertarVoto(voto: VotoEntity): Boolean {
-        val count = db.votoDao().countByVotacionAndUsuario(voto.votacionId, voto.usuarioId)
-        return if (count > 0) {
-            false
-        } else {
+        return try {
             db.votoDao().insert(voto)
             true
+        } catch (_: Exception) {
+            false
         }
     }
 

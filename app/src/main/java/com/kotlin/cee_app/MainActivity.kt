@@ -36,7 +36,16 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain.includeTopBar.topBar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_elections, R.id.nav_results, R.id.nav_users))
+        if (SessionManager.isAdmin()) {
+            appBarConfiguration = AppBarConfiguration(
+                setOf(R.id.nav_elections, R.id.nav_results, R.id.nav_users)
+            )
+        } else {
+            binding.appBarMain.bottomNav.menu.removeItem(R.id.nav_users)
+            appBarConfiguration = AppBarConfiguration(
+                setOf(R.id.nav_elections, R.id.nav_results)
+            )
+        }
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.appBarMain.bottomNav.setupWithNavController(navController)
     }

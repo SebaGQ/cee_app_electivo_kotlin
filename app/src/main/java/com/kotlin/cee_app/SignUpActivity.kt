@@ -27,6 +27,8 @@ class SignUpActivity : AppCompatActivity() {
             val correo = binding.editCorreo.text.toString()
             val password = binding.editPassword.text.toString()
 
+            val role = if (binding.switchAdmin.isChecked) "ADMIN" else "SIMPLE"
+
             if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
                 binding.editCorreo.error = getString(R.string.invalid_email)
                 return@setOnClickListener
@@ -38,7 +40,7 @@ class SignUpActivity : AppCompatActivity() {
                     nombre = nombre,
                     correo = correo,
                     password = password,
-                    rol = "SIMPLE"
+                    rol = role
                 )
                 repo.insertar(user)
                 Snackbar.make(binding.root, R.string.account_created, Snackbar.LENGTH_SHORT).show()
