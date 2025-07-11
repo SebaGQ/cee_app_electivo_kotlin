@@ -1,51 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CEE APP</string>
-    <string name="action_settings">Opciones</string>
-    <string name="title_elections">Votaciones</string>
-    <string name="title_results">Resultados</string>
-    <string name="vote_saved">¡Voto registrado!</string>
-    <string name="title_home">Inicio</string>
-    <string name="title_upcoming">Futuras Votaciones</string>
-    <string name="add_option">Agregar Opción</string>
-    <string name="start_date">Fecha de Inicio</string>
-    <string name="end_date">Fecha de Fin</string>
-    <string name="no_active_elections">No hay votaciones activas</string>
-    <string name="active_elections_header">Votaciones en curso</string>
-    <string name="upcoming_elections_header">Próximas votaciones</string>
-    <string name="past_elections_header">Votaciones finalizadas</string>
-    <string name="winner_label">Ganador: %1$s</string>
-    <string name="edit">Editar</string>
-    <string name="delete">Eliminar</string>
-    <string name="already_voted">Ya has votado</string>
-    <string name="invalid_dates">La fecha fin debe ser posterior al inicio</string>
-    <string name="create_new_election">Crear nueva votación</string>
-    <string name="hint_title">Título</string>
-    <string name="hint_description">Descripción</string>
-    <string name="switch_open">Abierta</string>
-    <string name="button_vote">Votar</string>
-    <string name="button_view_results">Ver resultados</string>
-    <string name="button_ok">Vale</string>
-    <string name="button_back">Volver</string>
-    <string name="saved">Guardado</string>
-    <string name="admin_only">Solo admin</string>
-    <string name="expand">Expandir</string>
-    <string name="collapse">Contraer</string>
-    <string name="need_two_options">Ingrese al menos dos opciones</string>
+    <!-- App name -->
+    <string name="app_name">CEE Vote</string>
+
+    <!-- Navigation -->
+    <string name="nav_elections">Votaciones</string>
+    <string name="nav_results">Resultados</string>
+    <string name="nav_users">Usuarios</string>
+
+    <!-- Login & Auth -->
+    <string name="welcome_title">Bienvenido</string>
+    <string name="welcome_subtitle">Ingresa tus credenciales para continuar</string>
+    <string name="email_hint">Correo electrónico</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button">Iniciar Sesión</string>
+    <string name="signup_button">Crear cuenta nueva</string>
+    <string name="invalid_credentials">Credenciales incorrectas. Por favor, intenta nuevamente.</string>
+    <string name="invalid_email">Por favor, ingresa un correo electrónico válido</string>
+    <string name="account_created">¡Cuenta creada exitosamente!</string>
+    <string name="logout">Cerrar sesión</string>
+
+    <!-- Sign Up -->
+    <string name="signup_title">Crear Cuenta</string>
+    <string name="name_hint">Nombre completo</string>
+    <string name="create_account_button">Crear cuenta</string>
+    <string name="admin_switch">Cuenta de administrador</string>
+
+    <!-- Elections -->
+    <string name="elections_title">Votaciones</string>
+    <string name="active_elections">Votaciones Activas</string>
+    <string name="upcoming_elections">Próximas Votaciones</string>
+    <string name="past_elections">Votaciones Finalizadas</string>
+    <string name="no_active_elections">No hay votaciones activas en este momento</string>
+    <string name="vote_now">Votar ahora</string>
+    <string name="participation">Participación</string>
+    <string name="winner_label">Ganador: %s</string>
+    <string name="votes_count">%d votos</string>
+
+    <!-- Create Election -->
+    <string name="create_election_title">Nueva Votación</string>
+    <string name="edit_election_title">Editar Votación</string>
+    <string name="basic_info">Información básica</string>
+    <string name="election_title_hint">Título de la votación</string>
+    <string name="election_description_hint">Descripción</string>
+    <string name="configuration">Configuración</string>
+    <string name="start_date">Fecha inicio</string>
+    <string name="end_date">Fecha fin</string>
+    <string name="election_status">Estado de la votación</string>
+    <string name="status_description">Activa la votación para que los usuarios puedan participar</string>
+    <string name="voting_options">Opciones de votación</string>
+    <string name="add_option">+ Agregar</string>
+    <string name="min_options_required">Mínimo 2 opciones requeridas</string>
+    <string name="save">Guardar</string>
+    <string name="saved">Votación guardada exitosamente</string>
+    <string name="invalid_dates">Las fechas seleccionadas no son válidas</string>
+    <string name="need_two_options">Debes agregar al menos 2 opciones</string>
     <string name="option_name">Nombre de la opción</string>
-    <string name="confirm_discard_changes">¿Salir sin guardar los cambios?</string>
-    <string name="confirm_delete">¿Eliminar la votación?</string>
-    <string name="title_users">Usuarios</string>
-    <string name="create_user">Crear usuario</string>
-    <string name="hint_name">Nombre</string>
-    <string name="hint_email">Correo</string>
-    <string name="hint_password">Contraseña</string>
-    <string name="hint_role">Rol</string>
-    <string name="action_login">Iniciar sesión</string>
-    <string name="action_logout">Cerrar sesión</string>
-    <string name="invalid_credentials">Credenciales inválidas</string>
-    <string name="action_create_account">Crear cuenta</string>
-    <string name="invalid_email">Correo inválido</string>
-    <string name="account_created">Cuenta creada</string>
-    <string name="votes_count">%1$d votos</string>
-    <string name="label_is_admin">Administrador</string>
+    <string name="confirm_discard_changes">¿Descartar los cambios?</string>
+
+    <!-- Vote -->
+    <string name="vote_title">Emitir Voto</string>
+    <string name="select_option">Selecciona una opción</string>
+    <string name="submit_vote">Confirmar voto</string>
+    <string name="already_voted">Ya has votado en esta elección</string>
+    <string name="vote_success">¡Tu voto ha sido registrado exitosamente!</string>
+    <string name="vote_confirmation">Voto Confirmado</string>
+    <string name="thank_you_vote">Gracias por participar</string>
+    <string name="view_results">Ver resultados</string>
+
+    <!-- Results -->
+    <string name="results_title">Resultados</string>
+    <string name="total_votes">Total de votos</string>
+    <string name="vote_distribution">Distribución de votos</string>
+    <string name="dashboard_title">Panel de Control</string>
+    <string name="total_elections">Total votaciones</string>
+    <string name="open_elections">Abiertas</string>
+    <string name="closed_elections">Cerradas</string>
+
+    <!-- Users -->
+    <string name="users_title">Gestión de Usuarios</string>
+    <string name="create_user">Crear Usuario</string>
+    <string name="edit_user">Editar Usuario</string>
+    <string name="user_name">Nombre</string>
+    <string name="user_email">Correo</string>
+    <string name="user_role">Rol</string>
+    <string name="save_user">Guardar usuario</string>
+
+    <!-- Common -->
+    <string name="confirm_delete">¿Estás seguro de que deseas eliminar este elemento?</string>
+    <string name="delete">Eliminar</string>
+    <string name="edit">Editar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="ok">Aceptar</string>
+    <string name="error">Error</string>
+    <string name="success">Éxito</string>
+    <string name="loading">Cargando…</string>
+    <string name="retry">Reintentar</string>
+    <string name="admin_only">Esta función solo está disponible para administradores</string>
+
+    <!-- Status -->
+    <string name="status_open">Abierta</string>
+    <string name="status_closed">Cerrada</string>
+    <string name="status_upcoming">Próxima</string>
+
+    <!-- Roles -->
+    <string name="role_admin">Administrador</string>
+    <string name="role_user">Usuario</string>
+    <string name="role_simple">Simple</string>
 </resources>

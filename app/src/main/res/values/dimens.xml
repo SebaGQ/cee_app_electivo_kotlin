@@ -1,19 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="nav_header_vertical_spacing">8dp</dimen>
-    <dimen name="nav_header_height">176dp</dimen>
+    <!-- Spacing System (4dp grid) -->
+    <dimen name="spacing_xxs">4dp</dimen>
+    <dimen name="spacing_xs">8dp</dimen>
+    <dimen name="spacing_sm">12dp</dimen>
+    <dimen name="spacing_md">16dp</dimen>
+    <dimen name="spacing_lg">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_xxl">48dp</dimen>
+    <dimen name="spacing_xxxl">64dp</dimen>
+
+    <!-- Margins -->
+    <dimen name="margin_screen">16dp</dimen>
+    <dimen name="margin_card">16dp</dimen>
+    <dimen name="margin_list_item">16dp</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding_button">16dp</dimen>
+    <dimen name="padding_card">16dp</dimen>
+    <dimen name="padding_dialog">24dp</dimen>
+
+    <!-- Corner Radius -->
+    <dimen name="radius_small">8dp</dimen>
+    <dimen name="radius_medium">12dp</dimen>
+    <dimen name="radius_large">16dp</dimen>
+    <dimen name="radius_xl">24dp</dimen>
+    <dimen name="radius_round">999dp</dimen>
+
+    <!-- Elevations -->
+    <dimen name="elevation_card">4dp</dimen>
+    <dimen name="elevation_button">4dp</dimen>
+    <dimen name="elevation_fab">8dp</dimen>
+    <dimen name="elevation_dialog">16dp</dimen>
+    <dimen name="elevation_bottom_nav">8dp</dimen>
+
+    <!-- Heights -->
+    <dimen name="height_button">56dp</dimen>
+    <dimen name="height_input">56dp</dimen>
+    <dimen name="height_toolbar">56dp</dimen>
+    <dimen name="height_bottom_nav">64dp</dimen>
+    <dimen name="height_list_item">72dp</dimen>
+    <dimen name="height_card_header">120dp</dimen>
+
+    <!-- Widths -->
+    <dimen name="width_button_min">120dp</dimen>
+    <dimen name="width_dialog">320dp</dimen>
+    <dimen name="width_max_content">600dp</dimen>
+
+    <!-- Icon Sizes -->
+    <dimen name="icon_size_small">20dp</dimen>
+    <dimen name="icon_size_medium">24dp</dimen>
+    <dimen name="icon_size_large">32dp</dimen>
+    <dimen name="icon_size_xl">48dp</dimen>
+
+    <!-- Text Sizes -->
+    <dimen name="text_size_xs">12sp</dimen>
+    <dimen name="text_size_sm">14sp</dimen>
+    <dimen name="text_size_md">16sp</dimen>
+    <dimen name="text_size_lg">18sp</dimen>
+    <dimen name="text_size_xl">20sp</dimen>
+    <dimen name="text_size_xxl">24sp</dimen>
+    <dimen name="text_size_xxxl">32sp</dimen>
+
+    <!-- Progress Bar -->
+    <dimen name="progress_height">8dp</dimen>
+    <dimen name="progress_corner_radius">4dp</dimen>
+
+    <!-- Chip -->
+    <dimen name="chip_height">32dp</dimen>
+    <dimen name="chip_corner_radius">16dp</dimen>
+    <dimen name="chip_spacing">8dp</dimen>
+
+    <!-- FAB -->
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="fab_size_mini">40dp</dimen>
 
-    <!-- Text sizes -->
-    <dimen name="text_size_heading">22sp</dimen>
-    <dimen name="text_size_body">16sp</dimen>
-    <dimen name="text_size_button">14sp</dimen>
-    <dimen name="text_size_hint">14sp</dimen>
-
-    <!-- Dialog constraints -->
+    <!-- Dialog -->
     <dimen name="dialog_width">320dp</dimen>
-    <dimen name="dialog_height">360dp</dimen>
-</resources>
+    <dimen name="dialog_height">480dp</dimen>
+    <dimen name="dialog_corner_radius">24dp</dimen>
 
+    <!-- Divider -->
+    <dimen name="divider_height">1dp</dimen>
+
+    <!-- Animation -->
+    <dimen name="anim_duration_short">200</dimen>
+    <dimen name="anim_duration_medium">300</dimen>
+    <dimen name="anim_duration_long">500</dimen>
+</resources>

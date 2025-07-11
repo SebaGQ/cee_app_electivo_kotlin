@@ -1,15 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="primary_blue">#0A4E84</color>
-    <color name="background_gray">#F5F6F7</color>
-    <color name="success_green">#1FB76C</color>
-    <color name="text_secondary">#555555</color>
-    <color name="disabled_gray">#CCCCCC</color>
+    <!-- Primary Colors -->
+    <color name="primary_blue">#1E88E5</color>
+    <color name="primary_dark">#1565C0</color>
+    <color name="primary_light">#64B5F6</color>
+
+    <!-- Accent Colors -->
+    <color name="accent_color">#00ACC1</color>
+    <color name="accent_dark">#00838F</color>
+    <color name="accent_light">#4DD0E1</color>
+
+    <!-- Background Colors -->
+    <color name="background_light">#F8F9FA</color>
+    <color name="surface_color">#FFFFFF</color>
+    <color name="surface_elevated">#FAFBFC</color>
+    <color name="background_gray">#F5F5F5</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#212529</color>
+    <color name="text_secondary">#6C757D</color>
+    <color name="text_tertiary">#ADB5BD</color>
+    <color name="text_disabled">#CED4DA</color>
+
+    <!-- State Colors -->
+    <color name="success_color">#2E7D32</color>
+    <color name="error_color">#D32F2F</color>
+    <color name="warning_color">#F57C00</color>
+    <color name="info_color">#0288D1</color>
+
+    <!-- Component Colors -->
+    <color name="divider_color">#E9ECEF</color>
+    <color name="ripple_color">#1E88E520</color>
+    <color name="disabled_gray">#9E9E9E</color>
+    <color name="chip_background">#E3F2FD</color>
+
+    <!-- Switch Colors -->
+    <color name="switch_thumb_normal">#FAFAFA</color>
+    <color name="switch_track_normal">#E0E0E0</color>
+
+    <!-- Shadow Colors -->
+    <color name="shadow_color">#1A000000</color>
+    <color name="shadow_dark">#33000000</color>
+
+    <!-- Gradient Colors -->
+    <color name="gradient_start">#1E88E5</color>
+    <color name="gradient_end">#0D47A1</color>
+
+    <!-- Basic Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Chart Colors -->
+    <color name="chart_color_1">#1E88E5</color>
+    <color name="chart_color_2">#43A047</color>
+    <color name="chart_color_3">#FB8C00</color>
+    <color name="chart_color_4">#8E24AA</color>
+    <color name="chart_color_5">#00ACC1</color>
+    <color name="chart_color_6">#D81B60</color>
+
+    <!-- State Backgrounds -->
+    <color name="success_background">#E8F5E9</color>
+    <color name="error_background">#FFEBEE</color>
+    <color name="warning_background">#FFF3E0</color>
+    <color name="info_background">#E1F5FE</color>
 </resources>

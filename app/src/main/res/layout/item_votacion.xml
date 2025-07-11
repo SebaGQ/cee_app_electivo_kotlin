@@ -1,104 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:radius="8dp">
+    android:layout_marginBottom="@dimen/spacing_md"
+    app:cardCornerRadius="@dimen/radius_large"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/surface_color"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:orientation="vertical"
+        android:animateLayoutChanges="true">
 
-        <TextView
-            android:id="@+id/textTitle"
-            android:layout_width="0dp"
+        <!-- Header del card -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_body"
-            android:textStyle="bold"
-            android:textColor="@color/primary_blue"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/iconInfo"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:padding="@dimen/spacing_md">
 
+            <!-- Estado badge -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/textEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Abierta"
+                android:textSize="@dimen/text_size_xs"
+                android:clickable="false"
+                app:chipBackgroundColor="@color/success_background"
+                app:chipStrokeColor="@color/success_color"
+                app:chipStrokeWidth="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Abierta" />
 
-        <ImageView
-            android:id="@+id/iconInfo"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_more_vert"
-            android:contentDescription="@string/action_settings"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <!-- Menú opciones -->
+            <ImageView
+                android:id="@+id/iconInfo"
+                android:layout_width="@dimen/icon_size_medium"
+                android:layout_height="@dimen/icon_size_medium"
+                android:src="@drawable/ic_more_vert"
+                android:tint="@color/text_secondary"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:padding="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textEstado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_hint"
-            android:textColor="@color/text_secondary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textTitle" />
+            <!-- Título -->
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:text="Título de la votación"
+                android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
+                android:textColor="@color/text_primary"
+                android:maxLines="2"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iconInfo"
+                app:layout_constraintTop_toBottomOf="@id/textEstado"
+                tools:text="Elección de representante estudiantil 2025" />
 
-        <LinearLayout
-            android:id="@+id/layoutExpandable"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textEstado"
-            app:layout_constraintBottom_toBottomOf="parent">
+            <!-- Progress bar para votaciones activas -->
+            <LinearLayout
+                android:id="@+id/progressContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/spacing_md"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textTitle">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/spacing_xs">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Participación"
+                        android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
+                        android:textColor="@color/text_secondary" />
+
+                    <TextView
+                        android:id="@+id/textProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0%"
+                        android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
+                        android:textColor="@color/primary_blue"
+                        android:fontFamily="@font/inter_semibold" />
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressVotos"
+                    style="@style/Widget.CEEAPP.ProgressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/progress_height"
+                    android:progress="0"
+                    android:max="100" />
+            </LinearLayout>
+
+            <!-- Texto del ganador para votaciones cerradas -->
             <TextView
                 android:id="@+id/textWinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:text="Ganador: "
+                android:textAppearance="@style/TextAppearance.CEEAPP.Body1"
+                android:textColor="@color/success_color"
+                android:fontFamily="@font/inter_semibold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressContainer"
+                tools:text="Ganador: Opción A" />
+
+            <!-- Botón de votar -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonVotar"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Votar ahora"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_size_sm"
+                android:paddingHorizontal="@dimen/spacing_lg"
+                app:cornerRadius="20dp"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textWinner" />
+
+            <!-- Icono expandir/colapsar -->
+            <ImageView
+                android:id="@+id/iconExpand"
+                android:layout_width="@dimen/icon_size_medium"
+                android:layout_height="@dimen/icon_size_medium"
+                android:src="@drawable/ic_expand_more"
+                android:tint="@color/text_secondary"
+                android:layout_marginTop="@dimen/spacing_md"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buttonVotar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Sección expandible con opciones -->
+        <LinearLayout
+            android:id="@+id/layoutExpandable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:background="@color/background_gray"
+            android:paddingHorizontal="@dimen/spacing_md"
+            android:paddingVertical="@dimen/spacing_md">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/success_green"
-                android:textSize="@dimen/text_size_hint"
-                android:visibility="gone" />
+                android:text="Opciones de votación"
+                android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_marginBottom="@dimen/spacing_sm" />
 
             <LinearLayout
                 android:id="@+id/layoutOptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp" />
-
-            <ProgressBar
-                android:id="@+id/progressVotos"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
-                android:progressTint="@color/primary_blue" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonVotar"
-                style="?attr/materialButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/button_vote"
-                android:textSize="@dimen/text_size_button"
-                android:visibility="gone" />
-
+                android:orientation="vertical" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iconExpand"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_expand_more"
-            android:contentDescription="@string/expand"
-            app:layout_constraintTop_toBottomOf="@id/layoutExpandable"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

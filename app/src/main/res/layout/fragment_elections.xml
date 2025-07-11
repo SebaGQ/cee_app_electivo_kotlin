@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray">
+    android:background="@color/background_light"
+    tools:context=".ui.elections.ElectionsFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
@@ -11,104 +13,210 @@
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none">
 
             <LinearLayout
-                android:id="@+id/contentLayout"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:animateLayoutChanges="true"
+                android:paddingTop="@dimen/spacing_md"
+                android:paddingBottom="@dimen/spacing_xxxl">
 
+                <!-- Sección de votaciones activas -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="@dimen/margin_screen">
 
-    <TextView
-        android:id="@+id/textActiveHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/active_elections_header"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size_heading"
-        android:padding="8dp"
-        android:layout_marginTop="16dp"
-        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/textActiveHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/spacing_sm">
 
-    <TextView
-        android:id="@+id/textNoActive"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/no_active_elections"
-        android:textSize="@dimen/text_size_body"
-        android:gravity="center"
-        android:padding="16dp"
-        android:visibility="gone" />
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="24dp"
+                            android:background="@color/primary_blue"
+                            android:layout_marginEnd="@dimen/spacing_xs" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerActive"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Votaciones Activas"
+                            android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
+                            android:textColor="@color/text_primary" />
 
-    <TextView
-        android:id="@+id/textUpcomingHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/upcoming_elections_header"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size_heading"
-        android:padding="8dp"
-        android:layout_marginTop="16dp" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipActiveCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:text="0"
+                            android:textColor="@color/white"
+                            android:chipBackgroundColor="@color/primary_blue"
+                            android:clickable="false"
+                            android:visibility="gone" />
+                    </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerUpcoming"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerActive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <TextView
-        android:id="@+id/textPastHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/past_elections_header"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size_heading"
-        android:padding="8dp"
-        android:layout_marginTop="16dp" />
+                    <!-- Mensaje cuando no hay votaciones activas -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/textNoActive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:cardCornerRadius="@dimen/radius_large"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/info_background"
+                        android:layout_marginBottom="@dimen/spacing_md">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerPast"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/spacing_md"
+                            android:gravity="center_vertical">
 
+                            <ImageView
+                                android:layout_width="@dimen/icon_size_large"
+                                android:layout_height="@dimen/icon_size_large"
+                                android:src="@drawable/ic_info"
+                                android:tint="@color/info_color"
+                                android:layout_marginEnd="@dimen/spacing_md" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="No hay votaciones activas en este momento"
+                                android:textAppearance="@style/TextAppearance.CEEAPP.Body1"
+                                android:textColor="@color/text_primary" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- Sección de próximas votaciones -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/spacing_xl"
+                    android:layout_marginHorizontal="@dimen/margin_screen">
+
+                    <LinearLayout
+                        android:id="@+id/textUpcomingHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/spacing_sm"
+                        android:visibility="gone">
+
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="24dp"
+                            android:background="@color/accent_color"
+                            android:layout_marginEnd="@dimen/spacing_xs" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Próximas Votaciones"
+                            android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
+                            android:textColor="@color/text_primary" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerUpcoming"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </LinearLayout>
+
+                <!-- Sección de votaciones pasadas -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/spacing_xl"
+                    android:layout_marginHorizontal="@dimen/margin_screen">
+
+                    <LinearLayout
+                        android:id="@+id/textPastHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/spacing_sm"
+                        android:visibility="gone">
+
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="24dp"
+                            android:background="@color/text_secondary"
+                            android:layout_marginEnd="@dimen/spacing_xs" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Votaciones Finalizadas"
+                            android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
+                            android:textColor="@color/text_primary" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerPast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <!-- FAB principal con menú -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabMain"
+        style="@style/Widget.CEEAPP.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add"
+        app:fabSize="normal"
+        android:visibility="gone" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <!-- FAB secundario para crear votación -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCreate"
+        style="@style/Widget.CEEAPP.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="88dp"
+        android:src="@drawable/ic_ballot"
+        app:fabSize="mini"
         android:visibility="gone"
-        android:text="@string/create_new_election"
-        android:textSize="@dimen/text_size_button"
-        android:textColor="@color/white"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        app:icon="@android:drawable/ic_menu_edit"
-        app:iconTint="@color/white" />
+        android:alpha="0.9" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
