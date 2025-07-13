@@ -1,6 +1,6 @@
-# CEE APP
+# CEE Voting App
 
-Esta es una aplicación de ejemplo para Android escrita en **Kotlin**. Utiliza la plantilla de "Navigation Drawer" de Android Studio y está configurada con las siguientes versiones:
+Esta aplicación de ejemplo, escrita en **Kotlin**, implementa un sistema de votaciones con autenticación básica y gestión local mediante **Room**. El proyecto utiliza el _Navigation Drawer_ de Android Studio y compila con las siguientes versiones:
 
 - **Gradle** 8.11.1
 - **Android Gradle Plugin** 8.9.1
@@ -9,35 +9,91 @@ Esta es una aplicación de ejemplo para Android escrita en **Kotlin**. Utiliza l
 - **minSdk**: 24
 - **JVM target**: 11
 
-Las versiones de estas dependencias se definen en
-`gradle/libs.versions.toml` y el wrapper de Gradle está configurado en
-`gradle/wrapper/gradle-wrapper.properties`. Si necesitas compilar sin
-conexión a Internet, asegúrate de contar con la distribución de Gradle
-de forma local o modifica `distributionUrl` a una ruta `file://`.
+Las versiones de dependencias se especifican en `gradle/libs.versions.toml` y el wrapper se encuentra en `gradle/wrapper/gradle-wrapper.properties`.
 
-La aplicación ahora carga únicamente la pantalla de **Elections**, que incluye su propia barra superior y de navegación inferior.
-
-## Estructura
+## Árbol principal
 
 ```
 app/
- ├─ src/main/java/com/kotlin/cee_app/
- │   ├─ MainActivity.kt
- │   └─ ui/
- │       └─ elections/
- └─ src/test/... (pruebas unitarias)
+ └─ src/main/
+     ├─ java/com/kotlin/cee_app/
+     │   ├─ LoginActivity.kt
+     │   ├─ SignUpActivity.kt
+     │   ├─ MainActivity.kt
+     │   ├─ data/
+     │   │   ├─ AppDatabase.kt
+     │   │   ├─ ElectionRepository.kt
+     │   │   ├─ UserRepository.kt
+     │   │   ├─ SessionManager.kt
+     │   │   ├─ entities
+     │   │   │   ├─ UsuarioEntity.kt
+     │   │   │   ├─ AdminEntity.kt
+     │   │   │   ├─ VotacionEntity.kt
+     │   │   │   ├─ OpcionEntity.kt
+     │   │   │   ├─ VotoEntity.kt
+     │   │   │   └─ SimpleEntity.kt
+     │   │   └─ daos
+     │   │       ├─ UsuarioDao.kt
+     │   │       ├─ AdminDao.kt
+     │   │       ├─ VotacionDao.kt
+     │   │       ├─ OpcionDao.kt
+     │   │       ├─ VotoDao.kt
+     │   │       └─ SimpleDao.kt
+     │   └─ ui/
+     │       ├─ elections/...
+     │       ├─ results/...
+     │       └─ users/...
+     └─ res/
+         ├─ layout/ (xml de pantallas y listas)
+         └─ values/dimens.xml
 ```
 
-## Cómo compilar
+## Funcionalidades principales
+
+A continuación se listan las funciones implementadas y los archivos más relevantes que las componen (solo se mencionan entidades, DAOs, clases Kotlin, layouts y `dimens`).
+
+### Autenticación
+
+- **Clases:** `LoginActivity.kt`, `SignUpActivity.kt`, `SessionManager.kt`, `UserRepository.kt`.
+- **Entidades:** `UsuarioEntity.kt`, `AdminEntity.kt`.
+- **DAOs:** `UsuarioDao.kt`, `AdminDao.kt`.
+- **Layouts:** `activity_login.xml`, `activity_sign_up.xml`.
+- **Dimensiones:** `res/values/dimens.xml` y sus variantes.
+
+### Gestión de usuarios (solo admins)
+
+- **Clases:** `UsersFragment.kt`, `CreateUserFragment.kt`, `UserAdapter.kt`, `UsersViewModel.kt`, `CreateUserViewModel.kt`.
+- **Entidades:** `UsuarioEntity.kt`.
+- **DAO:** `UsuarioDao.kt`.
+- **Layouts:** `fragment_users.xml`, `fragment_create_user.xml`, `item_usuario.xml`.
+- **Dimensiones:** `res/values/dimens.xml`.
+
+### Gestión y participación en votaciones
+
+- **Clases:** `ElectionsFragment.kt`, `CreateElectionFragment.kt`, `VoteDialogFragment.kt`, `VoteDetailFragment.kt`, `VoteConfirmationFragment.kt`, `VotacionAdapter.kt`, `VoteDetailViewModel.kt`, `CreateElectionViewModel.kt`, `ElectionsViewModel.kt`.
+- **Entidades:** `VotacionEntity.kt`, `OpcionEntity.kt`, `VotoEntity.kt`.
+- **DAOs:** `VotacionDao.kt`, `OpcionDao.kt`, `VotoDao.kt`.
+- **Layouts:** `fragment_elections.xml`, `fragment_create_election.xml`, `dialog_vote.xml`, `fragment_vote_detail.xml`, `fragment_vote_confirmation.xml`, `item_votacion.xml`, `item_vote_option.xml`.
+- **Dimensiones:** `res/values/dimens.xml`.
+
+### Resultados de votaciones
+
+- **Clases:** `ResultsFragment.kt`, `DashboardAdapter.kt`, `OpcionResultAdapter.kt`, `ResultsViewModel.kt`, `DashboardUtils.kt`.
+- **Entidades:** `VotacionEntity.kt`, `OpcionEntity.kt`, `VotoEntity.kt`.
+- **DAOs:** `VotacionDao.kt`, `OpcionDao.kt`, `VotoDao.kt`.
+- **Layouts:** `fragment_results.xml`, `item_dashboard.xml`, `item_result_option.xml`.
+- **Dimensiones:** `res/values/dimens.xml`.
+
+## Compilación
 
 ```bash
 ./gradlew build
 ```
 
-Para ejecutar las pruebas unitarias puede usarse:
+Para ejecutar pruebas unitarias:
 
 ```bash
 ./gradlew test
 ```
 
-Este repositorio no incluye un archivo `keystore`; por lo tanto, las builds de `release` no están firmadas por defecto.
+Este repositorio no incluye un `keystore`; las builds de `release` no están firmadas por defecto.
