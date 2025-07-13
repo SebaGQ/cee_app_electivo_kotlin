@@ -3,7 +3,7 @@ package com.kotlin.cee_app.data.repository
 import android.content.Context
 import kotlinx.coroutines.flow.Flow
 import com.kotlin.cee_app.data.AppDatabase
-import com.kotlin.cee_app.data.dao.VotacionDao.VotacionWithCount
+import com.kotlin.cee_app.data.dao.VotacionWithCount
 import com.kotlin.cee_app.data.entity.OpcionEntity
 import com.kotlin.cee_app.data.entity.VotacionEntity
 import com.kotlin.cee_app.data.entity.VotoEntity

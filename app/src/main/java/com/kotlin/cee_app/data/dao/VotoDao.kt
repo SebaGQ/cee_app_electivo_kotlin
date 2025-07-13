@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.kotlin.cee_app.data.entity.VotoEntity
 import com.kotlin.cee_app.data.model.ConteoOpcion
 import kotlinx.coroutines.flow.Flow
 

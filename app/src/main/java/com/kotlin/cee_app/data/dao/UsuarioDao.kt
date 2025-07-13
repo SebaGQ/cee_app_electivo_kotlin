@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.kotlin.cee_app.data.entity.UsuarioEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
