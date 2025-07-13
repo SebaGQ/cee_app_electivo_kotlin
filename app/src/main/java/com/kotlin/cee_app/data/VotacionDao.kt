@@ -23,4 +23,40 @@ interface VotacionDao {
 
     @Query("SELECT * FROM votaciones WHERE id = :id")
     suspend fun findById(id: String): VotacionEntity?
+
+    @Query(
+        "SELECT v.*, COUNT(vt.id) as voteCount " +
+                "FROM votaciones v " +
+                "LEFT JOIN votos vt ON v.id = vt.votacionId " +
+                "GROUP BY v.id " +
+                "ORDER BY voteCount DESC"
+    )
+    suspend fun getVotacionesWithVoteCount(): List<VotacionWithCount>
+
+    @Query("SELECT COUNT(*) FROM votaciones WHERE estado = :estado")
+    suspend fun countByEstado(estado: String): Int
+
+    @Query(
+        "SELECT v.id, COUNT(vt.id) as count " +
+                "FROM votaciones v " +
+                "LEFT JOIN votos vt ON v.id = vt.votacionId " +
+                "GROUP BY v.id"
+    )
+    suspend fun getVoteCountByVotacion(): List<VotacionVoteCount>
 }
+
+data class VotacionWithCount(
+    val id: String,
+    val titulo: String,
+    val descripcion: String,
+    val fechaInicio: Long,
+    val fechaFin: Long,
+    val estado: String,
+    val adminId: String,
+    val voteCount: Int
+)
+
+data class VotacionVoteCount(
+    val id: String,
+    val count: Int
+)

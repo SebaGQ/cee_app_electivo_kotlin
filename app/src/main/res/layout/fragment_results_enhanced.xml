@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_medium"
+    tools:context=".ui.results.ResultsFragment">
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Dashboard Layout -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layoutDashboard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Título Dashboard -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dashboard de Votaciones"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/margin_small" />
+
+            <!-- Resumen general -->
+            <TextView
+                android:id="@+id/textDashboardSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginBottom="@dimen/margin_medium"
+                tools:text="Sistema de votaciones con 150 usuarios registrados. Participación promedio: 65.3%" />
+
+            <!-- Sección de métricas -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Métricas Generales"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerDashboardMetrics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:spanCount="2"
+                tools:itemCount="6" />
+
+            <!-- Sección de participación por votación -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Participación por Votación"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_small" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerVotacionesParticipation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Votación Results Layout -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layoutVotacionResults"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Gráfico circular -->
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginBottom="@dimen/margin_medium" />
+
+            <!-- Total de votos -->
+            <TextView
+                android:id="@+id/textTotalVotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total de votos: 0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/margin_medium" />
+
+            <!-- Lista de opciones con porcentajes -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Desglose de Resultados"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/margin_small" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerOpciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="4" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

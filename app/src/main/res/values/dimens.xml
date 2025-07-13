@@ -61,6 +61,12 @@
     <dimen name="text_size_xl">20sp</dimen>
     <dimen name="text_size_xxl">24sp</dimen>
     <dimen name="text_size_xxxl">32sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_xlarge">20sp</dimen>
+    <dimen name="text_size_title">24sp</dimen>
+    <dimen name="text_size_header">28sp</dimen>
 
     <!-- Compatibility text sizes -->
     <dimen name="text_size_body">16sp</dimen>
@@ -94,4 +100,15 @@
     <dimen name="anim_duration_short">200</dimen>
     <dimen name="anim_duration_medium">300</dimen>
     <dimen name="anim_duration_long">500</dimen>
+
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_tiny">4dp</dimen>
+
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+
+    <dimen name="corner_radius">8dp</dimen>
 </resources>

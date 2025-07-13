@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/margin_small"
+    android:layout_marginHorizontal="@dimen/margin_tiny"
+    app:cardCornerRadius="@dimen/corner_radius"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_medium">
+
+        <!-- Título de la votación -->
+        <TextView
+            android:id="@+id/textVotacionTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textStatus"
+            app:layout_constraintHorizontal_bias="0"
+            tools:text="Elección de representante estudiantil 2025" />
+
+        <!-- Estado -->
+        <TextView
+            android:id="@+id/textStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/padding_small"
+            android:paddingVertical="2dp"
+            android:background="@drawable/status_background"
+            app:layout_constraintTop_toTopOf="@+id/textVotacionTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Abierta"
+            tools:textColor="@android:color/holo_green_dark" />
+
+        <!-- Fechas -->
+        <TextView
+            android:id="@+id/textVotacionDates"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="@dimen/margin_tiny"
+            app:layout_constraintTop_toBottomOf="@+id/textVotacionTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="01/07/2025 - 15/07/2025" />
+
+        <!-- Progress bar de participación -->
+        <ProgressBar
+            android:id="@+id/progressParticipation"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:max="100"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:progressDrawable="@drawable/custom_progress_drawable"
+            app:layout_constraintTop_toBottomOf="@+id/textVotacionDates"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:progress="45" />
+
+        <!-- Información de participación -->
+        <TextView
+            android:id="@+id/textTotalVotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@+id/progressParticipation"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="125 votos" />
+
+        <TextView
+            android:id="@+id/textParticipationPercentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_blue"
+            android:layout_marginTop="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@+id/progressParticipation"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="45.2% participación" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

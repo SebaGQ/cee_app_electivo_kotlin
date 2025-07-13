@@ -65,6 +65,18 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
 
     suspend fun totalUsuarios() = db.usuarioDao().countAll()
 
+    // Nuevos métodos para el dashboard mejorado
+    suspend fun obtenerVotosConteosPorVotacion(): Map<String, Int> {
+        val votacionesList = db.votacionDao().getVoteCountByVotacion()
+        return votacionesList.associate { it.id to it.count }
+    }
+
+    suspend fun obtenerVotacionesConConteo(): List<VotacionWithCount> =
+        db.votacionDao().getVotacionesWithVoteCount()
+
+    suspend fun contarVotacionesPorEstado(estado: String): Int =
+        db.votacionDao().countByEstado(estado)
+
     companion object {
         @Volatile private var INSTANCE: ElectionRepository? = null
 
