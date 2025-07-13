@@ -10,8 +10,8 @@ class DashboardUtilsTest {
     @Test
     fun compute_counts_correct() {
         val list = listOf(
-            VotacionEntity("v1", "t1", "d", LocalDate.now(), LocalDate.now(), "Abierta", "a1"),
-            VotacionEntity("v2", "t2", "d", LocalDate.now(), LocalDate.now(), "Cerrada", "a1")
+            VotacionEntity("v1", "t1", "d", LocalDate.now(), LocalDate.now(), "Abierta", "a1", null),
+            VotacionEntity("v2", "t2", "d", LocalDate.now(), LocalDate.now(), "Cerrada", "a1", null)
         )
         val result = computeDashboard(list)
         assertEquals(3, result.size)

@@ -12,6 +12,7 @@ CREATE TABLE votaciones (
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL,
     estado VARCHAR(20) NOT NULL,
+    final_participant_count INTEGER,
     admin_id VARCHAR(50) REFERENCES usuarios(id)
 );
 

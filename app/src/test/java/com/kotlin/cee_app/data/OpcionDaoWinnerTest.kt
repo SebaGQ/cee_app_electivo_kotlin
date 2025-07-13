@@ -46,7 +46,8 @@ class OpcionDaoWinnerTest {
             fechaInicio = LocalDate.now(),
             fechaFin = LocalDate.now(),
             estado = "CERRADA",
-            adminId = "a1"
+            adminId = "a1",
+            finalParticipantCount = null
         )
         votacionDao.insert(votacion)
         val idA = opcionDao.insert(OpcionEntity(descripcion = "A", votacionId = "v1"))

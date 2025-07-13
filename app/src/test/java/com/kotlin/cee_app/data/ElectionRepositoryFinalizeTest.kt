@@ -7,13 +7,12 @@ import com.kotlin.cee_app.data.repository.ElectionRepository
 import com.kotlin.cee_app.data.entity.VotacionEntity
 import com.kotlin.cee_app.data.entity.OpcionEntity
 import com.kotlin.cee_app.data.entity.VotoEntity
-import com.kotlin.cee_app.data.entity.UsuarioEntity
 import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
 import org.junit.Assert.*
 
-class ElectionRepositoryUserVoteTest {
+class ElectionRepositoryFinalizeTest {
     private lateinit var repo: ElectionRepository
     private lateinit var db: AppDatabase
 
@@ -26,7 +25,7 @@ class ElectionRepositoryUserVoteTest {
     }
 
     @Test
-    fun get_user_vote_returns_option_id() = runBlocking {
+    fun finalize_sets_state_and_participant_count() = runBlocking {
         val votacion = VotacionEntity(
             id = "v1",
             titulo = "t",
@@ -35,7 +34,7 @@ class ElectionRepositoryUserVoteTest {
             fechaFin = LocalDate.now(),
             estado = "Abierta",
             adminId = "a1",
-            finalParticipantCount = null,
+            finalParticipantCount = null
         )
         db.votacionDao().insert(votacion)
         val opcionId = db.opcionDao().insert(
@@ -50,8 +49,9 @@ class ElectionRepositoryUserVoteTest {
             )
         )
 
-        val result = repo.opcionVotadaPorUsuario("v1", "u1")
-        assertEquals(opcionId, result)
-        assertNull(repo.opcionVotadaPorUsuario("v1", "u2"))
+        repo.finalizarVotacion(votacion)
+        val updated = db.votacionDao().findById("v1")
+        assertEquals("Finalizada", updated?.estado)
+        assertEquals(1, updated?.finalParticipantCount)
     }
 }

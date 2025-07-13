@@ -119,6 +119,12 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    fun finalizar(votacion: VotacionEntity) {
+        viewModelScope.launch {
+            repo.finalizarVotacion(votacion)
+        }
+    }
+
     suspend fun refresh() {
         val list = repo.votaciones.first()
         _votaciones.value = list

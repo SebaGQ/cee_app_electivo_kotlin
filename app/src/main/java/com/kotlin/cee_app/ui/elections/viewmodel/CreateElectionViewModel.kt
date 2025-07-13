@@ -93,7 +93,8 @@ class CreateElectionViewModel(application: Application) : AndroidViewModel(appli
                 fechaInicio = _fechaInicio.value,
                 fechaFin = _fechaFin.value,
                 estado = _estado.value,
-                adminId = SessionManager.currentUserId
+                adminId = SessionManager.currentUserId,
+                finalParticipantCount = null
             )
             if (editId == null) {
                 repo.insertarVotacion(votacion)

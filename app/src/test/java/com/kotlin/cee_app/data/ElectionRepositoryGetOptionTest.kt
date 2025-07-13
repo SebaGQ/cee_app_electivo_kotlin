@@ -35,6 +35,7 @@ class ElectionRepositoryGetOptionTest {
             fechaFin = LocalDate.now(),
             estado = "Abierta",
             adminId = "a1",
+            finalParticipantCount = null,
         )
         db.votacionDao().insert(votacion)
         val opcionId = db.opcionDao().insert(

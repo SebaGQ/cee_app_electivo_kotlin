@@ -14,4 +14,5 @@ data class VotacionEntity(
     val fechaFin: LocalDate,
     val estado: String,
     val adminId: String,
+    val finalParticipantCount: Int? = null,
 )
