@@ -1,72 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@drawable/bg_gradient"
+    tools:context=".SignUpActivity">
 
-    <LinearLayout
-        android:id="@+id/layoutForm"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:padding="24dp"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:animateLayoutChanges="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_name">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editNombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_email"
-            android:layout_marginTop="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editCorreo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_password"
-            android:layout_marginTop="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Switch
-            android:id="@+id/switchAdmin"
+        <!-- Logo y título -->
+        <LinearLayout
+            android:id="@+id/headerContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/label_is_admin" />
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/signupCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.13999999">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonCreate"
-            android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/logoImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_vote"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/appTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:text="@string/app_name"
+                android:textAppearance="@style/TextAppearance.CEEAPP.Headline1"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/appSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:alpha="0.9"
+                android:text="Sistema de Votación Electrónica"
+                android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <!-- Card de registro -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/signupCard"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/action_create_account" />
-    </LinearLayout>
+            android:layout_marginHorizontal="@dimen/spacing_lg"
+            android:layout_marginTop="@dimen/spacing_xxl"
+            app:cardCornerRadius="@dimen/radius_xl"
+            app:cardElevation="@dimen/elevation_card"
+            app:cardBackgroundColor="@color/surface_color"
+            app:layout_constraintTop_toBottomOf="@id/headerContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_max="@dimen/width_max_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_xl">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_xs"
+                    android:text="@string/signup_title"
+                    android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_lg"
+                    android:text="Ingresa tus credenciales para continuar"
+                    android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
+                    android:textColor="@color/text_secondary" />
+
+                <!-- Campo Nombre -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:hint="@string/hint_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Campo Correo -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:hint="@string/hint_email"
+                    app:startIconDrawable="@drawable/ic_email"
+                    app:startIconTint="@color/text_secondary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editCorreo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Campo Contraseña -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:hint="@string/hint_password"
+                    app:endIconMode="password_toggle"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:startIconTint="@color/text_secondary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Switch
+                    android:id="@+id/switchAdmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:text="@string/label_is_admin" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonCreate"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_button"
+                    android:text="@string/action_create_account"
+                    android:textAllCaps="false"
+                    app:cornerRadius="@dimen/radius_medium" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
