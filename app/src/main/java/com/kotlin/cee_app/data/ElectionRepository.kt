@@ -48,6 +48,9 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
     suspend fun haVotado(votacionId: String, usuarioId: String): Boolean =
         db.votoDao().countByVotacionAndUsuario(votacionId, usuarioId) > 0
 
+    suspend fun opcionVotadaPorUsuario(votacionId: String, usuarioId: String): Long? =
+        db.votoDao().opcionIdByVotacionAndUsuario(votacionId, usuarioId)
+
     suspend fun contarVotos(votacionId: String) =
         db.votoDao().countByVotacion(votacionId)
 
