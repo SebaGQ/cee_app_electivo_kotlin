@@ -30,12 +30,9 @@
         <item name="android:fontFamily">@font/inter</item>
 
         <!-- Shape -->
-        <item name="shapeSmallCornerFamily">rounded</item>
-        <item name="shapeMediumCornerFamily">rounded</item>
-        <item name="shapeLargeCornerFamily">rounded</item>
-        <item name="shapeSmallCornerSize">8dp</item>
-        <item name="shapeMediumCornerSize">12dp</item>
-        <item name="shapeLargeCornerSize">16dp</item>
+<!--        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Material3.SmallComponent</item>-->
+<!--        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Material3.MediumComponent</item>-->
+<!--        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Material3.LargeComponent</item>-->
 
         <!-- Elevation -->
         <item name="elevationOverlayEnabled">true</item>
@@ -187,4 +184,7 @@
         <item name="colorSwitchThumbNormal">@color/switch_thumb_normal</item>
         <item name="android:colorForeground">@color/switch_track_normal</item>
     </style>
+
+    <style name="Theme.CEEAPP.AppBarOverlay" parent="ThemeOverlay.Material3.ActionBar" />
+    <style name="Theme.CEEAPP.PopupOverlay" parent="ThemeOverlay.Material3.Dialog" />
 </resources>

@@ -61,7 +61,7 @@
                             android:layout_height="32dp"
                             android:text="0"
                             android:textColor="@color/white"
-                            android:chipBackgroundColor="@color/primary_blue"
+                            app:chipBackgroundColor="@color/primary_blue"
                             android:clickable="false"
                             android:visibility="gone" />
                     </LinearLayout>

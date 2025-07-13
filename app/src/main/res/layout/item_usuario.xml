@@ -28,13 +28,13 @@
                 android:id="@+id/textCorreo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_hint" />
+                android:textSize="@dimen/text_size_sm" />
 
             <TextView
                 android:id="@+id/textRol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_hint" />
+                android:textSize="@dimen/text_size_sm" />
         </LinearLayout>
 
         <ImageView

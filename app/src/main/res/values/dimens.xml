@@ -62,6 +62,12 @@
     <dimen name="text_size_xxl">24sp</dimen>
     <dimen name="text_size_xxxl">32sp</dimen>
 
+    <!-- Compatibility text sizes -->
+    <dimen name="text_size_body">16sp</dimen>
+    <dimen name="text_size_heading">24sp</dimen>
+    <dimen name="text_size_button">16sp</dimen>
+
+
     <!-- Progress Bar -->
     <dimen name="progress_height">8dp</dimen>
     <dimen name="progress_corner_radius">4dp</dimen>
