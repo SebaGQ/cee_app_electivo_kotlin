@@ -13,39 +13,39 @@
         android:id="@+id/headerContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_marginTop="@dimen/spacing_xxxl"
-        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/logoImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/ic_vote"
-            android:tint="@color/white"
-            android:contentDescription="@string/app_name" />
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/appTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.CEEAPP.Headline1"
-            android:textColor="@color/white"
-            android:layout_marginTop="@dimen/spacing_md" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/appSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:alpha="0.9"
             android:text="Sistema de Votación Electrónica"
             android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
-            android:textColor="@color/white"
-            android:alpha="0.9"
-            android:layout_marginTop="@dimen/spacing_xs" />
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <!-- Card de login -->
@@ -99,9 +99,9 @@
                     android:id="@+id/editCorreo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
                     android:hint="Correo electrónico"
                     android:inputType="textEmailAddress"
-                    android:fontFamily="@font/inter"
                     android:textSize="@dimen/text_size_md" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -181,17 +181,5 @@
     </com.google.android.material.card.MaterialCardView>
 
     <!-- Footer -->
-    <TextView
-        android:id="@+id/footerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="© 2025 Sistema CEE. Todos los derechos reservados."
-        android:textAppearance="@style/TextAppearance.CEEAPP.Caption"
-        android:textColor="@color/white"
-        android:alpha="0.7"
-        android:layout_marginBottom="@dimen/spacing_lg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
