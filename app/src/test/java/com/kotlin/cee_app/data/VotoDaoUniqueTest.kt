@@ -46,7 +46,8 @@ class VotoDaoUniqueTest {
             fechaInicio = LocalDate.now(),
             fechaFin = LocalDate.now(),
             estado = "Abierta",
-            adminId = "a1"
+            adminId = "a1",
+            finalParticipantCount = null
         )
         votacionDao.insert(votacion)
         val opcion = opcionDao.insert(OpcionEntity(descripcion = "A", votacionId = "v1"))

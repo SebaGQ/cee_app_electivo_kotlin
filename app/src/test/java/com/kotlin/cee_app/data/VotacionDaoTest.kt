@@ -44,6 +44,7 @@ class VotacionDaoTest {
             fechaFin = LocalDate.now().plusDays(1),
             estado = "ABIERTA",
             adminId = "a1",
+            finalParticipantCount = null,
         )
         dao.insert(votacion)
         val list = dao.getAll().first()

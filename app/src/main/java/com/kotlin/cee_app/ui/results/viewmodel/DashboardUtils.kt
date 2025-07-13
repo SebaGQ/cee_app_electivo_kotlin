@@ -39,10 +39,14 @@ fun computeExtendedDashboard(
     }
 
     val cerradas = votaciones.count {
-        it.estado == "Cerrada" || hoy.isAfter(it.fechaFin)
+        it.estado.equals("Cerrada", true) ||
+            it.estado.equals("Finalizada", true) ||
+            hoy.isAfter(it.fechaFin)
     }
 
-    val totalVotos = votosConteo.values.sum()
+    val totalVotos = votaciones.sumOf { v ->
+        v.finalParticipantCount ?: votosConteo[v.id] ?: 0
+    }
 
     // Calcular porcentaje de participación
     val maxVotosPosibles = totalUsuarios * votaciones.size

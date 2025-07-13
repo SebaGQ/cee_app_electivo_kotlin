@@ -57,7 +57,8 @@ class ElectionsFragment : Fragment() {
                     .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
                     .setNegativeButton(android.R.string.cancel, null)
                     .show()
-            }
+            },
+            onFinalize = { votacion -> viewModel.finalizar(votacion) }
         )
 
         val upcomingAdapter = VotacionAdapter(
@@ -77,7 +78,8 @@ class ElectionsFragment : Fragment() {
                     .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
                     .setNegativeButton(android.R.string.cancel, null)
                     .show()
-            }
+            },
+            onFinalize = { votacion -> viewModel.finalizar(votacion) }
         )
 
         val pastAdapter = VotacionAdapter(
@@ -99,7 +101,8 @@ class ElectionsFragment : Fragment() {
                     .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
                     .setNegativeButton(android.R.string.cancel, null)
                     .show()
-            }
+            },
+            onFinalize = { votacion -> viewModel.finalizar(votacion) }
         )
 
         binding.recyclerActive.adapter = activeAdapter

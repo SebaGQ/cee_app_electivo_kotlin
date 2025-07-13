@@ -15,11 +15,13 @@ import com.kotlin.cee_app.data.model.ConteoOpcion
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.SessionManager
 
 class VotacionAdapter(
     private val onClick: (VotacionEntity) -> Unit,
     private val onEdit: (VotacionEntity) -> Unit,
     private val onDelete: (VotacionEntity) -> Unit,
+    private val onFinalize: (VotacionEntity) -> Unit,
 ) : RecyclerView.Adapter<VotacionAdapter.Vh>() {
 
     private var data: List<VotacionEntity> = emptyList()
@@ -150,10 +152,13 @@ class VotacionAdapter(
         holder.menu.setOnClickListener { v ->
             val popup = PopupMenu(v.context, v)
             popup.inflate(R.menu.menu_votacion_item)
+            popup.menu.findItem(R.id.action_finalize).isVisible =
+                SessionManager.isAdmin() && item.estado == "Abierta"
             popup.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_edit -> { onEdit(item); true }
                     R.id.action_delete -> { onDelete(item); true }
+                    R.id.action_finalize -> { onFinalize(item); true }
                     else -> false
                 }
             }

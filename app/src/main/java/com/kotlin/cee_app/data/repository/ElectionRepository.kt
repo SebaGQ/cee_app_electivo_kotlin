@@ -70,6 +70,16 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
 
     suspend fun totalUsuarios() = db.usuarioDao().countAll()
 
+    suspend fun finalizarVotacion(votacion: VotacionEntity) {
+        val count = contarVotos(votacion.id)
+        actualizarVotacion(
+            votacion.copy(
+                estado = "Finalizada",
+                finalParticipantCount = count
+            )
+        )
+    }
+
     // Nuevos métodos para el dashboard mejorado
     suspend fun obtenerVotosConteosPorVotacion(): Map<String, Int> {
         val votacionesList = db.votacionDao().getVoteCountByVotacion()
