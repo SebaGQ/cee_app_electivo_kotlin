@@ -2,6 +2,7 @@ package com.kotlin.cee_app.ui.results.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.kotlin.cee_app.data.ConteoOpcion
 import com.kotlin.cee_app.data.DashboardItem
@@ -19,18 +20,23 @@ class ResultsViewModel(application: Application) : AndroidViewModel(application)
 
     private val _datos = MutableStateFlow<List<ConteoOpcion>>(emptyList())
     val datos: StateFlow<List<ConteoOpcion>> = _datos
+    val datosLiveData = _datos.asLiveData()
 
     private val _dashboardItems = MutableStateFlow<List<ExtendedDashboardItem>>(emptyList())
     val dashboardItems: StateFlow<List<ExtendedDashboardItem>> = _dashboardItems
+    val dashboardItemsLiveData = _dashboardItems.asLiveData()
 
     private val _dashboardData = MutableStateFlow<DashboardData?>(null)
     val dashboardData: StateFlow<DashboardData?> = _dashboardData
+    val dashboardDataLiveData = _dashboardData.asLiveData()
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
+    val isLoadingLiveData = _isLoading.asLiveData()
 
     private val _votacionesConParticipacion = MutableStateFlow<List<VotacionConParticipacion>>(emptyList())
     val votacionesConParticipacion: StateFlow<List<VotacionConParticipacion>> = _votacionesConParticipacion
+    val votacionesConParticipacionLiveData = _votacionesConParticipacion.asLiveData()
 
     fun cargarResultados(votacionId: String) {
         viewModelScope.launch {

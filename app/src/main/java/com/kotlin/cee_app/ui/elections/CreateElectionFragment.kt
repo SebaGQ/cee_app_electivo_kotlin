@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.lifecycle.asLiveData
 import com.kotlin.cee_app.ui.elections.viewmodel.CreateElectionViewModel
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
@@ -58,23 +57,23 @@ class CreateElectionFragment : Fragment() {
             viewModel.cargar(id)
         }
 
-        viewModel.titulo.asLiveData().observe(viewLifecycleOwner) {
+        viewModel.tituloLiveData.observe(viewLifecycleOwner) {
             binding.editTitle.setText(it)
         }
-        viewModel.descripcion.asLiveData().observe(viewLifecycleOwner) {
+        viewModel.descripcionLiveData.observe(viewLifecycleOwner) {
             binding.editDescription.setText(it)
         }
         val formatter = DateTimeFormatter.ISO_DATE
-        viewModel.fechaInicio.asLiveData().observe(viewLifecycleOwner) {
+        viewModel.fechaInicioLiveData.observe(viewLifecycleOwner) {
             binding.editStartDate.setText(it.format(formatter))
         }
-        viewModel.fechaFin.asLiveData().observe(viewLifecycleOwner) {
+        viewModel.fechaFinLiveData.observe(viewLifecycleOwner) {
             binding.editEndDate.setText(it.format(formatter))
         }
-        viewModel.estado.asLiveData().observe(viewLifecycleOwner) {
+        viewModel.estadoLiveData.observe(viewLifecycleOwner) {
             binding.switchEstado.isChecked = it == "Abierta"
         }
-        viewModel.opciones.asLiveData().observe(viewLifecycleOwner) { list ->
+        viewModel.opcionesLiveData.observe(viewLifecycleOwner) { list ->
             binding.chipGroup.removeAllViews()
             list.forEach { text ->
                 val chip = Chip(requireContext()).apply {

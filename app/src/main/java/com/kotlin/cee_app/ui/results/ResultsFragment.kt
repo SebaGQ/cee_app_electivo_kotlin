@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -137,22 +136,22 @@ class ResultsFragment : Fragment() {
 
     private fun observeViewModel() {
         // Observar estado de carga
-        viewModel.isLoading.asLiveData().observe(viewLifecycleOwner) { isLoading ->
+        viewModel.isLoadingLiveData.observe(viewLifecycleOwner) { isLoading ->
             binding.progressBar.isVisible = isLoading
         }
 
         // Observar datos del dashboard
-        viewModel.dashboardItems.asLiveData().observe(viewLifecycleOwner) { items ->
+        viewModel.dashboardItemsLiveData.observe(viewLifecycleOwner) { items ->
             (binding.recyclerDashboardMetrics.adapter as? ExtendedDashboardAdapter)?.submitList(items)
         }
 
         // Observar votaciones con participación
-        viewModel.votacionesConParticipacion.asLiveData().observe(viewLifecycleOwner) { votaciones ->
+        viewModel.votacionesConParticipacionLiveData.observe(viewLifecycleOwner) { votaciones ->
             (binding.recyclerVotacionesParticipation.adapter as? VotacionParticipationAdapter)?.submitList(votaciones)
         }
 
         // Observar datos de votación específica
-        viewModel.datos.asLiveData().observe(viewLifecycleOwner) { list ->
+        viewModel.datosLiveData.observe(viewLifecycleOwner) { list ->
             if (list.isNotEmpty()) {
                 updatePieChart(list)
                 updateOptionsList(list)
@@ -160,7 +159,7 @@ class ResultsFragment : Fragment() {
         }
 
         // Observar dashboard data para actualizar título
-        viewModel.dashboardData.asLiveData().observe(viewLifecycleOwner) { data ->
+        viewModel.dashboardDataLiveData.observe(viewLifecycleOwner) { data ->
             data?.let {
                 binding.textDashboardSummary.text = buildString {
                     append("Sistema de votaciones con ${it.totalUsuarios} usuarios registrados. ")
