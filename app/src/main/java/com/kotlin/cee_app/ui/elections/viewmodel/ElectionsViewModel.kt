@@ -108,17 +108,15 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun refresh() {
-        viewModelScope.launch {
-            val list = repo.votaciones.first()
-            _votaciones.value = list
-            val (act, upcomingList, pastList) = splitActiveUpcomingPast(list, LocalDate.now())
-            _active.value = act
-            _upcoming.value = upcomingList
-            _past.value = pastList
-            updateProgress(act + pastList)
-            updateOptions(act + pastList)
-            updateVoted(act + pastList)
-        }
+    suspend fun refresh() {
+        val list = repo.votaciones.first()
+        _votaciones.value = list
+        val (act, upcomingList, pastList) = splitActiveUpcomingPast(list, LocalDate.now())
+        _active.value = act
+        _upcoming.value = upcomingList
+        _past.value = pastList
+        updateProgress(act + pastList)
+        updateOptions(act + pastList)
+        updateVoted(act + pastList)
     }
 }
