@@ -29,7 +29,9 @@ class ResultsViewModel(application: Application) : AndroidViewModel(application)
     fun cargarDashboard() {
         viewModelScope.launch {
             val list = repo.votaciones.first()
-            _dashboard.value = computeDashboard(list)
+            val totalUsers = repo.totalUsuarios()
+            val totalVotes = repo.totalVotos()
+            _dashboard.value = computeDashboard(list, totalUsers, totalVotes)
         }
     }
 }

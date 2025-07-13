@@ -65,6 +65,8 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
 
     suspend fun totalUsuarios() = db.usuarioDao().countAll()
 
+    suspend fun totalVotos() = db.votoDao().countAll()
+
     companion object {
         @Volatile private var INSTANCE: ElectionRepository? = null
 

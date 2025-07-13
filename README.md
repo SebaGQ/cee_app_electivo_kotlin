@@ -83,6 +83,7 @@ A continuación se listan las funciones implementadas y los archivos más releva
 - **DAOs:** `VotacionDao.kt`, `OpcionDao.kt`, `VotoDao.kt`.
 - **Layouts:** `fragment_results.xml`, `item_dashboard.xml`, `item_result_option.xml`.
 - **Dimensiones:** `res/values/dimens.xml`.
+  El dashboard muestra totales, abiertas, cerradas, porcentaje de participación y promedio de votantes.
 
 ## Compilación
 

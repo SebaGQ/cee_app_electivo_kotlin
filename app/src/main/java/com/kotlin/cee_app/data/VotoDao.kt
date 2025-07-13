@@ -15,6 +15,9 @@ interface VotoDao {
     @Query("SELECT * FROM votos")
     fun getAll(): Flow<List<VotoEntity>>
 
+    @Query("SELECT COUNT(*) FROM votos")
+    suspend fun countAll(): Int
+
     @Query("SELECT COUNT(*) FROM votos WHERE votacionId = :votacionId")
     suspend fun countByVotacion(votacionId: String): Int
 
