@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import com.kotlin.cee_app.ui.elections.viewmodel.VoteDetailViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.lifecycle.asLiveData
 import android.content.res.ColorStateList
 import com.kotlin.cee_app.ui.elections.VoteDetailFragmentDirections
 import com.google.android.material.snackbar.Snackbar
@@ -32,7 +31,7 @@ class VoteDetailFragment : Fragment() {
         _binding = FragmentVoteDetailBinding.inflate(inflater, container, false)
         viewModel.cargar(args.votacionId)
 
-        viewModel.yaVoto.asLiveData().observe(viewLifecycleOwner) { voted ->
+        viewModel.yaVotoLiveData.observe(viewLifecycleOwner) { voted ->
             binding.buttonVote.isEnabled = !voted
             if (voted) {
                 binding.buttonVote.backgroundTintList =
@@ -40,7 +39,7 @@ class VoteDetailFragment : Fragment() {
             }
         }
 
-        viewModel.votacion.asLiveData().observe(viewLifecycleOwner) { v ->
+        viewModel.votacionLiveData.observe(viewLifecycleOwner) { v ->
             binding.textPregunta.text = v?.titulo ?: ""
         }
 
@@ -60,7 +59,7 @@ class VoteDetailFragment : Fragment() {
             }
         }
 
-        viewModel.opciones.asLiveData().observe(viewLifecycleOwner) { list ->
+        viewModel.opcionesLiveData.observe(viewLifecycleOwner) { list ->
             binding.radioGroup.removeAllViews()
             list.forEach { opcion ->
                 val rb = RadioButton(requireContext())
@@ -76,7 +75,7 @@ class VoteDetailFragment : Fragment() {
 
         // Observar cambios en la opción votada para mantener el check al
         // recrear la vista (p. ej. al rotar la pantalla)
-        viewModel.opcionVotada.asLiveData().observe(viewLifecycleOwner) { id ->
+        viewModel.opcionVotadaLiveData.observe(viewLifecycleOwner) { id ->
             id?.let {
                 binding.radioGroup.findViewWithTag<RadioButton>(it)?.isChecked = true
             }

@@ -2,6 +2,7 @@ package com.kotlin.cee_app.ui.users.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.kotlin.cee_app.data.UserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +15,7 @@ class UsersViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _usuarios = MutableStateFlow<List<UsuarioEntity>>(emptyList())
     val usuarios: StateFlow<List<UsuarioEntity>> = _usuarios
+    val usuariosLiveData = _usuarios.asLiveData()
 
     init {
         viewModelScope.launch {

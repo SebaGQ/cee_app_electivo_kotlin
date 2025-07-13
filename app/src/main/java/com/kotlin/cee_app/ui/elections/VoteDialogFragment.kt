@@ -8,7 +8,6 @@ import android.widget.RadioButton
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.asLiveData
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
@@ -45,34 +44,34 @@ class VoteDialogFragment : DialogFragment() {
     }
 
     private fun setupObservers() {
-        viewModel.yaVoto.asLiveData().observe(viewLifecycleOwner) { voted ->
+        viewModel.yaVotoLiveData.observe(viewLifecycleOwner) { voted ->
             updateVoteButtonState(voted)
         }
 
-        viewModel.votacion.asLiveData().observe(viewLifecycleOwner) { votacion ->
+        viewModel.votacionLiveData.observe(viewLifecycleOwner) { votacion ->
             binding.textPregunta.text = votacion?.titulo ?: ""
         }
 
-        viewModel.opciones.asLiveData().observe(viewLifecycleOwner) { opciones ->
+        viewModel.opcionesLiveData.observe(viewLifecycleOwner) { opciones ->
             setupVoteOptions(opciones)
         }
 
-        viewModel.opcionVotada.asLiveData().observe(viewLifecycleOwner) { opcionId ->
+        viewModel.opcionVotadaLiveData.observe(viewLifecycleOwner) { opcionId ->
             opcionId?.let { id ->
                 val radio = binding.radioGroup.findViewWithTag<RadioButton>(id)
                 radio?.isChecked = true
             }
         }
 
-        viewModel.isLoading.asLiveData().observe(viewLifecycleOwner) { isLoading ->
+        viewModel.isLoadingLiveData.observe(viewLifecycleOwner) { isLoading ->
             updateLoadingState(isLoading)
         }
 
-        viewModel.isVoting.asLiveData().observe(viewLifecycleOwner) { isVoting ->
+        viewModel.isVotingLiveData.observe(viewLifecycleOwner) { isVoting ->
             updateVotingState(isVoting)
         }
 
-        viewModel.error.asLiveData().observe(viewLifecycleOwner) { error ->
+        viewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
             error?.let {
                 showVoteError(it)
                 viewModel.clearError()

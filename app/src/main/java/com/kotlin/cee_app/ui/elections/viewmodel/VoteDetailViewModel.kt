@@ -2,6 +2,7 @@ package com.kotlin.cee_app.ui.elections.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.kotlin.cee_app.data.ElectionRepository
 import com.kotlin.cee_app.data.OpcionEntity
@@ -19,24 +20,31 @@ class VoteDetailViewModel(application: Application) : AndroidViewModel(applicati
 
     private val _opciones = MutableStateFlow<List<OpcionEntity>>(emptyList())
     val opciones: StateFlow<List<OpcionEntity>> = _opciones
+    val opcionesLiveData = _opciones.asLiveData()
 
     private val _votacion = MutableStateFlow<VotacionEntity?>(null)
     val votacion: StateFlow<VotacionEntity?> = _votacion
+    val votacionLiveData = _votacion.asLiveData()
 
     private val _yaVoto = MutableStateFlow(false)
     val yaVoto: StateFlow<Boolean> = _yaVoto
+    val yaVotoLiveData = _yaVoto.asLiveData()
 
     private val _opcionVotada = MutableStateFlow<Long?>(null)
     val opcionVotada: StateFlow<Long?> = _opcionVotada
+    val opcionVotadaLiveData = _opcionVotada.asLiveData()
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
+    val isLoadingLiveData = _isLoading.asLiveData()
 
     private val _isVoting = MutableStateFlow(false)
     val isVoting: StateFlow<Boolean> = _isVoting
+    val isVotingLiveData = _isVoting.asLiveData()
 
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error
+    val errorLiveData = _error.asLiveData()
 
     fun cargar(votacionId: String) {
         if (_isLoading.value) return // Evitar cargas duplicadas
