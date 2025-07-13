@@ -57,6 +57,9 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
     suspend fun resultados(votacionId: String): List<ConteoOpcion> =
         db.votoDao().conteoPorOpcion(votacionId)
 
+    suspend fun opcionSeleccionada(votacionId: String, usuarioId: String): Long? =
+        db.votoDao().opcionSeleccionada(votacionId, usuarioId)
+
     suspend fun totalUsuarios() = db.usuarioDao().countAll()
 
     companion object {

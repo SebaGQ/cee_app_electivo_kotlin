@@ -26,6 +26,9 @@ class VoteDetailViewModel(application: Application) : AndroidViewModel(applicati
     private val _yaVoto = MutableStateFlow(false)
     val yaVoto: StateFlow<Boolean> = _yaVoto
 
+    private val _opcionSeleccionada = MutableStateFlow<Long?>(null)
+    val opcionSeleccionada: StateFlow<Long?> = _opcionSeleccionada
+
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
@@ -45,6 +48,8 @@ class VoteDetailViewModel(application: Application) : AndroidViewModel(applicati
             try {
                 _votacion.value = repo.obtenerVotacion(votacionId)
                 _yaVoto.value = repo.haVotado(votacionId, SessionManager.currentUserId)
+                _opcionSeleccionada.value =
+                    repo.opcionSeleccionada(votacionId, SessionManager.currentUserId)
             } catch (e: Exception) {
                 _error.value = "Error al cargar la votación: ${e.message}"
             } finally {
@@ -93,6 +98,7 @@ class VoteDetailViewModel(application: Application) : AndroidViewModel(applicati
 
                 if (ok) {
                     _yaVoto.value = true
+                    _opcionSeleccionada.value = opcionId
                     onSuccess()
                 } else {
                     onDuplicate()
@@ -123,6 +129,11 @@ class VoteDetailViewModel(application: Application) : AndroidViewModel(applicati
     // Método para obtener la opción seleccionada por ID
     fun getOpcionById(opcionId: Long): OpcionEntity? {
         return _opciones.value.find { it.id == opcionId }
+    }
+
+    fun getOpcionSeleccionada(): OpcionEntity? {
+        val id = _opcionSeleccionada.value ?: return null
+        return getOpcionById(id)
     }
 
     // Método para verificar si la votación está activa

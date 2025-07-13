@@ -102,6 +102,8 @@ class VoteDialogFragment : DialogFragment() {
     private fun setupVoteOptions(opciones: List<OpcionEntity>) {
         binding.radioGroup.removeAllViews()
 
+        val seleccionada = viewModel.opcionSeleccionada.value
+
         opciones.forEachIndexed { index, opcion ->
             val radioButton = layoutInflater.inflate(
                 R.layout.item_vote_option,
@@ -112,6 +114,10 @@ class VoteDialogFragment : DialogFragment() {
             radioButton.text = opcion.descripcion
             radioButton.tag = opcion.id
             radioButton.id = View.generateViewId() // Generar ID único para cada RadioButton
+
+            if (seleccionada != null && opcion.id == seleccionada) {
+                radioButton.isChecked = true
+            }
 
             binding.radioGroup.addView(radioButton)
         }
@@ -132,8 +138,11 @@ class VoteDialogFragment : DialogFragment() {
             }
         }
 
-        // Limpiar cualquier selección previa
-        binding.radioGroup.clearCheck()
+        if (seleccionada != null) {
+            // Forzar que el botón permanezca seleccionado
+            val rb = binding.radioGroup.findViewWithTag<RadioButton>(seleccionada)
+            rb?.let { binding.radioGroup.check(it.id) }
+        }
     }
 
     private fun setupClickListeners() {

@@ -62,10 +62,14 @@ class VoteDetailFragment : Fragment() {
 
         viewModel.opciones.asLiveData().observe(viewLifecycleOwner) { list ->
             binding.radioGroup.removeAllViews()
+            val seleccionada = viewModel.opcionSeleccionada.value
             list.forEach { opcion ->
                 val rb = RadioButton(requireContext())
                 rb.text = opcion.descripcion
                 rb.tag = opcion.id
+                if (seleccionada != null && opcion.id == seleccionada) {
+                    rb.isChecked = true
+                }
                 binding.radioGroup.addView(rb)
             }
         }

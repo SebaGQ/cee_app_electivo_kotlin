@@ -32,4 +32,9 @@ interface VotoDao {
             "GROUP BY o.id ORDER BY o.id"
     )
     suspend fun conteoPorOpcion(votacionId: String): List<ConteoOpcion>
+
+    @Query(
+        "SELECT opcionId FROM votos WHERE votacionId = :votacionId AND usuarioId = :usuarioId LIMIT 1"
+    )
+    suspend fun opcionSeleccionada(votacionId: String, usuarioId: String): Long?
 }
