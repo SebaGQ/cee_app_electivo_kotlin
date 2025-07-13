@@ -73,18 +73,11 @@ class ResultsViewModel(application: Application) : AndroidViewModel(application)
                 _dashboardItems.value = dashboardDataToItems(dashboardData)
 
                 // Preparar lista de votaciones con su participación
-                val votacionesParticipacion = votaciones.map { votacion ->
-                    val votos = votosConteo[votacion.id] ?: 0
-                    val porcentaje = if (totalUsuarios > 0) {
-                        (votos.toFloat() / totalUsuarios) * 100
-                    } else 0f
-
-                    VotacionConParticipacion(
-                        votacion = votacion,
-                        totalVotos = votos,
-                        porcentajeParticipacion = porcentaje
-                    )
-                }.sortedByDescending { it.porcentajeParticipacion }
+                val votacionesParticipacion = computeParticipacionPorVotacion(
+                    votaciones = votaciones,
+                    votosConteo = votosConteo,
+                    totalUsuarios = totalUsuarios
+                )
 
                 _votacionesConParticipacion.value = votacionesParticipacion
 

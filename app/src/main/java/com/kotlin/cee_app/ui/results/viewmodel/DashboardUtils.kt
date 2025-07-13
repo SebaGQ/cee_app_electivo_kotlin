@@ -2,7 +2,7 @@ package com.kotlin.cee_app.ui.results.viewmodel
 
 import com.kotlin.cee_app.data.model.DashboardItem
 import com.kotlin.cee_app.data.entity.VotacionEntity
-import com.kotlin.cee_app.data.entity.VotoEntity
+import com.kotlin.cee_app.ui.results.viewmodel.VotacionConParticipacion
 import java.time.LocalDate
 
 data class ExtendedDashboardItem(
@@ -136,4 +136,23 @@ fun dashboardDataToItems(data: DashboardData): List<ExtendedDashboardItem> {
             )
         }
     }
+}
+
+fun computeParticipacionPorVotacion(
+    votaciones: List<VotacionEntity>,
+    votosConteo: Map<String, Int>,
+    totalUsuarios: Int
+): List<VotacionConParticipacion> {
+    return votaciones.map { votacion ->
+        val votos = votacion.finalParticipantCount ?: votosConteo[votacion.id] ?: 0
+        val porcentaje = if (totalUsuarios > 0) {
+            (votos.toFloat() / totalUsuarios) * 100
+        } else 0f
+
+        VotacionConParticipacion(
+            votacion = votacion,
+            totalVotos = votos,
+            porcentajeParticipacion = porcentaje
+        )
+    }.sortedByDescending { it.porcentajeParticipacion }
 }
