@@ -38,7 +38,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nueva Votación"
+                    android:text="@string/create_election_title"
                     android:textAppearance="@style/TextAppearance.CEEAPP.Headline1"
                     android:textColor="@color/text_primary" />
             </LinearLayout>
@@ -61,7 +61,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Información básica"
+                        android:text="@string/basic_info"
                         android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
                         android:textColor="@color/text_primary"
                         android:layout_marginBottom="@dimen/spacing_md" />
@@ -80,7 +80,7 @@
                             android:id="@+id/editTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Título de la votación"
+                            android:hint="@string/election_title_hint"
                             android:inputType="textCapSentences"
                             android:maxLength="100" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -98,7 +98,7 @@
                             android:id="@+id/editDescription"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Descripción"
+                            android:hint="@string/election_description_hint"
                             android:inputType="textMultiLine|textCapSentences"
                             android:minLines="3"
                             android:maxLength="500"
@@ -125,7 +125,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Configuración"
+                        android:text="@string/configuration_title"
                         android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
                         android:textColor="@color/text_primary"
                         android:layout_marginBottom="@dimen/spacing_md" />
@@ -150,7 +150,7 @@
                                 android:id="@+id/editStartDate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Fecha inicio"
+                                android:hint="@string/start_date"
                                 android:inputType="date"
                                 android:focusable="false"
                                 android:clickable="true" />
@@ -169,7 +169,7 @@
                                 android:id="@+id/editEndDate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Fecha fin"
+                                android:hint="@string/end_date"
                                 android:inputType="date"
                                 android:focusable="false"
                                 android:clickable="true" />
@@ -209,14 +209,14 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Estado de la votación"
+                                    android:text="@string/election_status"
                                     android:textAppearance="@style/TextAppearance.CEEAPP.Body1"
                                     android:textColor="@color/text_primary" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Activa la votación para que los usuarios puedan participar"
+                                    android:text="@string/status_description"
                                     android:textAppearance="@style/TextAppearance.CEEAPP.Caption"
                                     android:textColor="@color/text_secondary" />
                             </LinearLayout>
@@ -257,7 +257,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Opciones de votación"
+                            android:text="@string/voting_options"
                             android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
                             android:textColor="@color/text_primary" />
 
@@ -266,7 +266,7 @@
                             style="@style/Widget.CEEAPP.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Agregar"
+                            android:text="@string/action_add"
                             android:textColor="@color/primary_blue"
                             app:icon="@drawable/ic_add"
                             app:iconTint="@color/primary_blue" />
@@ -275,7 +275,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mínimo 2 opciones requeridas"
+                        android:text="@string/min_options_required"
                         android:textAppearance="@style/TextAppearance.CEEAPP.Caption"
                         android:textColor="@color/text_secondary"
                         android:layout_marginBottom="@dimen/spacing_md" />
@@ -300,7 +300,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:text="Guardar"
+        android:text="@string/save"
         app:icon="@drawable/ic_save" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

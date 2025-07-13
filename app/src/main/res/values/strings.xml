@@ -11,10 +11,12 @@
     <!-- Login & Auth -->
     <string name="welcome_title">Bienvenido</string>
     <string name="welcome_subtitle">Ingresa tus credenciales para continuar</string>
+    <string name="app_subtitle">Sistema de Votación Electrónica</string>
     <string name="email_hint">Correo electrónico</string>
     <string name="password_hint">Contraseña</string>
     <string name="login_button">Iniciar Sesión</string>
     <string name="signup_button">Crear cuenta nueva</string>
+    <string name="separator_or">o</string>
     <string name="invalid_credentials">Credenciales incorrectas. Por favor, intenta nuevamente.</string>
     <string name="invalid_email">Por favor, ingresa un correo electrónico válido</string>
     <string name="account_created">¡Cuenta creada exitosamente!</string>
@@ -33,8 +35,11 @@
     <string name="past_elections">Votaciones Finalizadas</string>
     <string name="no_active_elections">No hay votaciones activas en este momento</string>
     <string name="vote_now">Votar ahora</string>
+    <string name="zero_percent">0%</string>
+    <string name="zero">0</string>
     <string name="participation">Participación</string>
     <string name="winner_label">Ganador: %s</string>
+    <string name="winner_prefix">Ganador: </string>
     <string name="votes_count">%d votos</string>
 
     <!-- Create Election -->
@@ -44,12 +49,14 @@
     <string name="election_title_hint">Título de la votación</string>
     <string name="election_description_hint">Descripción</string>
     <string name="configuration">Configurar duración</string>
+    <string name="configuration_title">Configuración</string>
     <string name="start_date">Fecha inicio</string>
     <string name="end_date">Fecha fin</string>
     <string name="election_status">Estado de la votación</string>
     <string name="status_description">Activa la votación para que los usuarios puedan participar</string>
     <string name="voting_options">Opciones de votación</string>
     <string name="add_option">+ Agregar</string>
+    <string name="action_add">Agregar</string>
     <string name="min_options_required">Mínimo 2 opciones requeridas</string>
     <string name="save">Guardar</string>
     <string name="saved">Votación guardada exitosamente</string>
