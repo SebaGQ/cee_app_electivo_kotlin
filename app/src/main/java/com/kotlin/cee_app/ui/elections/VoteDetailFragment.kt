@@ -68,6 +68,18 @@ class VoteDetailFragment : Fragment() {
                 rb.tag = opcion.id
                 binding.radioGroup.addView(rb)
             }
+            // Restaurar selección previa si existe
+            viewModel.opcionVotada.value?.let { id ->
+                binding.radioGroup.findViewWithTag<RadioButton>(id)?.isChecked = true
+            }
+        }
+
+        // Observar cambios en la opción votada para mantener el check al
+        // recrear la vista (p. ej. al rotar la pantalla)
+        viewModel.opcionVotada.asLiveData().observe(viewLifecycleOwner) { id ->
+            id?.let {
+                binding.radioGroup.findViewWithTag<RadioButton>(it)?.isChecked = true
+            }
         }
 
         return binding.root
