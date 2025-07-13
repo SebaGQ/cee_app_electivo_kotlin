@@ -98,8 +98,8 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
             votedMap[v.id] = opcionId != null
             descMap[v.id] = opcionId?.let { repo.obtenerOpcion(it)?.descripcion }
         }
-        _voted.value = votedMap
         _votedOption.value = descMap
+        _voted.value = votedMap
     }
 
     fun eliminar(votacion: VotacionEntity) {
