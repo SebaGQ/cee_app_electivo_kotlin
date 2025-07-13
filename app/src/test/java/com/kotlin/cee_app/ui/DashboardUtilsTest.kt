@@ -1,6 +1,6 @@
 package com.kotlin.cee_app.ui
 
-import com.kotlin.cee_app.data.VotacionEntity
+import com.kotlin.cee_app.data.entity.VotacionEntity
 import com.kotlin.cee_app.ui.results.viewmodel.computeDashboard
 import org.junit.Test
 import java.time.LocalDate

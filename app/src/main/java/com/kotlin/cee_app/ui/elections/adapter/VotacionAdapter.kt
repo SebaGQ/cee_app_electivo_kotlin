@@ -10,11 +10,11 @@ import android.widget.PopupMenu
 import android.widget.LinearLayout
 import android.content.res.ColorStateList
 import java.time.LocalDate
-import com.kotlin.cee_app.data.OpcionPercent
-import com.kotlin.cee_app.data.ConteoOpcion
+import com.kotlin.cee_app.data.model.OpcionPercent
+import com.kotlin.cee_app.data.model.ConteoOpcion
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
-import com.kotlin.cee_app.data.VotacionEntity
+import com.kotlin.cee_app.data.entity.VotacionEntity
 
 class VotacionAdapter(
     private val onClick: (VotacionEntity) -> Unit,

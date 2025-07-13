@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
-import com.kotlin.cee_app.data.UserRepository
-import com.kotlin.cee_app.data.UsuarioEntity
+import com.kotlin.cee_app.data.repository.UserRepository
+import com.kotlin.cee_app.data.entity.UsuarioEntity
 import com.kotlin.cee_app.databinding.ActivitySignUpBinding
 import kotlinx.coroutines.launch
 import java.util.UUID

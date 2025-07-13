@@ -3,6 +3,12 @@ package com.kotlin.cee_app.data
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.runBlocking
+import com.kotlin.cee_app.data.dao.VotoDao
+import com.kotlin.cee_app.data.dao.VotacionDao
+import com.kotlin.cee_app.data.dao.OpcionDao
+import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.OpcionEntity
+import com.kotlin.cee_app.data.entity.VotoEntity
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

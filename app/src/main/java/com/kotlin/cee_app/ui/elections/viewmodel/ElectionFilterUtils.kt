@@ -1,6 +1,6 @@
 package com.kotlin.cee_app.ui.elections.viewmodel
 
-import com.kotlin.cee_app.data.VotacionEntity
+import com.kotlin.cee_app.data.entity.VotacionEntity
 import java.time.LocalDate
 
 internal fun splitActiveUpcoming(

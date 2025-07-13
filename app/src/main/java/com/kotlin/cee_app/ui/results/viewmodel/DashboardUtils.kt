@@ -1,8 +1,8 @@
 package com.kotlin.cee_app.ui.results.viewmodel
 
-import com.kotlin.cee_app.data.DashboardItem
-import com.kotlin.cee_app.data.VotacionEntity
-import com.kotlin.cee_app.data.VotoEntity
+import com.kotlin.cee_app.data.model.DashboardItem
+import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.VotoEntity
 import java.time.LocalDate
 
 data class ExtendedDashboardItem(

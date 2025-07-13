@@ -9,13 +9,13 @@
     <string name="nav_users">Usuarios</string>
 
     <!-- Login & Auth -->
-    <string name="welcome_title">Bienvenido</string>
-    <string name="welcome_subtitle">Ingresa tus credenciales para continuar</string>
+    <string name="login_title_welcome">Bienvenido</string>
+    <string name="login_subtitle_welcome">Ingresa tus credenciales para continuar</string>
     <string name="app_subtitle">Sistema de Votación Electrónica</string>
     <string name="email_hint">Correo electrónico</string>
     <string name="password_hint">Contraseña</string>
-    <string name="login_button">Iniciar Sesión</string>
-    <string name="signup_button">Crear cuenta nueva</string>
+    <string name="login_action_sign_in">Iniciar Sesión</string>
+    <string name="login_action_sign_up">Crear cuenta nueva</string>
     <string name="separator_or">o</string>
     <string name="invalid_credentials">Credenciales incorrectas. Por favor, intenta nuevamente.</string>
     <string name="invalid_email">Por favor, ingresa un correo electrónico válido</string>
@@ -23,7 +23,7 @@
     <string name="logout">Cerrar sesión</string>
 
     <!-- Sign Up -->
-    <string name="signup_title">Crear Cuenta</string>
+    <string name="signup_title_create">Crear Cuenta</string>
     <string name="name_hint">Nombre completo</string>
     <string name="create_account_button">Crear cuenta</string>
     <string name="admin_switch">Cuenta de administrador</string>
@@ -43,8 +43,8 @@
     <string name="votes_count">%d votos</string>
 
     <!-- Create Election -->
-    <string name="create_election_title">Nueva Votación</string>
-    <string name="edit_election_title">Editar Votación</string>
+    <string name="create_election_title_new">Nueva Votación</string>
+    <string name="create_election_title_edit">Editar Votación</string>
     <string name="basic_info">Información básica</string>
     <string name="election_title_hint">Título de la votación</string>
     <string name="election_description_hint">Descripción</string>
@@ -66,7 +66,7 @@
     <string name="confirm_discard_changes">¿Descartar los cambios?</string>
 
     <!-- Vote -->
-    <string name="vote_title">Emitir Voto</string>
+    <string name="vote_title_cast">Emitir Voto</string>
     <string name="select_option">Selecciona una opción</string>
     <string name="submit_vote">Confirmar voto</string>
     <string name="already_voted">Ya has votado en esta elección</string>
@@ -76,7 +76,7 @@
     <string name="view_results">Ver resultados</string>
 
     <!-- Results -->
-    <string name="results_title">Resultados</string>
+    <string name="results_title_overview">Resultados</string>
     <string name="total_votes">Total de votos</string>
     <string name="vote_distribution">Distribución de votos</string>
     <string name="dashboard_title">Panel de Control</string>
@@ -85,8 +85,8 @@
     <string name="closed_elections">Cerradas</string>
 
     <!-- Users -->
-    <string name="users_title">Gestión de Usuarios</string>
-    <string name="create_user">Crear Usuario</string>
+    <string name="users_title_manage">Gestión de Usuarios</string>
+    <string name="users_action_create">Crear Usuario</string>
     <string name="edit_user">Editar Usuario</string>
     <string name="user_name">Nombre</string>
     <string name="user_email">Correo</string>

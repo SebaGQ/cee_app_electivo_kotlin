@@ -1,6 +1,6 @@
 package com.kotlin.cee_app.ui
 
-import com.kotlin.cee_app.data.ConteoOpcion
+import com.kotlin.cee_app.data.model.ConteoOpcion
 import com.kotlin.cee_app.ui.elections.viewmodel.toPercent
 import org.junit.Assert.assertEquals
 import org.junit.Test

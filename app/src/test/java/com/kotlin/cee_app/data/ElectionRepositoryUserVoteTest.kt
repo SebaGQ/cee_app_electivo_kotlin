@@ -3,6 +3,11 @@ package com.kotlin.cee_app.data
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.runBlocking
+import com.kotlin.cee_app.data.repository.ElectionRepository
+import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.OpcionEntity
+import com.kotlin.cee_app.data.entity.VotoEntity
+import com.kotlin.cee_app.data.entity.UsuarioEntity
 import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate

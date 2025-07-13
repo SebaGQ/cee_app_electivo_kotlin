@@ -1,7 +1,9 @@
-package com.kotlin.cee_app.data
+package com.kotlin.cee_app.data.repository
 
 import android.content.Context
 import kotlinx.coroutines.flow.Flow
+import com.kotlin.cee_app.data.AppDatabase
+import com.kotlin.cee_app.data.entity.UsuarioEntity
 
 class UserRepository private constructor(private val db: AppDatabase) {
 

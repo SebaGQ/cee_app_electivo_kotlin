@@ -4,6 +4,10 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import com.kotlin.cee_app.data.dao.UsuarioDao
+import com.kotlin.cee_app.data.entity.UsuarioEntity
+import com.kotlin.cee_app.data.dao.AdminDao
+import com.kotlin.cee_app.data.entity.AdminEntity
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

@@ -4,10 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.kotlin.cee_app.data.ElectionRepository
-import com.kotlin.cee_app.data.OpcionPercent
-import com.kotlin.cee_app.data.ConteoOpcion
-import com.kotlin.cee_app.data.VotacionEntity
+import com.kotlin.cee_app.data.repository.ElectionRepository
+import com.kotlin.cee_app.data.model.OpcionPercent
+import com.kotlin.cee_app.data.model.ConteoOpcion
+import com.kotlin.cee_app.data.entity.VotacionEntity
 import com.kotlin.cee_app.data.SessionManager
 import java.time.LocalDate
 import com.kotlin.cee_app.ui.elections.viewmodel.splitActiveUpcomingPast

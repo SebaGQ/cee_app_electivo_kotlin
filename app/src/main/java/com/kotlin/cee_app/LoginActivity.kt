@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.data.SessionManager
-import com.kotlin.cee_app.data.UserRepository
+import com.kotlin.cee_app.data.repository.UserRepository
 import com.kotlin.cee_app.databinding.ActivityLoginBinding
 import kotlinx.coroutines.launch
 

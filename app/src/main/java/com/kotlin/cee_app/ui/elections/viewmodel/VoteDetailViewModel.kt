@@ -4,11 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.kotlin.cee_app.data.ElectionRepository
-import com.kotlin.cee_app.data.OpcionEntity
+import com.kotlin.cee_app.data.repository.ElectionRepository
+import com.kotlin.cee_app.data.entity.OpcionEntity
 import com.kotlin.cee_app.data.SessionManager
-import com.kotlin.cee_app.data.VotoEntity
-import com.kotlin.cee_app.data.VotacionEntity
+import com.kotlin.cee_app.data.entity.VotoEntity
+import com.kotlin.cee_app.data.entity.VotacionEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

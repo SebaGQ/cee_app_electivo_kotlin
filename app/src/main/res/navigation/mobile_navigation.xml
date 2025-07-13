@@ -102,7 +102,7 @@
         <fragment
             android:id="@+id/createUserFragment"
             android:name="com.kotlin.cee_app.ui.users.CreateUserFragment"
-            android:label="@string/create_user"
+            android:label="@string/users_action_create"
             tools:layout="@layout/fragment_create_user">
             <argument
                 android:name="userId"

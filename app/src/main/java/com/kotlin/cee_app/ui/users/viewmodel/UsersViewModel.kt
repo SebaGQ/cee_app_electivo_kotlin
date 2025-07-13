@@ -4,11 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.kotlin.cee_app.data.UserRepository
+import com.kotlin.cee_app.data.repository.UserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import com.kotlin.cee_app.data.UsuarioEntity
+import com.kotlin.cee_app.data.entity.UsuarioEntity
 
 class UsersViewModel(application: Application) : AndroidViewModel(application) {
     private val repo = UserRepository.getInstance(application)

@@ -1,10 +1,10 @@
-package com.kotlin.cee_app.data
+package com.kotlin.cee_app.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.kotlin.cee_app.data.ConteoOpcion
+import com.kotlin.cee_app.data.model.ConteoOpcion
 import kotlinx.coroutines.flow.Flow
 
 @Dao

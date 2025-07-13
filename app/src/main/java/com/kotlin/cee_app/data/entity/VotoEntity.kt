@@ -1,4 +1,4 @@
-package com.kotlin.cee_app.data
+package com.kotlin.cee_app.data.entity
 
 import androidx.room.Entity
 import androidx.room.Index
