@@ -78,10 +78,12 @@ A continuación se listan las funciones implementadas y los archivos más releva
 
 ### Resultados de votaciones
 
-- **Clases:** `ResultsFragment.kt`, `DashboardAdapter.kt`, `OpcionResultAdapter.kt`, `ResultsViewModel.kt`, `DashboardUtils.kt`.
+La sección de resultados ahora cuenta con un **dashboard** que resume las principales métricas y la participación por votación.
+
+- **Clases:** `ResultsFragment.kt`, `ExtendedDashboardAdapter.kt`, `VotacionParticipationAdapter.kt`, `OpcionResultAdapter.kt`, `ResultsViewModel.kt`, `DashboardUtils.kt`.
 - **Entidades:** `VotacionEntity.kt`, `OpcionEntity.kt`, `VotoEntity.kt`.
 - **DAOs:** `VotacionDao.kt`, `OpcionDao.kt`, `VotoDao.kt`.
-- **Layouts:** `fragment_results.xml`, `item_dashboard.xml`, `item_result_option.xml`.
+- **Layouts:** `fragment_results_enhanced.xml`, `item_dashboard_extended.xml`, `item_dashboard_percentage.xml`, `item_votacion_participation.xml`, `item_result_option.xml`.
 - **Dimensiones:** `res/values/dimens.xml`.
 
 ## Compilación
