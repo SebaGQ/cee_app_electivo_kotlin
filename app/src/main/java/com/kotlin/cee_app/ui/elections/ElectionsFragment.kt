@@ -114,7 +114,8 @@ class ElectionsFragment : Fragment() {
                     viewModel.optionsPercent.value,
                     viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
-                    votedMap = viewModel.voted.value
+                    votedMap = viewModel.voted.value,
+                    votedOptionMap = viewModel.votedOption.value
                 )
             }
         }
@@ -128,7 +129,8 @@ class ElectionsFragment : Fragment() {
                     viewModel.optionsPercent.value,
                     viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
-                    votedMap = emptyMap()
+                    votedMap = emptyMap(),
+                    votedOptionMap = emptyMap()
                 )
             }
         }
@@ -142,7 +144,8 @@ class ElectionsFragment : Fragment() {
                     viewModel.optionsPercent.value,
                     viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
-                    votedMap = emptyMap()
+                    votedMap = emptyMap(),
+                    votedOptionMap = emptyMap()
                 )
             }
         }
@@ -155,7 +158,8 @@ class ElectionsFragment : Fragment() {
                     viewModel.optionsPercent.value,
                     viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
-                    votedMap = viewModel.voted.value
+                    votedMap = viewModel.voted.value,
+                    votedOptionMap = viewModel.votedOption.value
                 )
                 pastAdapter.submit(
                     viewModel.past.value,
@@ -163,7 +167,8 @@ class ElectionsFragment : Fragment() {
                     viewModel.optionsPercent.value,
                     viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
-                    votedMap = viewModel.voted.value
+                    votedMap = viewModel.voted.value,
+                    votedOptionMap = viewModel.votedOption.value
                 )
             }
         }
@@ -177,7 +182,8 @@ class ElectionsFragment : Fragment() {
                     opts,
                     viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
-                    votedMap = viewModel.voted.value
+                    votedMap = viewModel.voted.value,
+                    votedOptionMap = viewModel.votedOption.value
                 )
                 upcomingAdapter.submit(
                     viewModel.upcoming.value,
@@ -185,7 +191,8 @@ class ElectionsFragment : Fragment() {
                     opts,
                     viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
-                    votedMap = emptyMap()
+                    votedMap = emptyMap(),
+                    votedOptionMap = emptyMap()
                 )
                 pastAdapter.submit(
                     viewModel.past.value,
@@ -193,7 +200,8 @@ class ElectionsFragment : Fragment() {
                     opts,
                     viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
-                    votedMap = viewModel.voted.value
+                    votedMap = viewModel.voted.value,
+                    votedOptionMap = viewModel.votedOption.value
                 )
             }
         }
@@ -206,7 +214,8 @@ class ElectionsFragment : Fragment() {
                     viewModel.optionsPercent.value,
                     viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
-                    votedMap = votedMap
+                    votedMap = votedMap,
+                    votedOptionMap = viewModel.votedOption.value
                 )
                 pastAdapter.submit(
                     viewModel.past.value,
@@ -214,7 +223,8 @@ class ElectionsFragment : Fragment() {
                     viewModel.optionsPercent.value,
                     viewModel.optionsCount.value,
                     viewModel.totalUsers.value,
-                    votedMap = votedMap
+                    votedMap = votedMap,
+                    votedOptionMap = viewModel.votedOption.value
                 )
             }
         }

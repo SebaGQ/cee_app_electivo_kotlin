@@ -38,6 +38,9 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
     private val _voted = MutableStateFlow<Map<String, Boolean>>(emptyMap())
     val voted: StateFlow<Map<String, Boolean>> = _voted
 
+    private val _votedOption = MutableStateFlow<Map<String, String?>>(emptyMap())
+    val votedOption: StateFlow<Map<String, String?>> = _votedOption
+
 
     private val _totalUsers = MutableStateFlow(0)
     val totalUsers: StateFlow<Int> = _totalUsers
@@ -58,7 +61,7 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
                 _past.value = pastList
                 updateProgress(act + pastList)
                 updateOptions(act + pastList)
-                updateVoted(act)
+                updateVoted(act + pastList)
             }
         }
         viewModelScope.launch {
@@ -88,11 +91,15 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     private suspend fun updateVoted(list: List<VotacionEntity>) {
-        val map = mutableMapOf<String, Boolean>()
+        val votedMap = mutableMapOf<String, Boolean>()
+        val descMap = mutableMapOf<String, String?>()
         list.forEach { v ->
-            map[v.id] = repo.haVotado(v.id, SessionManager.currentUserId)
+            val opcionId = repo.opcionVotadaPorUsuario(v.id, SessionManager.currentUserId)
+            votedMap[v.id] = opcionId != null
+            descMap[v.id] = opcionId?.let { repo.obtenerOpcion(it)?.descripcion }
         }
-        _voted.value = map
+        _voted.value = votedMap
+        _votedOption.value = descMap
     }
 
     fun eliminar(votacion: VotacionEntity) {
@@ -111,7 +118,7 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
             _past.value = pastList
             updateProgress(act + pastList)
             updateOptions(act + pastList)
-            updateVoted(act)
+            updateVoted(act + pastList)
         }
     }
 }

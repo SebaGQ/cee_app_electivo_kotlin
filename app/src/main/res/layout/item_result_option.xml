@@ -33,5 +33,14 @@
             android:textStyle="bold"
             android:textSize="@dimen/text_size_body"
             android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iconChecked"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_check_circle"
+            android:tint="@color/success_color"
+            android:visibility="gone" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

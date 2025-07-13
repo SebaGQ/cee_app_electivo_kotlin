@@ -19,6 +19,9 @@ interface OpcionDao {
     @Query("DELETE FROM opciones WHERE votacionId = :votacionId")
     suspend fun deleteByVotacionId(votacionId: String)
 
+    @Query("SELECT * FROM opciones WHERE id = :id LIMIT 1")
+    suspend fun findById(id: Long): OpcionEntity?
+
     @Query(
         "SELECT o.* FROM opciones o LEFT JOIN votos v ON o.id = v.opcionId " +
             "WHERE o.votacionId = :votacionId " +

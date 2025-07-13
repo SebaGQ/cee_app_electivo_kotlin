@@ -29,6 +29,7 @@ class VotacionAdapter(
     private var totalUsers: Int = 1
     private var winners: Map<String, String> = emptyMap()
     private var voted: Map<String, Boolean> = emptyMap()
+    private var votedOptions: Map<String, String?> = emptyMap()
     private val expanded: MutableSet<String> = mutableSetOf()
 
     private fun isActive(v: VotacionEntity): Boolean {
@@ -45,7 +46,8 @@ class VotacionAdapter(
         countsMap: Map<String, List<ConteoOpcion>>,
         total: Int,
         winnersMap: Map<String, String> = emptyMap(),
-        votedMap: Map<String, Boolean> = emptyMap()
+        votedMap: Map<String, Boolean> = emptyMap(),
+        votedOptionMap: Map<String, String?> = emptyMap()
     ) {
         data = list
         progress = progressMap
@@ -54,6 +56,7 @@ class VotacionAdapter(
         totalUsers = if (total == 0) 1 else total
         winners = winnersMap
         voted = votedMap
+        votedOptions = votedOptionMap
         expanded.clear()
         notifyDataSetChanged()
     }
@@ -73,6 +76,8 @@ class VotacionAdapter(
             else holder.itemView.context.getColor(R.color.black)
         )
         val count = progress[item.id] ?: 0
+        val percent = if (totalUsers == 0) 0 else count * 100 / totalUsers
+        holder.progressText.text = "$percent%"
         if (item.estado == "Abierta") {
             holder.progress.visibility = View.VISIBLE
             holder.progress.max = totalUsers
@@ -95,18 +100,26 @@ class VotacionAdapter(
         val opts = options[item.id] ?: emptyList()
         val countsList = counts[item.id] ?: emptyList()
         val already = voted[item.id] == true
+        val votedDesc = votedOptions[item.id]
         opts.forEachIndexed { index, op ->
             val view = LayoutInflater.from(holder.itemView.context)
                 .inflate(R.layout.item_result_option, holder.optionsContainer, false)
             view.findViewById<TextView>(R.id.textOption).text = op.descripcion
             view.findViewById<TextView>(R.id.textPercent).text = "${op.porcentaje}%"
             val votesView = view.findViewById<TextView>(R.id.textVotes)
+            val icon = view.findViewById<ImageView>(R.id.iconChecked)
             if (already) {
                 val count = countsList.getOrNull(index)?.total ?: 0
                 votesView.visibility = View.VISIBLE
                 votesView.text = holder.itemView.context.getString(R.string.votes_count, count)
+                if (votedDesc != null && votedDesc == op.descripcion) {
+                    icon.visibility = View.VISIBLE
+                } else {
+                    icon.visibility = View.GONE
+                }
             } else {
                 votesView.visibility = View.GONE
+                icon.visibility = View.GONE
             }
             holder.optionsContainer.addView(view)
         }
@@ -154,6 +167,7 @@ class VotacionAdapter(
         val title: TextView = itemView.findViewById(R.id.textTitle)
         val estado: TextView = itemView.findViewById(R.id.textEstado)
         val progress: ProgressBar = itemView.findViewById(R.id.progressVotos)
+        val progressText: TextView = itemView.findViewById(R.id.textProgress)
         val winner: TextView = itemView.findViewById(R.id.textWinner)
         val optionsContainer: LinearLayout = itemView.findViewById(R.id.layoutOptions)
         val menu: ImageView = itemView.findViewById(R.id.iconInfo)
