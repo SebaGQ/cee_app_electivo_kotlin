@@ -23,10 +23,8 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/loginCard"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.48"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.13999999">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/logoImage"
@@ -63,10 +61,12 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_lg"
             android:layout_marginTop="@dimen/spacing_xxl"
+            android:layout_marginBottom="@dimen/spacing_xxl"
             app:cardCornerRadius="@dimen/radius_xl"
             app:cardElevation="@dimen/elevation_card"
             app:cardBackgroundColor="@color/surface_color"
             app:layout_constraintTop_toBottomOf="@id/headerContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintWidth_max="@dimen/width_max_content">
@@ -78,17 +78,21 @@
                 android:padding="@dimen/spacing_xl">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/spacing_xs"
+                    android:gravity="center"
                     android:text="Bienvenido"
                     android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
                     android:textColor="@color/text_primary" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/spacing_lg"
+                    android:gravity="center"
                     android:text="Ingresa tus credenciales para continuar"
                     android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
                     android:textColor="@color/text_secondary" />
