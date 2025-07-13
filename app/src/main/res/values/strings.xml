@@ -135,4 +135,15 @@
 
     <string name="create_new_election">Nueva votación</string>
     <string name="button_view_results">Ver resultados</string>
+
+    <!-- Strings para el diálogo de votación -->
+    <string name="button_cancel">Cancelar</string>
+    <string name="voting_in_progress">Votando…</string>
+    <string name="vote_error">Error al enviar el voto. Inténtalo de nuevo.</string>
+    <string name="dialog_vote_title">Confirma tu voto</string>
+    <string name="vote_instruction">Seleccione su opción de voto</string>
+
+    <!-- Mensajes de accesibilidad -->
+    <string name="vote_option_selected">Opción seleccionada</string>
+    <string name="vote_confirmation_icon">Voto confirmado</string>
 </resources>
