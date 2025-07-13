@@ -96,7 +96,7 @@
                                 android:layout_width="@dimen/icon_size_large"
                                 android:layout_height="@dimen/icon_size_large"
                                 android:src="@drawable/ic_info"
-                                android:tint="@color/info_color"
+                                app:tint="@color/info_color"
                                 android:layout_marginEnd="@dimen/spacing_md" />
 
                             <TextView

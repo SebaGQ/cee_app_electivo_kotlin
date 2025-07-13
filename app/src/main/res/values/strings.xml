@@ -43,7 +43,7 @@
     <string name="basic_info">Información básica</string>
     <string name="election_title_hint">Título de la votación</string>
     <string name="election_description_hint">Descripción</string>
-    <string name="configuration">Configuración</string>
+    <string name="configuration">Configurar duración</string>
     <string name="start_date">Fecha inicio</string>
     <string name="end_date">Fecha fin</string>
     <string name="election_status">Estado de la votación</string>
