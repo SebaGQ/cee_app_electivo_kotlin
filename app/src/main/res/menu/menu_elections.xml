@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_add_election"
-        android:title="Add"
+        android:title="@string/action_add"
         android:icon="@android:drawable/ic_input_add"
         android:showAsAction="ifRoom" />
 </menu>

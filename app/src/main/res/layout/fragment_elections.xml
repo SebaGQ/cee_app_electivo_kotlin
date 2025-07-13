@@ -51,7 +51,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Votaciones Activas"
+                            android:text="@string/active_elections"
                             android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
                             android:textColor="@color/text_primary" />
 
@@ -59,7 +59,7 @@
                             android:id="@+id/chipActiveCount"
                             android:layout_width="wrap_content"
                             android:layout_height="32dp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/white"
                             app:chipBackgroundColor="@color/primary_blue"
                             android:clickable="false"
@@ -103,7 +103,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="No hay votaciones activas en este momento"
+                                android:text="@string/no_active_elections"
                                 android:textAppearance="@style/TextAppearance.CEEAPP.Body1"
                                 android:textColor="@color/text_primary" />
                         </LinearLayout>
@@ -136,7 +136,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Próximas Votaciones"
+                            android:text="@string/upcoming_elections"
                             android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
                             android:textColor="@color/text_primary" />
                     </LinearLayout>
@@ -176,7 +176,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Votaciones Finalizadas"
+                            android:text="@string/past_elections"
                             android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
                             android:textColor="@color/text_primary" />
                     </LinearLayout>

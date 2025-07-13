@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_xs"
                 android:alpha="0.9"
-                android:text="Sistema de Votación Electrónica"
+                android:text="@string/app_subtitle"
                 android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
                 android:textColor="@color/white" />
         </LinearLayout>
@@ -83,7 +83,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/spacing_xs"
                     android:gravity="center"
-                    android:text="Bienvenido"
+                    android:text="@string/welcome_title"
                     android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
                     android:textColor="@color/text_primary" />
 
@@ -93,7 +93,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/spacing_lg"
                     android:gravity="center"
-                    android:text="Ingresa tus credenciales para continuar"
+                    android:text="@string/welcome_subtitle"
                     android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
                     android:textColor="@color/text_secondary" />
 
@@ -112,7 +112,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter"
-                        android:hint="Correo electrónico"
+                        android:hint="@string/email_hint"
                         android:inputType="textEmailAddress"
                         android:textSize="@dimen/text_size_md" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -133,7 +133,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter"
-                        android:hint="Contraseña"
+                        android:hint="@string/password_hint"
                         android:inputType="textPassword"
                         android:textSize="@dimen/text_size_md" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -145,7 +145,7 @@
                     android:layout_height="@dimen/height_button"
                     android:layout_marginBottom="@dimen/spacing_md"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="Iniciar Sesión"
+                    android:text="@string/login_button"
                     android:textAllCaps="false"
                     android:textSize="@dimen/text_size_md"
                     app:cornerRadius="@dimen/radius_medium" />
@@ -168,7 +168,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/spacing_md"
-                        android:text="o"
+                        android:text="@string/separator_or"
                         android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
                         android:textColor="@color/text_secondary" />
 
@@ -185,7 +185,7 @@
                     style="@style/Widget.CEEAPP.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_button"
-                    android:text="Crear cuenta nueva"
+                    android:text="@string/signup_button"
                     android:textColor="@color/primary_blue"
                     app:cornerRadius="@dimen/radius_medium"
                     app:strokeColor="@color/primary_blue" />
