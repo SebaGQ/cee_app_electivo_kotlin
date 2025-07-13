@@ -83,7 +83,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/spacing_xs"
                     android:gravity="center"
-                    android:text="@string/welcome_title"
+                    android:text="@string/login_title_welcome"
                     android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
                     android:textColor="@color/text_primary" />
 
@@ -93,7 +93,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/spacing_lg"
                     android:gravity="center"
-                    android:text="@string/welcome_subtitle"
+                    android:text="@string/login_subtitle_welcome"
                     android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
                     android:textColor="@color/text_secondary" />
 
@@ -145,7 +145,7 @@
                     android:layout_height="@dimen/height_button"
                     android:layout_marginBottom="@dimen/spacing_md"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="@string/login_button"
+                    android:text="@string/login_action_sign_in"
                     android:textAllCaps="false"
                     android:textSize="@dimen/text_size_md"
                     app:cornerRadius="@dimen/radius_medium" />
@@ -185,7 +185,7 @@
                     style="@style/Widget.CEEAPP.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_button"
-                    android:text="@string/signup_button"
+                    android:text="@string/login_action_sign_up"
                     android:textColor="@color/primary_blue"
                     app:cornerRadius="@dimen/radius_medium"
                     app:strokeColor="@color/primary_blue" />

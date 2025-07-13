@@ -12,7 +12,7 @@ import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.kotlin.cee_app.R
-import com.kotlin.cee_app.data.OpcionEntity
+import com.kotlin.cee_app.data.entity.OpcionEntity
 import com.kotlin.cee_app.databinding.DialogVoteBinding
 import com.kotlin.cee_app.ui.elections.viewmodel.VoteDetailViewModel
 

@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_xs"
-                    android:text="@string/signup_title"
+                    android:text="@string/signup_title_create"
                     android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
                     android:textColor="@color/text_primary" />
 
@@ -91,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_lg"
-                    android:text="@string/welcome_subtitle"
+                    android:text="@string/login_subtitle_welcome"
                     android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
                     android:textColor="@color/text_secondary" />
 

@@ -4,11 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.kotlin.cee_app.data.ConteoOpcion
-import com.kotlin.cee_app.data.DashboardItem
-import com.kotlin.cee_app.data.ElectionRepository
-import com.kotlin.cee_app.data.UserRepository
-import com.kotlin.cee_app.data.VotacionEntity
+import com.kotlin.cee_app.data.model.ConteoOpcion
+import com.kotlin.cee_app.data.model.DashboardItem
+import com.kotlin.cee_app.data.repository.ElectionRepository
+import com.kotlin.cee_app.data.repository.UserRepository
+import com.kotlin.cee_app.data.entity.VotacionEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

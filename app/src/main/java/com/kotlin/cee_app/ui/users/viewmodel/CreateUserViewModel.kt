@@ -3,8 +3,8 @@ package com.kotlin.cee_app.ui.users.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.kotlin.cee_app.data.UserRepository
-import com.kotlin.cee_app.data.UsuarioEntity
+import com.kotlin.cee_app.data.repository.UserRepository
+import com.kotlin.cee_app.data.entity.UsuarioEntity
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

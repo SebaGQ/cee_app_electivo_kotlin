@@ -1,4 +1,4 @@
-package com.kotlin.cee_app.data
+package com.kotlin.cee_app.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

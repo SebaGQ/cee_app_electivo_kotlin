@@ -8,7 +8,7 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
-import com.kotlin.cee_app.data.UsuarioEntity
+import com.kotlin.cee_app.data.entity.UsuarioEntity
 
 class UserAdapter(
     private val onEdit: (UsuarioEntity) -> Unit,

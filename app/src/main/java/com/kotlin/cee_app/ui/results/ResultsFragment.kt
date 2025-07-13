@@ -169,7 +169,7 @@ class ResultsFragment : Fragment() {
         }
     }
 
-    private fun updatePieChart(data: List<com.kotlin.cee_app.data.ConteoOpcion>) {
+    private fun updatePieChart(data: List<com.kotlin.cee_app.data.model.ConteoOpcion>) {
         val entries = data.map { PieEntry(it.total.toFloat(), it.descripcion) }
 
         val dataSet = PieDataSet(entries, "").apply {
@@ -193,11 +193,11 @@ class ResultsFragment : Fragment() {
         binding.pieChart.invalidate()
     }
 
-    private fun updateOptionsList(data: List<com.kotlin.cee_app.data.ConteoOpcion>) {
+    private fun updateOptionsList(data: List<com.kotlin.cee_app.data.model.ConteoOpcion>) {
         val total = data.sumOf { it.total }
         val percents = data.map {
             val pct = if (total == 0) 0 else (it.total * 100 / total)
-            com.kotlin.cee_app.data.OpcionPercent(it.descripcion, pct)
+            com.kotlin.cee_app.data.model.OpcionPercent(it.descripcion, pct)
         }
         (binding.recyclerOpciones.adapter as? OpcionResultAdapter)?.submit(percents)
 
