@@ -35,7 +35,9 @@ class ElectionsFragment : Fragment() {
             VoteDialogFragment.RESULT_KEY,
             viewLifecycleOwner
         ) { _, _ ->
-            viewModel.refresh()
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.refresh()
+            }
         }
 
         val activeAdapter = VotacionAdapter(
