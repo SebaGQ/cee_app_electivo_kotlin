@@ -53,7 +53,7 @@ class VotacionAdapter(
         progress = progressMap
         options = optionsMap
         counts = countsMap
-        totalUsers = if (total == 0) 1 else total
+        totalUsers = total
         winners = winnersMap
         voted = votedMap
         votedOptions = votedOptionMap
