@@ -139,8 +139,10 @@ class VoteDialogFragment : DialogFragment() {
             }
         }
 
-        // Limpiar cualquier selección previa
-        binding.radioGroup.clearCheck()
+        // Restaurar la opción previamente votada (si existe) o limpiar la selección
+        viewModel.opcionVotada.value?.let { id ->
+            binding.radioGroup.findViewWithTag<RadioButton>(id)?.isChecked = true
+        } ?: binding.radioGroup.clearCheck()
     }
 
     private fun setupClickListeners() {

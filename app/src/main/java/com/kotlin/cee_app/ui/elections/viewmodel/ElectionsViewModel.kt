@@ -118,5 +118,6 @@ class ElectionsViewModel(application: Application) : AndroidViewModel(applicatio
         updateProgress(act + pastList)
         updateOptions(act + pastList)
         updateVoted(act + pastList)
+        _totalUsers.value = repo.totalUsuarios()
     }
 }
