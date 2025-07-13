@@ -23,6 +23,11 @@ interface VotoDao {
     )
     suspend fun countByVotacionAndUsuario(votacionId: String, usuarioId: String): Int
 
+    @Query(
+        "SELECT opcionId FROM votos WHERE votacionId = :votacionId AND usuarioId = :usuarioId LIMIT 1"
+    )
+    suspend fun opcionIdByVotacionAndUsuario(votacionId: String, usuarioId: String): Long?
+
     @Query("DELETE FROM votos WHERE votacionId = :votacionId")
     suspend fun deleteByVotacionId(votacionId: String)
 

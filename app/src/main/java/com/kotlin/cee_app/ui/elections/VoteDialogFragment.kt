@@ -57,6 +57,13 @@ class VoteDialogFragment : DialogFragment() {
             setupVoteOptions(opciones)
         }
 
+        viewModel.opcionVotada.asLiveData().observe(viewLifecycleOwner) { opcionId ->
+            opcionId?.let { id ->
+                val radio = binding.radioGroup.findViewWithTag<RadioButton>(id)
+                radio?.isChecked = true
+            }
+        }
+
         viewModel.isLoading.asLiveData().observe(viewLifecycleOwner) { isLoading ->
             updateLoadingState(isLoading)
         }

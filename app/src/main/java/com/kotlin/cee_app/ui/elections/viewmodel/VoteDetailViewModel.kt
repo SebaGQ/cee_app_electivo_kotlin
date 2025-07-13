@@ -26,6 +26,9 @@ class VoteDetailViewModel(application: Application) : AndroidViewModel(applicati
     private val _yaVoto = MutableStateFlow(false)
     val yaVoto: StateFlow<Boolean> = _yaVoto
 
+    private val _opcionVotada = MutableStateFlow<Long?>(null)
+    val opcionVotada: StateFlow<Long?> = _opcionVotada
+
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
@@ -45,6 +48,14 @@ class VoteDetailViewModel(application: Application) : AndroidViewModel(applicati
             try {
                 _votacion.value = repo.obtenerVotacion(votacionId)
                 _yaVoto.value = repo.haVotado(votacionId, SessionManager.currentUserId)
+                if (_yaVoto.value) {
+                    _opcionVotada.value = repo.opcionVotadaPorUsuario(
+                        votacionId,
+                        SessionManager.currentUserId
+                    )
+                } else {
+                    _opcionVotada.value = null
+                }
             } catch (e: Exception) {
                 _error.value = "Error al cargar la votación: ${e.message}"
             } finally {
@@ -93,6 +104,7 @@ class VoteDetailViewModel(application: Application) : AndroidViewModel(applicati
 
                 if (ok) {
                     _yaVoto.value = true
+                    _opcionVotada.value = opcionId
                     onSuccess()
                 } else {
                     onDuplicate()
