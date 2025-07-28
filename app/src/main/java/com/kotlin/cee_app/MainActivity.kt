@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if (SessionManager.currentUserId.isBlank()) {
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, AuthActivity::class.java))
             finish()
             return
         }
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_logout -> {
                 SessionManager.clear()
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity(Intent(this, AuthActivity::class.java))
                 finish()
                 true
             }
