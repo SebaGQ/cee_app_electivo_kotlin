@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@drawable/bg_gradient"
-    tools:context=".SignUpActivity">
+    tools:context=".ui.auth.LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,12 +21,10 @@
             android:layout_marginTop="40dp"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/signupCard"
+            app:layout_constraintBottom_toTopOf="@+id/loginCard"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.48"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.13999999">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/logoImage"
@@ -56,9 +54,9 @@
                 android:textColor="@color/white" />
         </LinearLayout>
 
-        <!-- Card de registro -->
+        <!-- Card de login -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/signupCard"
+            android:id="@+id/loginCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_lg"
@@ -80,40 +78,32 @@
                 android:padding="@dimen/spacing_xl">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/spacing_xs"
-                    android:text="@string/signup_title_create"
+                    android:gravity="center"
+                    android:text="@string/login_title_welcome"
                     android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
                     android:textColor="@color/text_primary" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/spacing_lg"
+                    android:gravity="center"
                     android:text="@string/login_subtitle_welcome"
                     android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
                     android:textColor="@color/text_secondary" />
 
-                <!-- Campo Nombre -->
+                <!-- Campo de correo -->
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCorreo"
+                    style="@style/Widget.CEEAPP.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_md"
-                    android:hint="@string/hint_name">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editNombre"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Campo Correo -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_md"
-                    android:hint="@string/hint_email"
                     app:startIconDrawable="@drawable/ic_email"
                     app:startIconTint="@color/text_secondary">
 
@@ -121,15 +111,19 @@
                         android:id="@+id/editCorreo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress" />
+                        android:fontFamily="@font/inter"
+                        android:hint="@string/email_hint"
+                        android:inputType="textEmailAddress"
+                        android:textSize="@dimen/text_size_md" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Campo Contraseña -->
+                <!-- Campo de contraseña -->
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
+                    style="@style/Widget.CEEAPP.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_md"
-                    android:hint="@string/hint_password"
+                    android:layout_marginBottom="@dimen/spacing_lg"
                     app:endIconMode="password_toggle"
                     app:startIconDrawable="@drawable/ic_lock"
                     app:startIconTint="@color/text_secondary">
@@ -138,23 +132,63 @@
                         android:id="@+id/editPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword" />
+                        android:fontFamily="@font/inter"
+                        android:hint="@string/password_hint"
+                        android:inputType="textPassword"
+                        android:textSize="@dimen/text_size_md" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Switch
-                    android:id="@+id/switchAdmin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_md"
-                    android:text="@string/label_is_admin" />
-
+                <!-- Botón de login -->
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/buttonCreate"
+                    android:id="@+id/buttonLogin"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_button"
-                    android:text="@string/action_create_account"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="@string/login_action_sign_in"
                     android:textAllCaps="false"
+                    android:textSize="@dimen/text_size_md"
                     app:cornerRadius="@dimen/radius_medium" />
+
+                <!-- Separador -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/spacing_md"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_weight="1"
+                        android:background="@color/divider_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/spacing_md"
+                        android:text="@string/separator_or"
+                        android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
+                        android:textColor="@color/text_secondary" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_weight="1"
+                        android:background="@color/divider_color" />
+                </LinearLayout>
+
+                <!-- Botón de registro -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonSignup"
+                    style="@style/Widget.CEEAPP.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_button"
+                    android:text="@string/login_action_sign_up"
+                    android:textColor="@color/primary_blue"
+                    app:cornerRadius="@dimen/radius_medium"
+                    app:strokeColor="@color/primary_blue" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
