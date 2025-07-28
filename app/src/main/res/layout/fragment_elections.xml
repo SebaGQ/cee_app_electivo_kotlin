@@ -81,8 +81,8 @@
                         android:layout_height="wrap_content"
                         android:visibility="gone"
                         app:cardCornerRadius="@dimen/radius_large"
-                        app:cardElevation="0dp"
-                        app:cardBackgroundColor="@color/info_background"
+                        app:cardElevation="2dp"
+                        app:cardBackgroundColor="@color/surface_color"
                         android:layout_marginBottom="@dimen/spacing_md">
 
                         <LinearLayout
