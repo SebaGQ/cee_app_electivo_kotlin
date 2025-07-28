@@ -86,6 +86,7 @@
 
     <!-- Users -->
     <string name="users_title_manage">Gestión de Usuarios</string>
+    <string name="users_title">Usuarios</string>
     <string name="users_action_create">Crear Usuario</string>
     <string name="edit_user">Editar Usuario</string>
     <string name="user_name">Nombre</string>
