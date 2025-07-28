@@ -16,10 +16,12 @@ Las versiones de dependencias se especifican en `gradle/libs.versions.toml` y el
 ```
 app/
  └─ src/main/
-     ├─ java/com/kotlin/cee_app/
-     │   ├─ LoginActivity.kt
-     │   ├─ SignUpActivity.kt
-     │   ├─ MainActivity.kt
+    ├─ java/com/kotlin/cee_app/
+    │   ├─ AuthActivity.kt
+    │   ├─ MainActivity.kt
+    │   ├─ ui/auth/
+    │   │   ├─ LoginFragment.kt
+    │   │   └─ SignUpFragment.kt
      │   ├─ data/
      │   │   ├─ AppDatabase.kt
      │   │   ├─ ElectionRepository.kt
@@ -54,10 +56,10 @@ A continuación se listan las funciones implementadas y los archivos más releva
 
 ### Autenticación
 
-- **Clases:** `LoginActivity.kt`, `SignUpActivity.kt`, `SessionManager.kt`, `UserRepository.kt`.
+- **Clases:** `AuthActivity.kt`, `LoginFragment.kt`, `SignUpFragment.kt`, `AuthViewModel.kt`, `SessionManager.kt`, `UserRepository.kt`.
 - **Entidades:** `UsuarioEntity.kt`, `AdminEntity.kt`.
 - **DAOs:** `UsuarioDao.kt`, `AdminDao.kt`.
-- **Layouts:** `activity_login.xml`, `activity_sign_up.xml`.
+- **Layouts:** `login_fragment.xml`, `sign_up_fragment.xml`.
 - **Dimensiones:** `res/values/dimens.xml` y sus variantes.
 
 ### Gestión de usuarios (solo admins)
