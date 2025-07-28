@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:radius="8dp">
+    android:layout_margin="@dimen/margin_list_item"
+    app:cardCornerRadius="@dimen/radius_medium"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/surface_color">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="@dimen/padding_card">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -21,20 +24,23 @@
                 android:id="@+id/textNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_body"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.CEEAPP.Body1"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary" />
 
             <TextView
                 android:id="@+id/textCorreo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_sm" />
+                android:textAppearance="@style/TextAppearance.CEEAPP.Body2" />
 
-            <TextView
-                android:id="@+id/textRol"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipRol"
+                style="@style/Widget.CEEAPP.Chip"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_sm" />
+                android:layout_height="@dimen/chip_height"
+                android:textSize="@dimen/text_size_xs"
+                tools:text="ADMIN" />
         </LinearLayout>
 
         <ImageView
@@ -44,4 +50,4 @@
             android:src="@drawable/ic_more_vert"
             android:contentDescription="@string/action_settings" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

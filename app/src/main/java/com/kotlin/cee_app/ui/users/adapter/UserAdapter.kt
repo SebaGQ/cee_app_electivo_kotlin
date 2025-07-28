@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
+import com.google.android.material.chip.Chip
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.entity.UsuarioEntity
@@ -32,7 +33,28 @@ class UserAdapter(
         val item = data[position]
         holder.nombre.text = item.nombre
         holder.correo.text = item.correo
-        holder.rol.text = item.rol
+        holder.rolChip.text = item.rol
+
+        val context = holder.itemView.context
+        if (item.rol.uppercase() == "ADMIN") {
+            holder.rolChip.chipBackgroundColor =
+                android.content.res.ColorStateList.valueOf(
+                    context.getColor(R.color.success_background)
+                )
+            holder.rolChip.chipStrokeColor =
+                android.content.res.ColorStateList.valueOf(
+                    context.getColor(R.color.success_color)
+                )
+        } else {
+            holder.rolChip.chipBackgroundColor =
+                android.content.res.ColorStateList.valueOf(
+                    context.getColor(R.color.info_background)
+                )
+            holder.rolChip.chipStrokeColor =
+                android.content.res.ColorStateList.valueOf(
+                    context.getColor(R.color.info_color)
+                )
+        }
 
         holder.menu.setOnClickListener { v ->
             val popup = PopupMenu(v.context, v)
@@ -53,7 +75,7 @@ class UserAdapter(
     class Vh(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nombre: TextView = itemView.findViewById(R.id.textNombre)
         val correo: TextView = itemView.findViewById(R.id.textCorreo)
-        val rol: TextView = itemView.findViewById(R.id.textRol)
+        val rolChip: Chip = itemView.findViewById(R.id.chipRol)
         val menu: ImageView = itemView.findViewById(R.id.iconMenu)
     }
 }
