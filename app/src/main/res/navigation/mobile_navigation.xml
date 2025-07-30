@@ -76,7 +76,7 @@
             android:id="@+id/resultsFragment"
             android:name="com.kotlin.cee_app.ui.results.ResultsFragment"
             android:label="@string/title_results"
-            tools:layout="@layout/fragment_results">
+            tools:layout="@layout/fragment_results_enhanced">
             <argument
                 android:name="votacionId"
                 app:argType="string"
