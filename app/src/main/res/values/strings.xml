@@ -19,6 +19,7 @@
     <string name="separator_or">o</string>
     <string name="invalid_credentials">Credenciales incorrectas. Por favor, intenta nuevamente.</string>
     <string name="invalid_email">Por favor, ingresa un correo electrónico válido</string>
+    <string name="fill_all_fields">Por favor, completa todos los campos</string>
     <string name="account_created">¡Cuenta creada exitosamente!</string>
     <string name="logout">Cerrar sesión</string>
 

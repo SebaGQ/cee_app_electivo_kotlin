@@ -3,6 +3,7 @@ package com.kotlin.cee_app.ui.users.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import android.util.Patterns
 import com.kotlin.cee_app.data.repository.UserRepository
 import com.kotlin.cee_app.data.entity.UsuarioEntity
 import androidx.lifecycle.asLiveData
@@ -41,8 +42,23 @@ class CreateUserViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun guardar(nombre: String, correo: String, password: String, rol: String, onSuccess: () -> Unit) {
+    fun guardar(
+        nombre: String,
+        correo: String,
+        password: String,
+        rol: String,
+        onError: () -> Unit,
+        onSuccess: () -> Unit
+    ) {
         viewModelScope.launch {
+            if (nombre.isBlank() || correo.isBlank() || password.isBlank()) {
+                onError()
+                return@launch
+            }
+            if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
+                onError()
+                return@launch
+            }
             val id = editId ?: UUID.randomUUID().toString()
             val usuario = UsuarioEntity(
                 id = id,
