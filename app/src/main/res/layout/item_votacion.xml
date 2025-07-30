@@ -24,21 +24,35 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/spacing_md">
 
+            <!-- Título -->
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/election_title_hint"
+                android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
+                android:textColor="@color/text_primary"
+                android:maxLines="2"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iconInfo"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Elección de representante estudiantil 2025" />
+
             <!-- Estado badge -->
             <com.google.android.material.chip.Chip
                 android:id="@+id/textEstado"
+                style="@style/Widget.CEEAPP.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:text="@string/status_open"
                 android:textSize="@dimen/text_size_xs"
                 android:clickable="false"
-                app:chipBackgroundColor="@color/success_background"
-                app:chipStrokeColor="@color/success_color"
-                app:chipStrokeWidth="1dp"
+                app:chipBackgroundColor="@color/status_background"
+                android:layout_marginTop="@dimen/spacing_sm"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textTitle"
                 tools:text="Abierta" />
-
             <!-- Menú opciones -->
             <ImageView
                 android:id="@+id/iconInfo"
@@ -51,21 +65,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Título -->
-            <TextView
-                android:id="@+id/textTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_sm"
-                android:text="@string/election_title_hint"
-                android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
-                android:textColor="@color/text_primary"
-                android:maxLines="2"
-                android:ellipsize="end"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/iconInfo"
-                app:layout_constraintTop_toBottomOf="@id/textEstado"
-                tools:text="Elección de representante estudiantil 2025" />
 
             <!-- Progress bar para votaciones activas -->
             <LinearLayout
@@ -76,7 +75,7 @@
                 android:layout_marginTop="@dimen/spacing_md"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textTitle">
+                app:layout_constraintTop_toBottomOf="@id/textEstado">
 
                 <LinearLayout
                     android:layout_width="match_parent"
