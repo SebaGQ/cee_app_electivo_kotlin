@@ -1,14 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base palette used by both light and dark themes -->
-    <style name="Theme.CEEAPP.Base" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Base application theme. -->
+    <style name="Theme.CEEAPP" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_blue</item>
         <item name="colorPrimaryContainer">@color/primary_blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSurface">@color/background_gray</item>
+        <!-- rest of attributes remain the same -->
     </style>
-
-    <!-- Main application theme -->
-    <style name="Theme.CEEAPP" parent="Theme.CEEAPP.Base" />
 
     <style name="Theme.CEEAPP.NoActionBar">
         <item name="windowActionBar">false</item>
