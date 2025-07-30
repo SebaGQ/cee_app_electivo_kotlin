@@ -54,6 +54,7 @@ class UsersFragment : Fragment() {
         }
 
         if (SessionManager.isAdmin()) {
+            binding.fabAdd.visibility = View.VISIBLE
             binding.fabAdd.setOnClickListener {
                 findNavController().navigate(R.id.action_users_to_createUser)
             }
