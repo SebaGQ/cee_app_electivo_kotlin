@@ -13,7 +13,7 @@ object ElectionWorkScheduler {
     private const val WORK_NAME = "closeExpiredElections"
 
     internal fun nextDelayMinutes(now: LocalDateTime = LocalDateTime.now()): Long {
-        val nextRun = now.toLocalDate().plusDays(1).atStartOfDay().plusMinutes(1)
+        val nextRun = now.plusMinutes(1)
         return Duration.between(now, nextRun).toMinutes()
     }
 
@@ -22,7 +22,7 @@ object ElectionWorkScheduler {
         val constraints = Constraints.Builder()
             .setRequiresBatteryNotLow(true)
             .build()
-        val request = PeriodicWorkRequestBuilder<CloseExpiredElectionsWorker>(1, TimeUnit.DAYS)
+        val request = PeriodicWorkRequestBuilder<CloseExpiredElectionsWorker>(1, TimeUnit.MINUTES)
             .setInitialDelay(delay, TimeUnit.MINUTES)
             .setConstraints(constraints)
             .build()

@@ -6,9 +6,9 @@ import org.junit.Test
 
 class ElectionWorkSchedulerTest {
     @Test
-    fun nextDelayMinutes_returns_minutes_until_next_day_00_01() {
+    fun nextDelayMinutes_returns_one_minute_delay() {
         val now = LocalDateTime.of(2024, 1, 1, 10, 30)
         val minutes = ElectionWorkScheduler.nextDelayMinutes(now)
-        assertEquals(811L, minutes)
+        assertEquals(1L, minutes)
     }
 }
