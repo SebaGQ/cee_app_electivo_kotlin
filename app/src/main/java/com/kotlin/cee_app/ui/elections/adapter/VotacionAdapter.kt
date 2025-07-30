@@ -173,7 +173,8 @@ class VotacionAdapter(
             holder.buttonVote.backgroundTintList =
                 ColorStateList.valueOf(holder.itemView.context.getColor(R.color.disabled_gray))
         } else {
-            holder.buttonVote.backgroundTintList = null
+            holder.buttonVote.backgroundTintList =
+                ColorStateList.valueOf(holder.itemView.context.getColor(R.color.primary_dark))
         }
         holder.buttonVote.setOnClickListener { onClick(item) }
 
