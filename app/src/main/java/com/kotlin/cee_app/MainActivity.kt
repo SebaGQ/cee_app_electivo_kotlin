@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.navigation.ui.navigateUp
+import com.kotlin.cee_app.ui.components.BottomBar
 import com.kotlin.cee_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_elections, R.id.nav_results))
         setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.appBarMain.bottomNav.setupWithNavController(navController)
+        BottomBar.setup(binding.appBarMain.bottomNav, navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
