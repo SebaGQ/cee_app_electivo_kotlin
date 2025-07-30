@@ -12,15 +12,18 @@ import java.util.concurrent.TimeUnit
 object ElectionWorkScheduler {
     private const val WORK_NAME = "closeExpiredElections"
 
+    internal fun nextDelayMinutes(now: LocalDateTime = LocalDateTime.now()): Long {
+        val nextRun = now.toLocalDate().plusDays(1).atStartOfDay().plusMinutes(1)
+        return Duration.between(now, nextRun).toMinutes()
+    }
+
     fun scheduleDailyWork(context: Context) {
-        val now = LocalDateTime.now()
-        val nextRun = now.toLocalDate().plusDays(1).atStartOfDay()
-        val delay = Duration.between(now, nextRun)
+        val delay = nextDelayMinutes()
         val constraints = Constraints.Builder()
             .setRequiresBatteryNotLow(true)
             .build()
         val request = PeriodicWorkRequestBuilder<CloseExpiredElectionsWorker>(1, TimeUnit.DAYS)
-            .setInitialDelay(delay.toMinutes(), TimeUnit.MINUTES)
+            .setInitialDelay(delay, TimeUnit.MINUTES)
             .setConstraints(constraints)
             .build()
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
