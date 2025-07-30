@@ -11,14 +11,14 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/margin_screen"
-            android:paddingTop="@dimen/spacing_lg"
-            android:paddingBottom="@dimen/spacing_xxxl"
-            android:animateLayoutChanges="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/margin_screen"
+                android:paddingTop="@dimen/padding_medium"
+                android:paddingBottom="@dimen/spacing_xxl"
+                android:animateLayoutChanges="true">
 
             <!-- Header -->
             <LinearLayout
@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="@dimen/spacing_lg">
+                android:layout_marginBottom="@dimen/margin_medium">
 
                 <View
                     android:layout_width="4dp"
@@ -38,7 +38,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/create_election_title_new"
-                    android:textAppearance="@style/TextAppearance.CEEAPP.Headline1"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
                     android:textColor="@color/text_primary" />
             </LinearLayout>
 
@@ -55,13 +56,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/padding_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/basic_info"
-                        android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
                         android:textColor="@color/text_primary"
                         android:layout_marginBottom="@dimen/spacing_md" />
 
@@ -119,13 +121,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/padding_medium">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/configuration_title"
-                        android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
                         android:textColor="@color/text_primary"
                         android:layout_marginBottom="@dimen/spacing_md" />
 
@@ -243,7 +246,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/padding_medium">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -257,7 +260,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/voting_options"
-                            android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             android:textColor="@color/text_primary" />
 
                         <com.google.android.material.button.MaterialButton
