@@ -118,17 +118,18 @@ class VotacionAdapter(
 
         if (item.estado == EstadoVotacion.ABIERTA) {
             if (shouldShowParticipation(item)) {
+                holder.progressContainer.visibility = View.VISIBLE
                 holder.progress.visibility = View.VISIBLE
                 holder.progressText.visibility = View.VISIBLE
                 holder.progressText.text = "$percent%"
                 holder.progress.max = totalUsers
                 holder.progress.progress = count
             } else {
-                holder.progress.visibility = View.GONE
-                holder.progressText.visibility = View.GONE
+                holder.progressContainer.visibility = View.GONE
             }
             holder.winner.visibility = View.GONE
         } else {
+            holder.progressContainer.visibility = View.VISIBLE
             holder.progress.visibility = View.GONE
             holder.progressText.visibility = View.VISIBLE
             holder.progressText.text = "$percent%"
@@ -217,6 +218,7 @@ class VotacionAdapter(
     class Vh(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.textTitle)
         val estado: Chip = itemView.findViewById(R.id.textEstado)
+        val progressContainer: LinearLayout = itemView.findViewById(R.id.progressContainer)
         val progress: ProgressBar = itemView.findViewById(R.id.progressVotos)
         val progressText: TextView = itemView.findViewById(R.id.textProgress)
         val winner: TextView = itemView.findViewById(R.id.textWinner)
