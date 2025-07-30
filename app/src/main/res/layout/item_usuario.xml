@@ -36,11 +36,13 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.CEEAPP.Body2" />
 
-            <TextView
+            <com.google.android.material.chip.Chip
                 android:id="@+id/textRol"
+                style="@style/Widget.CEEAPP.Chip"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.CEEAPP.Body2" />
+                android:layout_height="32dp"
+                android:textSize="@dimen/text_size_xs"
+                android:clickable="false" />
         </LinearLayout>
 
         <ImageView

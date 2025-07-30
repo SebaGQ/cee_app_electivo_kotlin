@@ -115,6 +115,10 @@
     <string name="role_admin">Administrador</string>
     <string name="role_user">Usuario</string>
     <string name="role_simple">Simple</string>
+    <string-array name="role_display_values">
+        <item>@string/role_user</item>
+        <item>@string/role_admin</item>
+    </string-array>
 
     <!-- Missing strings for compatibility -->
     <string name="hint_name">Nombre completo</string>
