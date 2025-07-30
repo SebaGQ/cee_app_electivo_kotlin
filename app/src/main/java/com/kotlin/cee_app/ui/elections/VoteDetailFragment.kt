@@ -63,9 +63,14 @@ class VoteDetailFragment : Fragment() {
         viewModel.opcionesLiveData.observe(viewLifecycleOwner) { list ->
             binding.radioGroup.removeAllViews()
             list.forEach { opcion ->
-                val rb = RadioButton(requireContext())
+                val rb = layoutInflater.inflate(
+                    R.layout.item_vote_option,
+                    binding.radioGroup,
+                    false
+                ) as RadioButton
                 rb.text = opcion.descripcion
                 rb.tag = opcion.id
+                rb.id = View.generateViewId()
                 binding.radioGroup.addView(rb)
             }
             // Restaurar selección previa si existe
