@@ -53,9 +53,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_role"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                app:endIconMode="dropdown_menu">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/editRol"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
