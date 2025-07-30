@@ -97,8 +97,8 @@ class VotacionAdapter(
 
         holder.expandable.visibility = if (isExpanded) View.VISIBLE else View.GONE
         holder.expandIcon.setImageResource(
-            if (isExpanded) R.drawable.ic_expand_less
-            else R.drawable.ic_expand_more
+            if (isExpanded) R.drawable.ic_expand_less_24
+            else R.drawable.ic_expand_more_24
         )
 
 

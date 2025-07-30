@@ -61,7 +61,7 @@
             android:id="@+id/imageCheck"
             android:layout_width="160dp"
             android:layout_height="160dp"
-            app:srcCompat="@drawable/ic_baseline_check_circle_24"
+            app:srcCompat="@drawable/ic_check_circle_24"
             app:strokeColor="@color/primary_blue"
             android:tint="@color/primary_blue" />
 
