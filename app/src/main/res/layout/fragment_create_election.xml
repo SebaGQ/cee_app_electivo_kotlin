@@ -296,14 +296,13 @@
     </androidx.core.widget.NestedScrollView>
 
     <!-- FAB para guardar -->
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSave"
         style="@style/Widget.CEEAPP.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:text="@string/save"
-        app:icon="@drawable/ic_save" />
+        android:src="@drawable/ic_save" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
