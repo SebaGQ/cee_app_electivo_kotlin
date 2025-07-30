@@ -192,30 +192,16 @@
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- FAB principal con menú -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabMain"
-        style="@style/Widget.CEEAPP.FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add"
-        app:fabSize="normal"
-        android:visibility="gone" />
-
-    <!-- FAB secundario para crear votación -->
+    <!-- Botón para crear votación -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabCreate"
         style="@style/Widget.CEEAPP.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="88dp"
+        android:layout_margin="@dimen/fab_margin"
         android:text="@string/action_create_voting"
-        app:icon="@drawable/ic_ballot"
-        app:fabSize="mini"
+        app:icon="@drawable/ic_add"
         android:visibility="gone"
         android:alpha="0.9" />
 
