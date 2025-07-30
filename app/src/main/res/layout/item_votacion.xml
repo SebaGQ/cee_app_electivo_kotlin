@@ -139,6 +139,7 @@
                 app:cornerRadius="20dp"
                 android:layout_marginTop="@dimen/spacing_md"
                 android:visibility="gone"
+                android:backgroundTint="@color/primary_dark"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textWinner" />
 

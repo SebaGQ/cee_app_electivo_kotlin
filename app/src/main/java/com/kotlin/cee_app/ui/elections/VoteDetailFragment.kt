@@ -33,9 +33,10 @@ class VoteDetailFragment : Fragment() {
 
         viewModel.yaVotoLiveData.observe(viewLifecycleOwner) { voted ->
             binding.buttonVote.isEnabled = !voted
-            if (voted) {
-                binding.buttonVote.backgroundTintList =
-                    ColorStateList.valueOf(requireContext().getColor(R.color.disabled_gray))
+            binding.buttonVote.backgroundTintList = if (voted) {
+                ColorStateList.valueOf(requireContext().getColor(R.color.disabled_gray))
+            } else {
+                ColorStateList.valueOf(requireContext().getColor(R.color.primary_dark))
             }
         }
 

@@ -101,6 +101,9 @@ class VoteDialogFragment : DialogFragment() {
             else -> {
                 binding.buttonVote.isEnabled = false // Se habilitará al seleccionar opción
                 binding.buttonVote.text = getString(R.string.button_vote)
+                binding.buttonVote.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(requireContext(), R.color.primary_dark)
+                )
             }
         }
     }
