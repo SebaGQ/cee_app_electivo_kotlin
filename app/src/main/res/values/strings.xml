@@ -64,6 +64,7 @@
     <string name="save">Guardar</string>
     <string name="saved">Votación guardada exitosamente</string>
     <string name="invalid_dates">Las fechas seleccionadas no son válidas</string>
+    <string name="future_open_not_allowed">Las votaciones futuras deben crearse cerradas</string>
     <string name="need_two_options">Debes agregar al menos 2 opciones</string>
     <string name="option_name">Nombre de la opción</string>
     <string name="confirm_discard_changes">¿Descartar los cambios?</string>
