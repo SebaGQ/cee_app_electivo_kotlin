@@ -151,6 +151,12 @@ class CreateElectionFragment : Fragment() {
                 Snackbar.make(binding.root, R.string.need_two_options, Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            if (viewModel.estado.value == EstadoVotacion.ABIERTA &&
+                viewModel.fechaInicio.value.isAfter(LocalDate.now())
+            ) {
+                Snackbar.make(binding.root, R.string.future_open_not_allowed, Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             viewModel.guardar(title, desc,
                 onError = {
                     Snackbar.make(binding.root, R.string.invalid_dates, Snackbar.LENGTH_SHORT).show()
