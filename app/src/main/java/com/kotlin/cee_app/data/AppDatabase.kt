@@ -31,7 +31,7 @@ import com.kotlin.cee_app.data.dao.VotoDao
         OpcionEntity::class,
         VotoEntity::class,
     ],
-    version = 4,
+    version = 5,
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {

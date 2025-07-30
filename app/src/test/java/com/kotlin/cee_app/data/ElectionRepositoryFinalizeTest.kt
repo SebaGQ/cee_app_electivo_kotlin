@@ -54,5 +54,6 @@ class ElectionRepositoryFinalizeTest {
         val updated = db.votacionDao().findById("v1")
         assertEquals(EstadoVotacion.FINALIZADA, updated?.estado)
         assertEquals(1, updated?.finalParticipantCount)
+        assertTrue(updated?.cerrada == true)
     }
 }

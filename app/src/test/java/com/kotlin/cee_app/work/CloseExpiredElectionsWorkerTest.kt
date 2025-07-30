@@ -5,10 +5,12 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.work.testing.TestWorkerBuilder
 import com.kotlin.cee_app.data.AppDatabase
 import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 import java.time.LocalDate
 import java.util.concurrent.Executors
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -32,7 +34,7 @@ class CloseExpiredElectionsWorkerTest {
             descripcion = "d",
             fechaInicio = today,
             fechaFin = today,
-            estado = "Abierta",
+            estado = EstadoVotacion.ABIERTA,
             adminId = "a1",
             finalParticipantCount = null,
         )
@@ -44,7 +46,7 @@ class CloseExpiredElectionsWorkerTest {
             descripcion = "d2",
             fechaInicio = today,
             fechaFin = today.plusDays(1),
-            estado = "Abierta",
+            estado = EstadoVotacion.ABIERTA,
             adminId = "a1",
             finalParticipantCount = null,
         )
@@ -57,7 +59,10 @@ class CloseExpiredElectionsWorkerTest {
 
         worker.doWork()
 
-        assertEquals("Finalizada", db.votacionDao().findById("v1")?.estado)
-        assertEquals("Abierta", db.votacionDao().findById("v2")?.estado)
+        val closed = db.votacionDao().findById("v1")
+        val openResult = db.votacionDao().findById("v2")
+        assertEquals(EstadoVotacion.FINALIZADA, closed?.estado)
+        assertTrue(closed?.cerrada == true)
+        assertEquals(EstadoVotacion.ABIERTA, openResult?.estado)
     }
 }
