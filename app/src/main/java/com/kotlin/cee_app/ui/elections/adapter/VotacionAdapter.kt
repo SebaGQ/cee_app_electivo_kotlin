@@ -74,9 +74,15 @@ class VotacionAdapter(
         val item = data[position]
         holder.title.text = item.titulo
         holder.estado.text = item.estado
-        holder.estado.setTextColor(
-            if (item.estado == "Abierta") holder.itemView.context.getColor(R.color.primary_blue)
-            else holder.itemView.context.getColor(R.color.black)
+        val isOpen = item.estado.equals("Abierta", ignoreCase = true)
+        val textColorRes = if (isOpen) R.color.success_color else R.color.error_color
+        val backgroundRes = if (isOpen) R.color.success_background else R.color.error_background
+        holder.estado.setTextColor(holder.itemView.context.getColor(textColorRes))
+        holder.estado.chipBackgroundColor = ColorStateList.valueOf(
+            holder.itemView.context.getColor(backgroundRes)
+        )
+        holder.estado.chipStrokeColor = ColorStateList.valueOf(
+            holder.itemView.context.getColor(textColorRes)
         )
         val count = progress[item.id] ?: 0
         val percent = if (totalUsers == 0) 0 else count * 100 / totalUsers
