@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.ui.results.viewmodel.VotacionConParticipacion
 import com.kotlin.cee_app.data.entity.EstadoVotacion
+import com.kotlin.cee_app.ui.elections.viewmodel.shouldShowParticipation
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class VotacionParticipationAdapter : RecyclerView.Adapter<VotacionParticipationAdapter.ViewHolder>() {
@@ -47,8 +49,16 @@ class VotacionParticipationAdapter : RecyclerView.Adapter<VotacionParticipationA
             textTitle.text = votacion.titulo
             textDates.text = "${votacion.fechaInicio.format(dateFormatter)} - ${votacion.fechaFin.format(dateFormatter)}"
             textVotes.text = "${item.totalVotos} votos"
-            textPercentage.text = "%.1f%% participación".format(item.porcentajeParticipacion)
-            progressBar.progress = item.porcentajeParticipacion.toInt()
+
+            if (shouldShowParticipation(votacion, LocalDate.now())) {
+                textPercentage.visibility = View.VISIBLE
+                progressBar.visibility = View.VISIBLE
+                textPercentage.text = "%.1f%% participación".format(item.porcentajeParticipacion)
+                progressBar.progress = item.porcentajeParticipacion.toInt()
+            } else {
+                textPercentage.visibility = View.GONE
+                progressBar.visibility = View.GONE
+            }
 
             textStatus.text = votacion.estado.label
             val statusColor = if (votacion.estado == EstadoVotacion.ABIERTA) {

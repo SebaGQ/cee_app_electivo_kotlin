@@ -27,3 +27,11 @@ internal fun splitActiveUpcomingPast(
     val past = list.filterNot { it in active || it in upcoming }
     return Triple(active, upcoming, past)
 }
+
+internal fun shouldShowParticipation(
+    votacion: VotacionEntity,
+    today: LocalDate = LocalDate.now(),
+): Boolean {
+    val upcoming = votacion.estado == EstadoVotacion.ABIERTA && today.isBefore(votacion.fechaInicio)
+    return !upcoming
+}
