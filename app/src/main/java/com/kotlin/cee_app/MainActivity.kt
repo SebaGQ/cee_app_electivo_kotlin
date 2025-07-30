@@ -14,6 +14,7 @@ import androidx.navigation.ui.navigateUp
 import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.databinding.ActivityMainBinding
 import com.kotlin.cee_app.R
+import com.kotlin.cee_app.work.ElectionWorkScheduler
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        ElectionWorkScheduler.scheduleDailyWork(this)
 
         setSupportActionBar(binding.appBarMain.includeTopBar.topBar)
 
