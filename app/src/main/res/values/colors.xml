@@ -64,4 +64,8 @@
     <color name="error_background">#FFEBEE</color>
     <color name="warning_background">#FFF3E0</color>
     <color name="info_background">#E1F5FE</color>
+
+    <!-- Miscellaneous Backgrounds -->
+    <color name="status_background">#F0F0F0</color>
+    <color name="progress_background">#E0E0E0</color>
 </resources>
