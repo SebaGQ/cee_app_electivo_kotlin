@@ -53,6 +53,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textTitle"
                 tools:text="Abierta" />
+
+            <!-- Fechas -->
+            <TextView
+                android:id="@+id/textDates"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
+                android:textColor="@color/text_secondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textEstado"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Cierra el 01/01/2025" />
             <!-- Menú opciones -->
             <ImageView
                 android:id="@+id/iconInfo"

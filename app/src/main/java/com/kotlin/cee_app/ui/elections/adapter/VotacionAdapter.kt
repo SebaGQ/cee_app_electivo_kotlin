@@ -11,6 +11,7 @@ import android.widget.PopupMenu
 import android.widget.LinearLayout
 import android.content.res.ColorStateList
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import com.kotlin.cee_app.data.model.OpcionPercent
 import com.kotlin.cee_app.data.model.ConteoOpcion
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +36,12 @@ class VotacionAdapter(
     private var voted: Map<String, Boolean> = emptyMap()
     private var votedOptions: Map<String, String?> = emptyMap()
     private val expanded: MutableSet<String> = mutableSetOf()
+    private val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+
+    private fun isUpcoming(v: VotacionEntity): Boolean {
+        val today = LocalDate.now()
+        return v.estado == EstadoVotacion.ABIERTA && today.isBefore(v.fechaInicio)
+    }
 
     private fun isActive(v: VotacionEntity): Boolean {
         val today = LocalDate.now()
@@ -104,6 +111,23 @@ class VotacionAdapter(
             } else {
                 holder.winner.visibility = View.GONE
             }
+        }
+
+        if (isActive(item)) {
+            holder.dates.visibility = View.VISIBLE
+            holder.dates.text = holder.itemView.context.getString(
+                R.string.closes_on,
+                item.fechaFin.format(dateFormatter)
+            )
+        } else if (isUpcoming(item)) {
+            holder.dates.visibility = View.VISIBLE
+            holder.dates.text = holder.itemView.context.getString(
+                R.string.date_range,
+                item.fechaInicio.format(dateFormatter),
+                item.fechaFin.format(dateFormatter)
+            )
+        } else {
+            holder.dates.visibility = View.GONE
         }
 
         holder.optionsContainer.removeAllViews()
@@ -182,6 +206,7 @@ class VotacionAdapter(
         val progress: ProgressBar = itemView.findViewById(R.id.progressVotos)
         val progressText: TextView = itemView.findViewById(R.id.textProgress)
         val winner: TextView = itemView.findViewById(R.id.textWinner)
+        val dates: TextView = itemView.findViewById(R.id.textDates)
         val optionsContainer: LinearLayout = itemView.findViewById(R.id.layoutOptions)
         val menu: ImageView = itemView.findViewById(R.id.iconInfo)
         val expandIcon: ImageView = itemView.findViewById(R.id.iconExpand)
