@@ -41,4 +41,19 @@ class ElectionFilterUtilsTest {
         assertEquals("v1", upcoming.first().id)
         assertTrue(past.isEmpty())
     }
+
+    @Test
+    fun closed_today_considered_active() {
+        val today = LocalDate.of(2024, 1, 15)
+        val list = listOf(
+            VotacionEntity("v1", "t1", "d", LocalDate.of(2024, 1, 10), LocalDate.of(2024, 1, 20), EstadoVotacion.CERRADA, "a", null)
+        )
+
+        val (active, upcoming, past) = splitActiveUpcomingPast(list, today)
+
+        assertEquals(1, active.size)
+        assertEquals("v1", active.first().id)
+        assertTrue(upcoming.isEmpty())
+        assertTrue(past.isEmpty())
+    }
 }

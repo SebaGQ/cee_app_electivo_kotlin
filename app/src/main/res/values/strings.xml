@@ -31,10 +31,10 @@
 
     <!-- Elections -->
     <string name="elections_title">Votaciones</string>
-    <string name="active_elections">Votaciones Activas</string>
+    <string name="active_elections">Votaciones Actuales</string>
     <string name="upcoming_elections">Próximas Votaciones</string>
     <string name="past_elections">Votaciones Finalizadas</string>
-    <string name="no_active_elections">No hay votaciones activas en este momento</string>
+    <string name="no_active_elections">No hay votaciones actuales en este momento</string>
     <string name="vote_now">Votar ahora</string>
     <string name="zero_percent">0%</string>
     <string name="zero">0</string>

@@ -9,7 +9,7 @@ internal fun splitActiveUpcoming(
     today: LocalDate = LocalDate.now(),
 ): Pair<List<VotacionEntity>, List<VotacionEntity>> {
     val active = list.filter { v ->
-        v.estado == EstadoVotacion.ABIERTA &&
+        v.estado != EstadoVotacion.FINALIZADA &&
             !today.isBefore(v.fechaInicio) &&
             !today.isAfter(v.fechaFin)
     }
