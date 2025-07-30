@@ -54,12 +54,12 @@ class UsersFragment : Fragment() {
         }
 
         if (SessionManager.isAdmin()) {
-            binding.fabAddContainer.visibility = View.VISIBLE
+            binding.fabAdd.visibility = View.VISIBLE
             binding.fabAdd.setOnClickListener {
                 findNavController().navigate(R.id.action_users_to_createUser)
             }
         } else {
-            binding.fabAddContainer.visibility = View.GONE
+            binding.fabAdd.visibility = View.GONE
         }
 
         return binding.root

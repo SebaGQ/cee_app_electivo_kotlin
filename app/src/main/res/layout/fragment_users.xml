@@ -11,29 +11,14 @@
         android:padding="@dimen/margin_screen"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-    <LinearLayout
-        android:id="@+id/fabAddContainer"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabAdd"
+        style="@style/Widget.CEEAPP.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/labelCreateUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/users_action_create"
-            android:textColor="@color/primary_blue" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAdd"
-            style="@style/Widget.CEEAPP.FloatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add" />
-    </LinearLayout>
+        android:text="@string/users_action_create"
+        app:icon="@drawable/ic_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

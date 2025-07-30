@@ -242,12 +242,12 @@ class ElectionsFragment : Fragment() {
         }
 
         if (SessionManager.isAdmin()) {
-            binding.fabMainContainer.visibility = View.VISIBLE
-            binding.fabMain.setOnClickListener {
+            binding.fabCreateElection.visibility = View.VISIBLE
+            binding.fabCreateElection.setOnClickListener {
                 findNavController().navigate(R.id.action_elections_to_createElection)
             }
         } else {
-            binding.fabMainContainer.visibility = View.GONE
+            binding.fabCreateElection.visibility = View.GONE
         }
 
         return binding.root
