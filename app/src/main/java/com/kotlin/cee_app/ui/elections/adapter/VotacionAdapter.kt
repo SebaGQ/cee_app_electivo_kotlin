@@ -19,6 +19,7 @@ import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.entity.VotacionEntity
 import com.kotlin.cee_app.data.entity.EstadoVotacion
 import com.kotlin.cee_app.data.SessionManager
+import com.kotlin.cee_app.ui.elections.viewmodel.shouldShowParticipation
 
 class VotacionAdapter(
     private val onClick: (VotacionEntity) -> Unit,
@@ -114,14 +115,23 @@ class VotacionAdapter(
 
         val count = progress[item.id] ?: 0
         val percent = if (totalUsers == 0) 0 else count * 100 / totalUsers
-        holder.progressText.text = "$percent%"
+
         if (item.estado == EstadoVotacion.ABIERTA) {
-            holder.progress.visibility = View.VISIBLE
-            holder.progress.max = totalUsers
-            holder.progress.progress = count
+            if (shouldShowParticipation(item)) {
+                holder.progress.visibility = View.VISIBLE
+                holder.progressText.visibility = View.VISIBLE
+                holder.progressText.text = "$percent%"
+                holder.progress.max = totalUsers
+                holder.progress.progress = count
+            } else {
+                holder.progress.visibility = View.GONE
+                holder.progressText.visibility = View.GONE
+            }
             holder.winner.visibility = View.GONE
         } else {
             holder.progress.visibility = View.GONE
+            holder.progressText.visibility = View.VISIBLE
+            holder.progressText.text = "$percent%"
             val w = winners[item.id]
             if (w != null) {
                 holder.winner.visibility = View.VISIBLE
