@@ -51,9 +51,9 @@ class VotacionParticipationAdapter : RecyclerView.Adapter<VotacionParticipationA
 
             textStatus.text = votacion.estado
             val statusColor = if (votacion.estado == "Abierta") {
-                itemView.context.getColor(android.R.color.holo_green_dark)
+                itemView.context.getColor(R.color.success_color)
             } else {
-                itemView.context.getColor(android.R.color.holo_red_dark)
+                itemView.context.getColor(R.color.error_color)
             }
             textStatus.setTextColor(statusColor)
         }
