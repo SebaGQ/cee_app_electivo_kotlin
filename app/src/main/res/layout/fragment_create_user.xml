@@ -59,7 +59,8 @@
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/editRol"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/spacing_md" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </ScrollView>
