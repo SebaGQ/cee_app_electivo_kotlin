@@ -76,7 +76,8 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
         actualizarVotacion(
             votacion.copy(
                 estado = EstadoVotacion.FINALIZADA,
-                finalParticipantCount = count
+                finalParticipantCount = count,
+                cerrada = true
             )
         )
     }

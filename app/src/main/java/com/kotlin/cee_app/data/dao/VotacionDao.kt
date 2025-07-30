@@ -55,6 +55,8 @@ data class VotacionWithCount(
     val fechaFin: Long,
     val estado: EstadoVotacion,
     val adminId: String,
+    val finalParticipantCount: Int?,
+    val cerrada: Boolean,
     val voteCount: Int
 )
 
