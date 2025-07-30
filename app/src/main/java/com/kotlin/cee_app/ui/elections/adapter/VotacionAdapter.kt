@@ -11,6 +11,7 @@ import android.widget.PopupMenu
 import android.widget.LinearLayout
 import android.content.res.ColorStateList
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import com.kotlin.cee_app.data.model.OpcionPercent
 import com.kotlin.cee_app.data.model.ConteoOpcion
 import androidx.recyclerview.widget.RecyclerView
@@ -35,12 +36,18 @@ class VotacionAdapter(
     private var voted: Map<String, Boolean> = emptyMap()
     private var votedOptions: Map<String, String?> = emptyMap()
     private val expanded: MutableSet<String> = mutableSetOf()
+    private val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 
     private fun isActive(v: VotacionEntity): Boolean {
         val today = LocalDate.now()
         return v.estado == EstadoVotacion.ABIERTA &&
             !today.isBefore(v.fechaInicio) &&
             !today.isAfter(v.fechaFin)
+    }
+
+    private fun isUpcoming(v: VotacionEntity): Boolean {
+        val today = LocalDate.now()
+        return v.estado == EstadoVotacion.ABIERTA && today.isBefore(v.fechaInicio)
     }
 
     fun submit(
@@ -85,6 +92,26 @@ class VotacionAdapter(
         holder.estado.chipStrokeColor = ColorStateList.valueOf(
             holder.itemView.context.getColor(textColorRes)
         )
+
+        when {
+            isActive(item) -> {
+                holder.dates.visibility = View.VISIBLE
+                holder.dates.text = holder.itemView.context.getString(
+                    R.string.closing_on,
+                    item.fechaFin.format(formatter)
+                )
+            }
+            isUpcoming(item) -> {
+                holder.dates.visibility = View.VISIBLE
+                holder.dates.text = holder.itemView.context.getString(
+                    R.string.starts_and_ends,
+                    item.fechaInicio.format(formatter),
+                    item.fechaFin.format(formatter)
+                )
+            }
+            else -> holder.dates.visibility = View.GONE
+        }
+
         val count = progress[item.id] ?: 0
         val percent = if (totalUsers == 0) 0 else count * 100 / totalUsers
         holder.progressText.text = "$percent%"
@@ -187,6 +214,7 @@ class VotacionAdapter(
         val expandIcon: ImageView = itemView.findViewById(R.id.iconExpand)
         val expandable: LinearLayout = itemView.findViewById(R.id.layoutExpandable)
         val buttonVote: View = itemView.findViewById(R.id.buttonVotar)
+        val dates: TextView = itemView.findViewById(R.id.textDates)
     }
 }
 

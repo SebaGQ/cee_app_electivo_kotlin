@@ -42,6 +42,8 @@
     <string name="winner_label">Ganador: %s</string>
     <string name="winner_prefix">Ganador: </string>
     <string name="votes_count">%d votos</string>
+    <string name="closing_on">Cierra el %s</string>
+    <string name="starts_and_ends">Del %1$s al %2$s</string>
 
     <!-- Create Election -->
     <string name="create_election_title_new">Nueva Votación</string>
