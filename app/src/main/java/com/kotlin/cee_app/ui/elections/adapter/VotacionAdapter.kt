@@ -47,7 +47,7 @@ class VotacionAdapter(
 
     private fun isUpcoming(v: VotacionEntity): Boolean {
         val today = LocalDate.now()
-        return v.estado == EstadoVotacion.ABIERTA && today.isBefore(v.fechaInicio)
+        return today.isBefore(v.fechaInicio) && v.estado != EstadoVotacion.FINALIZADA
     }
 
     fun submit(

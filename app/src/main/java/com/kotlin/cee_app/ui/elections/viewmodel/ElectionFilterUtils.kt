@@ -14,8 +14,7 @@ internal fun splitActiveUpcoming(
             !today.isAfter(v.fechaFin)
     }
     val upcoming = list.filter { v ->
-        v.estado == EstadoVotacion.ABIERTA &&
-            today.isBefore(v.fechaInicio)
+        today.isBefore(v.fechaInicio) && v.estado != EstadoVotacion.FINALIZADA
     }
     return active to upcoming
 }
