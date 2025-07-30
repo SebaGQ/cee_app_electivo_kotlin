@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
+import android.util.Patterns
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.databinding.FragmentCreateUserBinding
 import com.kotlin.cee_app.ui.users.viewmodel.CreateUserViewModel
@@ -51,12 +53,27 @@ class CreateUserFragment : Fragment() {
         }
 
         binding.fabSaveUser.setOnClickListener {
+            val nombre = binding.editNombre.text.toString()
+            val correo = binding.editCorreo.text.toString()
+            val password = binding.editPassword.text.toString()
+            if (nombre.isBlank() || correo.isBlank() || password.isBlank()) {
+                Snackbar.make(binding.root, R.string.fill_all_fields, Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
+                binding.editCorreo.error = getString(R.string.invalid_email)
+                return@setOnClickListener
+            }
             viewModel.guardar(
-                binding.editNombre.text.toString(),
-                binding.editCorreo.text.toString(),
-                binding.editPassword.text.toString(),
-                viewModel.rol.value ?: "SIMPLE"
-            ) { findNavController().popBackStack() }
+                nombre,
+                correo,
+                password,
+                viewModel.rol.value ?: "SIMPLE",
+                onError = {
+                    Snackbar.make(binding.root, R.string.error, Snackbar.LENGTH_SHORT).show()
+                },
+                onSuccess = { findNavController().popBackStack() }
+            )
         }
 
         return binding.root
