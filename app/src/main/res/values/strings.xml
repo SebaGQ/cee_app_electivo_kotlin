@@ -135,6 +135,7 @@
     <string name="title_users">Usuarios</string>
 
     <string name="create_new_election">Nueva votación</string>
+    <string name="action_create_voting">Crear Votación</string>
     <string name="button_view_results">Ver resultados</string>
 
     <!-- Strings para el diálogo de votación -->
