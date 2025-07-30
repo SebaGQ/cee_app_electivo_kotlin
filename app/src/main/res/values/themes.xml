@@ -155,8 +155,8 @@
 
     <!-- Bottom Navigation Style -->
     <style name="Widget.CEEAPP.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
-        <item name="itemIconTint">@drawable/bottom_nav_colors</item>
-        <item name="itemTextColor">@drawable/bottom_nav_colors</item>
+        <item name="itemIconTint">@drawable/cs_bottom_nav</item>
+        <item name="itemTextColor">@drawable/cs_bottom_nav</item>
         <item name="itemRippleColor">@color/primary_light</item>
         <item name="labelVisibilityMode">labeled</item>
         <item name="itemHorizontalTranslationEnabled">false</item>
@@ -173,7 +173,7 @@
 
     <!-- Progress Bar Style -->
     <style name="Widget.CEEAPP.ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@drawable/custom_progress</item>
+        <item name="android:progressDrawable">@drawable/progress_custom</item>
         <item name="android:minHeight">8dp</item>
         <item name="android:maxHeight">8dp</item>
     </style>

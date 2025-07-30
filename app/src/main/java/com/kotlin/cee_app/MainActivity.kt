@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import com.kotlin.cee_app.ui.components.BottomBar
 import androidx.navigation.ui.navigateUp
 import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.databinding.ActivityMainBinding
@@ -43,8 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
         appBarConfiguration = AppBarConfiguration(topLevel)
         setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.appBarMain.bottomNav.setupWithNavController(navController)
-        binding.appBarMain.bottomNav.menu.findItem(R.id.nav_users).isVisible = SessionManager.isAdmin()
+        BottomBar.setup(binding.appBarMain.bottomNav, navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
