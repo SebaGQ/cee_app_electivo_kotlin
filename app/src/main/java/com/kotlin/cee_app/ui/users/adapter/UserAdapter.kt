@@ -36,7 +36,7 @@ class UserAdapter(
 
         holder.menu.setOnClickListener { v ->
             val popup = PopupMenu(v.context, v)
-            popup.inflate(R.menu.menu_votacion_item)
+            popup.inflate(R.menu.menu_user_item)
             popup.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_edit -> { onEdit(item); true }
