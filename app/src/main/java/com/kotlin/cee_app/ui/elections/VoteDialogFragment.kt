@@ -237,7 +237,7 @@ class VoteDialogFragment : DialogFragment() {
             setWindowAnimations(R.style.DialogAnimation)
 
             // Hacer fondo transparente para mostrar las esquinas redondeadas
-            setBackgroundDrawableResource(android.R.color.transparent)
+            setBackgroundDrawableResource(R.color.transparent)
         }
     }
 
