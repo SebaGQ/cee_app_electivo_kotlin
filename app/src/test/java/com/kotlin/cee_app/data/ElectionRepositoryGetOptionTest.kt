@@ -5,6 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.runBlocking
 import com.kotlin.cee_app.data.repository.ElectionRepository
 import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 import com.kotlin.cee_app.data.entity.OpcionEntity
 import com.kotlin.cee_app.data.entity.UsuarioEntity
 import com.kotlin.cee_app.data.entity.VotoEntity
@@ -33,7 +34,7 @@ class ElectionRepositoryGetOptionTest {
             descripcion = "d",
             fechaInicio = LocalDate.now(),
             fechaFin = LocalDate.now(),
-            estado = "Abierta",
+            estado = EstadoVotacion.ABIERTA,
             adminId = "a1",
             finalParticipantCount = null,
         )

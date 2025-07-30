@@ -8,6 +8,7 @@ import com.kotlin.cee_app.data.repository.ElectionRepository
 import com.kotlin.cee_app.data.entity.OpcionEntity
 import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -29,13 +30,13 @@ class CreateElectionViewModel(application: Application) : AndroidViewModel(appli
     val fechaFin: StateFlow<LocalDate> = _fechaFin
     val fechaFinLiveData = _fechaFin.asLiveData()
 
-    private val _estado = MutableStateFlow("Abierta")
-    val estado: StateFlow<String> = _estado
+    private val _estado = MutableStateFlow(EstadoVotacion.ABIERTA)
+    val estado: StateFlow<EstadoVotacion> = _estado
     val estadoLiveData = _estado.asLiveData()
 
     fun setFechaInicio(date: LocalDate) { _fechaInicio.value = date }
     fun setFechaFin(date: LocalDate) { _fechaFin.value = date }
-    fun setEstado(open: Boolean) { _estado.value = if (open) "Abierta" else "Cerrada" }
+    fun setEstado(open: Boolean) { _estado.value = if (open) EstadoVotacion.ABIERTA else EstadoVotacion.CERRADA }
 
     fun agregarOpcion(text: String) {
         _opciones.value = _opciones.value + text

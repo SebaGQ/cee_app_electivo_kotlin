@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.ui.results.viewmodel.VotacionConParticipacion
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 import java.time.format.DateTimeFormatter
 
 class VotacionParticipationAdapter : RecyclerView.Adapter<VotacionParticipationAdapter.ViewHolder>() {
@@ -49,8 +50,8 @@ class VotacionParticipationAdapter : RecyclerView.Adapter<VotacionParticipationA
             textPercentage.text = "%.1f%% participación".format(item.porcentajeParticipacion)
             progressBar.progress = item.porcentajeParticipacion.toInt()
 
-            textStatus.text = votacion.estado
-            val statusColor = if (votacion.estado == "Abierta") {
+            textStatus.text = votacion.estado.label
+            val statusColor = if (votacion.estado == EstadoVotacion.ABIERTA) {
                 itemView.context.getColor(R.color.success_color)
             } else {
                 itemView.context.getColor(R.color.error_color)

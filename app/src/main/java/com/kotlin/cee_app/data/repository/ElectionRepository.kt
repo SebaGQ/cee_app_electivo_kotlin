@@ -7,6 +7,7 @@ import com.kotlin.cee_app.data.dao.VotacionWithCount
 import com.kotlin.cee_app.data.entity.OpcionEntity
 import com.kotlin.cee_app.data.entity.VotacionEntity
 import com.kotlin.cee_app.data.entity.VotoEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 import com.kotlin.cee_app.data.model.ConteoOpcion
 
 /**
@@ -74,7 +75,7 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
         val count = contarVotos(votacion.id)
         actualizarVotacion(
             votacion.copy(
-                estado = "Finalizada",
+                estado = EstadoVotacion.FINALIZADA,
                 finalParticipantCount = count
             )
         )
@@ -89,8 +90,8 @@ class ElectionRepository private constructor(private val db: AppDatabase) {
     suspend fun obtenerVotacionesConConteo(): List<VotacionWithCount> =
         db.votacionDao().getVotacionesWithVoteCount()
 
-    suspend fun contarVotacionesPorEstado(estado: String): Int =
-        db.votacionDao().countByEstado(estado)
+    suspend fun contarVotacionesPorEstado(estado: EstadoVotacion): Int =
+        db.votacionDao().countByEstado(estado.label)
 
     companion object {
         @Volatile private var INSTANCE: ElectionRepository? = null

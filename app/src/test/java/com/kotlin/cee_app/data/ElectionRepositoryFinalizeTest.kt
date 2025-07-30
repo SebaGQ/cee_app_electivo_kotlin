@@ -5,6 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.runBlocking
 import com.kotlin.cee_app.data.repository.ElectionRepository
 import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 import com.kotlin.cee_app.data.entity.OpcionEntity
 import com.kotlin.cee_app.data.entity.VotoEntity
 import org.junit.Before
@@ -32,7 +33,7 @@ class ElectionRepositoryFinalizeTest {
             descripcion = "d",
             fechaInicio = LocalDate.now(),
             fechaFin = LocalDate.now(),
-            estado = "Abierta",
+            estado = EstadoVotacion.ABIERTA,
             adminId = "a1",
             finalParticipantCount = null
         )
@@ -51,7 +52,7 @@ class ElectionRepositoryFinalizeTest {
 
         repo.finalizarVotacion(votacion)
         val updated = db.votacionDao().findById("v1")
-        assertEquals("Finalizada", updated?.estado)
+        assertEquals(EstadoVotacion.FINALIZADA, updated?.estado)
         assertEquals(1, updated?.finalParticipantCount)
     }
 }
