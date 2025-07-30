@@ -205,7 +205,7 @@
         android:visibility="gone" />
 
     <!-- FAB secundario para crear votación -->
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCreate"
         style="@style/Widget.CEEAPP.FloatingActionButton"
         android:layout_width="wrap_content"
@@ -213,8 +213,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="88dp"
-        android:text="@string/action_create_voting"
-        app:icon="@drawable/ic_ballot"
+        android:src="@drawable/ic_ballot"
         app:fabSize="mini"
         android:visibility="gone"
         android:alpha="0.9" />
