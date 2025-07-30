@@ -11,4 +11,11 @@ class ElectionWorkSchedulerTest {
         val minutes = ElectionWorkScheduler.nextDelayMinutes(now)
         assertEquals(1L, minutes)
     }
+
+    @Test
+    fun nextDayDelayMinutes_returns_minutes_until_midnight_plus_one() {
+        val now = LocalDateTime.of(2024, 1, 1, 23, 59)
+        val minutes = ElectionWorkScheduler.nextDayDelayMinutes(now)
+        assertEquals(2L, minutes)
+    }
 }
