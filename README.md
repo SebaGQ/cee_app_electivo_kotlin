@@ -1,13 +1,13 @@
 # CEE Voting App
 
-Esta aplicación de ejemplo, escrita en **Kotlin**, implementa un sistema de votaciones con autenticación básica y gestión local mediante **Room**. El proyecto utiliza el _Navigation Drawer_ de Android Studio y compila con las siguientes versiones:
+Esta aplicación de ejemplo, escrita en **Kotlin**, implementa un sistema de votaciones con autenticación básica y gestión local mediante **Room**. El proyecto utiliza el menu inferior (Bottom Navigation) y compila con las siguientes versiones:
 
 - **Gradle** 8.11.1
 - **Android Gradle Plugin** 8.9.1
-- **Kotlin** 2.0.21
+- **Kotlin** 1.9.22
 - **compileSdk / targetSdk**: 35
 - **minSdk**: 24
-- **JVM target**: 11
+- **JVM target**: 17
 
 Las versiones de dependencias se especifican en `gradle/libs.versions.toml` y el wrapper se encuentra en `gradle/wrapper/gradle-wrapper.properties`.
 
@@ -21,30 +21,36 @@ app/
     │   ├─ ui/auth/
     │   │   ├─ LoginFragment.kt
     │   │   └─ SignUpFragment.kt
-     │   ├─ MainActivity.kt
-     │   ├─ data/
-     │   │   ├─ AppDatabase.kt
-     │   │   ├─ ElectionRepository.kt
-     │   │   ├─ UserRepository.kt
-     │   │   ├─ SessionManager.kt
-     │   │   ├─ entities
-     │   │   │   ├─ UsuarioEntity.kt
-     │   │   │   ├─ AdminEntity.kt
-     │   │   │   ├─ VotacionEntity.kt
-     │   │   │   ├─ OpcionEntity.kt
-     │   │   │   ├─ VotoEntity.kt
-     │   │   │   └─ SimpleEntity.kt
-     │   │   └─ daos
-     │   │       ├─ UsuarioDao.kt
-     │   │       ├─ AdminDao.kt
-     │   │       ├─ VotacionDao.kt
-     │   │       ├─ OpcionDao.kt
-     │   │       ├─ VotoDao.kt
-     │   │       └─ SimpleDao.kt
-     │   └─ ui/
-     │       ├─ elections/...
-     │       ├─ results/...
-     │       └─ users/...
+    │   ├─ MainActivity.kt
+    │   ├─ data/
+    │   │   ├─ AppDatabase.kt
+    │   │   ├─ ElectionRepository.kt
+    │   │   ├─ UserRepository.kt
+    │   │   ├─ SessionManager.kt
+    │   │   ├─ Converters.kt
+    │   │   ├─ model/
+    │   │   │   ├─ DashboardItem.kt
+    │   │   │   ├─ ConteoOpcion.kt
+    │   │   │   └─ OpcionPercent.kt
+    │   │   ├─ entities
+    │   │   │   ├─ UsuarioEntity.kt
+    │   │   │   ├─ AdminEntity.kt
+    │   │   │   ├─ VotacionEntity.kt
+    │   │   │   ├─ OpcionEntity.kt
+    │   │   │   ├─ VotoEntity.kt
+    │   │   │   └─ SimpleEntity.kt
+    │   │   └─ daos
+        │   │       ├─ UsuarioDao.kt
+        │   │       ├─ AdminDao.kt
+        │   │       ├─ VotacionDao.kt
+        │   │       ├─ OpcionDao.kt
+        │   │       ├─ VotoDao.kt
+        │   │       └─ SimpleDao.kt
+    │   └─ ui/
+    │       ├─ elections/...
+    │       ├─ results/...
+    │       ├─ users/...
+    │       └─ components/
      └─ res/
          ├─ layout/ (xml de pantallas y listas)
          └─ values/dimens.xml
@@ -87,6 +93,11 @@ La sección de resultados ahora cuenta con un **dashboard** que resume las princ
 - **DAOs:** `VotacionDao.kt`, `OpcionDao.kt`, `VotoDao.kt`.
 - **Layouts:** `fragment_results_enhanced.xml`, `item_dashboard_extended.xml`, `item_dashboard_percentage.xml`, `item_votacion_participation.xml`, `item_result_option.xml`.
 - **Dimensiones:** `res/values/dimens.xml`.
+
+### Componentes de interfaz
+
+- **Clases:** `TopBar.kt`, `BottomBar.kt`.
+- **Layouts:** `include_top_bar.xml`, `menu_bottom.xml`.
 
 ## Compilación
 
