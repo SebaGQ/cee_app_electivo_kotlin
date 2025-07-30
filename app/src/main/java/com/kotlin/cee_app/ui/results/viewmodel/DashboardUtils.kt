@@ -2,6 +2,7 @@ package com.kotlin.cee_app.ui.results.viewmodel
 
 import com.kotlin.cee_app.data.model.DashboardItem
 import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 import com.kotlin.cee_app.data.entity.VotoEntity
 import java.time.LocalDate
 
@@ -33,14 +34,14 @@ fun computeExtendedDashboard(
     val hoy = LocalDate.now()
 
     val abiertas = votaciones.count {
-        it.estado == "Abierta" &&
+        it.estado == EstadoVotacion.ABIERTA &&
                 hoy.isAfter(it.fechaInicio.minusDays(1)) &&
                 hoy.isBefore(it.fechaFin.plusDays(1))
     }
 
     val cerradas = votaciones.count {
-        it.estado.equals("Cerrada", true) ||
-            it.estado.equals("Finalizada", true) ||
+        it.estado == EstadoVotacion.CERRADA ||
+            it.estado == EstadoVotacion.FINALIZADA ||
             hoy.isAfter(it.fechaFin)
     }
 

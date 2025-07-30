@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -52,7 +53,7 @@ data class VotacionWithCount(
     val descripcion: String,
     val fechaInicio: Long,
     val fechaFin: Long,
-    val estado: String,
+    val estado: EstadoVotacion,
     val adminId: String,
     val voteCount: Int
 )

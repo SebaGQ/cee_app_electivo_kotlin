@@ -1,6 +1,7 @@
 package com.kotlin.cee_app.ui
 
 import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 import com.kotlin.cee_app.ui.elections.viewmodel.splitActiveUpcomingPast
 import org.junit.Test
 import java.time.LocalDate
@@ -11,9 +12,9 @@ class ElectionFilterUtilsTest {
     fun split_returns_active_upcoming_and_past() {
         val today = LocalDate.of(2024, 1, 15)
         val list = listOf(
-            VotacionEntity("v1", "t1", "d", LocalDate.of(2024, 1, 10), LocalDate.of(2024, 1, 20), "Abierta", "a", null),
-            VotacionEntity("v2", "t2", "d", LocalDate.of(2024, 2, 10), LocalDate.of(2024, 2, 20), "Abierta", "a", null),
-            VotacionEntity("v3", "t3", "d", LocalDate.of(2023, 1, 10), LocalDate.of(2023, 1, 20), "Cerrada", "a", null)
+            VotacionEntity("v1", "t1", "d", LocalDate.of(2024, 1, 10), LocalDate.of(2024, 1, 20), EstadoVotacion.ABIERTA, "a", null),
+            VotacionEntity("v2", "t2", "d", LocalDate.of(2024, 2, 10), LocalDate.of(2024, 2, 20), EstadoVotacion.ABIERTA, "a", null),
+            VotacionEntity("v3", "t3", "d", LocalDate.of(2023, 1, 10), LocalDate.of(2023, 1, 20), EstadoVotacion.CERRADA, "a", null)
         )
 
         val (active, upcoming, past) = splitActiveUpcomingPast(list, today)

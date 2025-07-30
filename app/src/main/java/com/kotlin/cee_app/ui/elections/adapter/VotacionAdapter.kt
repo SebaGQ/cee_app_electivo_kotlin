@@ -16,6 +16,7 @@ import com.kotlin.cee_app.data.model.ConteoOpcion
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 import com.kotlin.cee_app.data.SessionManager
 
 class VotacionAdapter(
@@ -37,7 +38,7 @@ class VotacionAdapter(
 
     private fun isActive(v: VotacionEntity): Boolean {
         val today = LocalDate.now()
-        return v.estado.equals("Abierta", ignoreCase = true) &&
+        return v.estado == EstadoVotacion.ABIERTA &&
             !today.isBefore(v.fechaInicio) &&
             !today.isAfter(v.fechaFin)
     }
@@ -73,8 +74,8 @@ class VotacionAdapter(
     override fun onBindViewHolder(holder: Vh, position: Int) {
         val item = data[position]
         holder.title.text = item.titulo
-        holder.estado.text = item.estado
-        val isOpen = item.estado.equals("Abierta", ignoreCase = true)
+        holder.estado.text = item.estado.label
+        val isOpen = item.estado == EstadoVotacion.ABIERTA
         val textColorRes = if (isOpen) R.color.success_color else R.color.error_color
         val backgroundRes = if (isOpen) R.color.success_background else R.color.error_background
         holder.estado.setTextColor(holder.itemView.context.getColor(textColorRes))
@@ -87,7 +88,7 @@ class VotacionAdapter(
         val count = progress[item.id] ?: 0
         val percent = if (totalUsers == 0) 0 else count * 100 / totalUsers
         holder.progressText.text = "$percent%"
-        if (item.estado == "Abierta") {
+        if (item.estado == EstadoVotacion.ABIERTA) {
             holder.progress.visibility = View.VISIBLE
             holder.progress.max = totalUsers
             holder.progress.progress = count
@@ -160,7 +161,7 @@ class VotacionAdapter(
             val popup = PopupMenu(v.context, v)
             popup.inflate(R.menu.menu_votacion_item)
             popup.menu.findItem(R.id.action_finalize).isVisible =
-                SessionManager.isAdmin() && item.estado == "Abierta"
+                SessionManager.isAdmin() && item.estado == EstadoVotacion.ABIERTA
             popup.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_edit -> { onEdit(item); true }

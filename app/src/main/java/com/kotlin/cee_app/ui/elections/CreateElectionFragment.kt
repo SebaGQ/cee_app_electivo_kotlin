@@ -22,6 +22,7 @@ import androidx.activity.addCallback
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.databinding.FragmentCreateElectionBinding
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 
 class CreateElectionFragment : Fragment() {
 
@@ -71,7 +72,7 @@ class CreateElectionFragment : Fragment() {
             binding.editEndDate.setText(it.format(formatter))
         }
         viewModel.estadoLiveData.observe(viewLifecycleOwner) {
-            binding.switchEstado.isChecked = it == "Abierta"
+            binding.switchEstado.isChecked = it == EstadoVotacion.ABIERTA
         }
         viewModel.opcionesLiveData.observe(viewLifecycleOwner) { list ->
             binding.chipGroup.removeAllViews()

@@ -7,6 +7,7 @@ import com.kotlin.cee_app.data.dao.VotoDao
 import com.kotlin.cee_app.data.dao.VotacionDao
 import com.kotlin.cee_app.data.dao.OpcionDao
 import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 import com.kotlin.cee_app.data.entity.OpcionEntity
 import com.kotlin.cee_app.data.entity.VotoEntity
 import org.junit.After
@@ -45,7 +46,7 @@ class VotoDaoUniqueTest {
             descripcion = "desc",
             fechaInicio = LocalDate.now(),
             fechaFin = LocalDate.now(),
-            estado = "Abierta",
+            estado = EstadoVotacion.ABIERTA,
             adminId = "a1",
             finalParticipantCount = null
         )

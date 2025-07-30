@@ -3,6 +3,7 @@ package com.kotlin.cee_app.data.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDate
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 
 @Entity(tableName = "votaciones")
 data class VotacionEntity(
@@ -12,7 +13,7 @@ data class VotacionEntity(
     val descripcion: String,
     val fechaInicio: LocalDate,
     val fechaFin: LocalDate,
-    val estado: String,
+    val estado: EstadoVotacion,
     val adminId: String,
     val finalParticipantCount: Int? = null,
 )
