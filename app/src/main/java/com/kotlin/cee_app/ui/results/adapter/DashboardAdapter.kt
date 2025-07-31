@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
-import com.kotlin.cee_app.data.DashboardItem
+import com.kotlin.cee_app.data.model.DashboardItem
 
 class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.Vh>() {
 

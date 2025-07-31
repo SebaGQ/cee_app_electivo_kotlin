@@ -1,0 +1,86 @@
+package com.kotlin.cee_app.ui.users
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import android.widget.ArrayAdapter
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
+import android.util.Patterns
+import com.kotlin.cee_app.R
+import com.kotlin.cee_app.databinding.FragmentCreateUserBinding
+import com.kotlin.cee_app.ui.users.viewmodel.CreateUserViewModel
+
+class CreateUserFragment : Fragment() {
+
+    private var _binding: FragmentCreateUserBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: CreateUserViewModel by viewModels()
+    private val args: CreateUserFragmentArgs by navArgs()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentCreateUserBinding.inflate(inflater, container, false)
+
+        val rolesDisplay = listOf(
+            getString(R.string.role_user),
+            getString(R.string.role_admin)
+        )
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, rolesDisplay)
+        (binding.editRol as MaterialAutoCompleteTextView).setAdapter(adapter)
+
+        binding.editRol.setOnItemClickListener { parent, _, position, _ ->
+            val value = if (position == 0) "SIMPLE" else "ADMIN"
+            viewModel.setRol(value)
+        }
+
+        args.userId?.let { viewModel.cargar(it) }
+
+        viewModel.nombre.observe(viewLifecycleOwner) { binding.editNombre.setText(it) }
+        viewModel.correo.observe(viewLifecycleOwner) { binding.editCorreo.setText(it) }
+        viewModel.password.observe(viewLifecycleOwner) { binding.editPassword.setText(it) }
+        viewModel.rol.observe(viewLifecycleOwner) { role ->
+            val display = if (role == "ADMIN") getString(R.string.role_admin) else getString(R.string.role_user)
+            (binding.editRol as MaterialAutoCompleteTextView).setText(display, false)
+        }
+
+        binding.fabSaveUser.setOnClickListener {
+            val nombre = binding.editNombre.text.toString()
+            val correo = binding.editCorreo.text.toString()
+            val password = binding.editPassword.text.toString()
+            if (nombre.isBlank() || correo.isBlank() || password.isBlank()) {
+                Snackbar.make(binding.root, R.string.fill_all_fields, Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
+                binding.editCorreo.error = getString(R.string.invalid_email)
+                return@setOnClickListener
+            }
+            viewModel.guardar(
+                nombre,
+                correo,
+                password,
+                viewModel.rol.value ?: "SIMPLE",
+                onError = {
+                    Snackbar.make(binding.root, R.string.error, Snackbar.LENGTH_SHORT).show()
+                },
+                onSuccess = { findNavController().popBackStack() }
+            )
+        }
+
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

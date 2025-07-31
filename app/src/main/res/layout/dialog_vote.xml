@@ -1,92 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/dialog_width"
-    android:layout_height="@dimen/dialog_height">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/spacing_md"
+    app:cardCornerRadius="@dimen/dialog_corner_radius"
+    app:cardElevation="@dimen/elevation_dialog"
+    app:cardBackgroundColor="@color/surface_color">
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:id="@+id/layoutVote"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/textPregunta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_body"
-            android:textStyle="bold" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonVote"
-            style="?attr/materialButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/button_vote"
-            android:textSize="@dimen/text_size_button"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutConfirmation"
-        android:orientation="vertical"
-        android:gravity="center"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:fillViewport="true"
+        android:scrollbars="none">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageCheck"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            app:srcCompat="@drawable/ic_baseline_check_circle_24"
-            app:strokeColor="@color/primary_blue"
-            android:tint="@color/primary_blue" />
-
-        <TextView
-            android:id="@+id/textConfirmation"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vote_saved"
-            android:textSize="@dimen/text_size_heading"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
+            android:orientation="vertical"
+            android:padding="@dimen/padding_dialog">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonOk"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_ok"
-            android:textSize="@dimen/text_size_button"
-            android:layout_marginTop="16dp"
-            app:strokeColor="@color/primary_blue" />
-    </LinearLayout>
+            <!-- Layout de Votación -->
+            <LinearLayout
+                android:id="@+id/layoutVote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Título de la votación -->
+                <TextView
+                    android:id="@+id/textPregunta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:lineSpacingMultiplier="1.2" />
+
+                <!-- Instrucción de selección -->
+                <TextView
+                    android:id="@+id/textInstruccion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vote_instruction"
+                    android:textAppearance="@style/TextAppearance.CEEAPP.Body2"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="@dimen/spacing_lg" />
+
+                <!-- Contenedor de opciones con RadioGroup -->
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_lg"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="@dimen/spacing_xs" />
+
+                <!-- Botones de acción -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buttonCancel"
+                        style="@style/Widget.CEEAPP.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/button_cancel"
+                        android:layout_marginEnd="@dimen/spacing_sm" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buttonVote"
+                        style="@style/Widget.CEEAPP.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/button_vote"
+                        android:enabled="false" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </ScrollView>
-    </HorizontalScrollView>
-</FrameLayout>
+            <!-- Layout de Confirmación -->
+            <LinearLayout
+                android:id="@+id/layoutConfirmation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone"
+                android:padding="@dimen/spacing_xl">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageCheck"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_check_circle_24"
+                    android:tint="@color/primary_blue"
+                    android:layout_marginBottom="@dimen/spacing_md" />
+
+                <TextView
+                    android:id="@+id/textConfirmation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vote_saved"
+                    android:textAppearance="@style/TextAppearance.CEEAPP.Headline2"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="@dimen/spacing_lg" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonOk"
+                    style="@style/Widget.CEEAPP.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_ok" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</com.google.android.material.card.MaterialCardView>

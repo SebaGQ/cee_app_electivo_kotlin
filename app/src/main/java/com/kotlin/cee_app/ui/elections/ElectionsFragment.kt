@@ -31,6 +31,15 @@ class ElectionsFragment : Fragment() {
     ): View {
         _binding = FragmentElectionsBinding.inflate(inflater, container, false)
 
+        childFragmentManager.setFragmentResultListener(
+            VoteDialogFragment.RESULT_KEY,
+            viewLifecycleOwner
+        ) { _, _ ->
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.refresh()
+            }
+        }
+
         val activeAdapter = VotacionAdapter(
             onClick = { votacion ->
                 VoteDialogFragment.newInstance(votacion.id)
@@ -48,7 +57,8 @@ class ElectionsFragment : Fragment() {
                     .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
                     .setNegativeButton(android.R.string.cancel, null)
                     .show()
-            }
+            },
+            onFinalize = { votacion -> viewModel.finalizar(votacion) }
         )
 
         val upcomingAdapter = VotacionAdapter(
@@ -68,7 +78,8 @@ class ElectionsFragment : Fragment() {
                     .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
                     .setNegativeButton(android.R.string.cancel, null)
                     .show()
-            }
+            },
+            onFinalize = { votacion -> viewModel.finalizar(votacion) }
         )
 
         val pastAdapter = VotacionAdapter(
@@ -90,7 +101,8 @@ class ElectionsFragment : Fragment() {
                     .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.eliminar(votacion) }
                     .setNegativeButton(android.R.string.cancel, null)
                     .show()
-            }
+            },
+            onFinalize = { votacion -> viewModel.finalizar(votacion) }
         )
 
         binding.recyclerActive.adapter = activeAdapter
@@ -105,7 +117,10 @@ class ElectionsFragment : Fragment() {
                     list,
                     viewModel.progress.value,
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.optionsCount.value,
+                    viewModel.totalUsers.value,
+                    votedMap = viewModel.voted.value,
+                    votedOptionMap = viewModel.votedOption.value
                 )
             }
         }
@@ -117,7 +132,10 @@ class ElectionsFragment : Fragment() {
                     list,
                     emptyMap(),
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.optionsCount.value,
+                    viewModel.totalUsers.value,
+                    votedMap = emptyMap(),
+                    votedOptionMap = emptyMap()
                 )
             }
         }
@@ -129,7 +147,10 @@ class ElectionsFragment : Fragment() {
                     list,
                     emptyMap(),
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.optionsCount.value,
+                    viewModel.totalUsers.value,
+                    votedMap = emptyMap(),
+                    votedOptionMap = emptyMap()
                 )
             }
         }
@@ -140,13 +161,19 @@ class ElectionsFragment : Fragment() {
                     viewModel.active.value,
                     map,
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.optionsCount.value,
+                    viewModel.totalUsers.value,
+                    votedMap = viewModel.voted.value,
+                    votedOptionMap = viewModel.votedOption.value
                 )
                 pastAdapter.submit(
                     viewModel.past.value,
                     map,
                     viewModel.optionsPercent.value,
-                    viewModel.totalUsers.value
+                    viewModel.optionsCount.value,
+                    viewModel.totalUsers.value,
+                    votedMap = viewModel.voted.value,
+                    votedOptionMap = viewModel.votedOption.value
                 )
             }
         }
@@ -158,19 +185,51 @@ class ElectionsFragment : Fragment() {
                     viewModel.active.value,
                     viewModel.progress.value,
                     opts,
-                    viewModel.totalUsers.value
+                    viewModel.optionsCount.value,
+                    viewModel.totalUsers.value,
+                    votedMap = viewModel.voted.value,
+                    votedOptionMap = viewModel.votedOption.value
                 )
                 upcomingAdapter.submit(
                     viewModel.upcoming.value,
                     emptyMap(),
                     opts,
-                    viewModel.totalUsers.value
+                    viewModel.optionsCount.value,
+                    viewModel.totalUsers.value,
+                    votedMap = emptyMap(),
+                    votedOptionMap = emptyMap()
                 )
                 pastAdapter.submit(
                     viewModel.past.value,
                     viewModel.progress.value,
                     opts,
-                    viewModel.totalUsers.value
+                    viewModel.optionsCount.value,
+                    viewModel.totalUsers.value,
+                    votedMap = viewModel.voted.value,
+                    votedOptionMap = viewModel.votedOption.value
+                )
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.voted.collectLatest { votedMap ->
+                activeAdapter.submit(
+                    viewModel.active.value,
+                    viewModel.progress.value,
+                    viewModel.optionsPercent.value,
+                    viewModel.optionsCount.value,
+                    viewModel.totalUsers.value,
+                    votedMap = votedMap,
+                    votedOptionMap = viewModel.votedOption.value
+                )
+                pastAdapter.submit(
+                    viewModel.past.value,
+                    viewModel.progress.value,
+                    viewModel.optionsPercent.value,
+                    viewModel.optionsCount.value,
+                    viewModel.totalUsers.value,
+                    votedMap = votedMap,
+                    votedOptionMap = viewModel.votedOption.value
                 )
             }
         }
@@ -183,17 +242,11 @@ class ElectionsFragment : Fragment() {
         }
 
         if (SessionManager.isAdmin()) {
-            binding.fabMain.visibility = View.VISIBLE
-            binding.fabMain.setOnClickListener {
-                binding.fabCreate.visibility =
-                    if (binding.fabCreate.visibility == View.VISIBLE) View.GONE else View.VISIBLE
-            }
+            binding.fabCreate.visibility = View.VISIBLE
             binding.fabCreate.setOnClickListener {
-                binding.fabCreate.visibility = View.GONE
                 findNavController().navigate(R.id.action_elections_to_createElection)
             }
         } else {
-            binding.fabMain.visibility = View.GONE
             binding.fabCreate.visibility = View.GONE
         }
 

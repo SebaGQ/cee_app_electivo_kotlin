@@ -3,11 +3,18 @@ package com.kotlin.cee_app.data
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.runBlocking
+import com.kotlin.cee_app.data.dao.VotoDao
+import com.kotlin.cee_app.data.dao.VotacionDao
+import com.kotlin.cee_app.data.dao.OpcionDao
+import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
+import com.kotlin.cee_app.data.entity.OpcionEntity
+import com.kotlin.cee_app.data.entity.VotoEntity
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
-import kotlin.test.assertEquals
+import org.junit.Assert.*
 
 class VotoDaoUniqueTest {
     private lateinit var db: AppDatabase
@@ -39,15 +46,30 @@ class VotoDaoUniqueTest {
             descripcion = "desc",
             fechaInicio = LocalDate.now(),
             fechaFin = LocalDate.now(),
-            estado = "Abierta",
-            adminId = "a1"
+            estado = EstadoVotacion.ABIERTA,
+            adminId = "a1",
+            finalParticipantCount = null
         )
         votacionDao.insert(votacion)
         val opcion = opcionDao.insert(OpcionEntity(descripcion = "A", votacionId = "v1"))
 
-        votoDao.insert(VotoEntity(LocalDate.now(), opcion, "u1", "v1"))
+        votoDao.insert(
+            VotoEntity(
+                fechaVoto = LocalDate.now(),
+                opcionId = opcion,
+                usuarioId = "u1",
+                votacionId = "v1"
+            )
+        )
         try {
-            votoDao.insert(VotoEntity(LocalDate.now(), opcion, "u1", "v1"))
+            votoDao.insert(
+                VotoEntity(
+                    fechaVoto = LocalDate.now(),
+                    opcionId = opcion,
+                    usuarioId = "u1",
+                    votacionId = "v1"
+                )
+            )
         } catch (_: Exception) {
         }
         val count = votoDao.countByVotacion("v1")

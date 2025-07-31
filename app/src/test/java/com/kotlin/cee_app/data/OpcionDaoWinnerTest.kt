@@ -3,11 +3,17 @@ package com.kotlin.cee_app.data
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.runBlocking
+import com.kotlin.cee_app.data.dao.OpcionDao
+import com.kotlin.cee_app.data.dao.VotacionDao
+import com.kotlin.cee_app.data.dao.VotoDao
+import com.kotlin.cee_app.data.entity.OpcionEntity
+import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.VotoEntity
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
-import kotlin.test.assertEquals
+import org.junit.Assert.*
 
 class OpcionDaoWinnerTest {
     private lateinit var db: AppDatabase
@@ -40,14 +46,36 @@ class OpcionDaoWinnerTest {
             fechaInicio = LocalDate.now(),
             fechaFin = LocalDate.now(),
             estado = "CERRADA",
-            adminId = "a1"
+            adminId = "a1",
+            finalParticipantCount = null
         )
         votacionDao.insert(votacion)
         val idA = opcionDao.insert(OpcionEntity(descripcion = "A", votacionId = "v1"))
         val idB = opcionDao.insert(OpcionEntity(descripcion = "B", votacionId = "v1"))
-        votoDao.insert(VotoEntity(LocalDate.now(), idA, "u1"))
-        votoDao.insert(VotoEntity(LocalDate.now(), idA, "u2"))
-        votoDao.insert(VotoEntity(LocalDate.now(), idB, "u3"))
+        votoDao.insert(
+            VotoEntity(
+                fechaVoto = LocalDate.now(),
+                opcionId = idA,
+                usuarioId = "u1",
+                votacionId = "v1"
+            )
+        )
+        votoDao.insert(
+            VotoEntity(
+                fechaVoto = LocalDate.now(),
+                opcionId = idA,
+                usuarioId = "u2",
+                votacionId = "v1"
+            )
+        )
+        votoDao.insert(
+            VotoEntity(
+                fechaVoto = LocalDate.now(),
+                opcionId = idB,
+                usuarioId = "u3",
+                votacionId = "v1"
+            )
+        )
 
         val winner = opcionDao.getWinnerForVotacion("v1")
         assertEquals("A", winner?.descripcion)

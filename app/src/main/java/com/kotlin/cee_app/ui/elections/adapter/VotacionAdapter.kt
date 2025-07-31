@@ -6,40 +6,70 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.google.android.material.chip.Chip
 import android.widget.PopupMenu
 import android.widget.LinearLayout
-import com.kotlin.cee_app.data.OpcionPercent
+import android.content.res.ColorStateList
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import com.kotlin.cee_app.data.model.OpcionPercent
+import com.kotlin.cee_app.data.model.ConteoOpcion
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.cee_app.R
-import com.kotlin.cee_app.data.VotacionEntity
+import com.kotlin.cee_app.data.entity.VotacionEntity
+import com.kotlin.cee_app.data.entity.EstadoVotacion
+import com.kotlin.cee_app.data.SessionManager
+import com.kotlin.cee_app.ui.elections.viewmodel.shouldShowParticipation
 
 class VotacionAdapter(
     private val onClick: (VotacionEntity) -> Unit,
     private val onEdit: (VotacionEntity) -> Unit,
     private val onDelete: (VotacionEntity) -> Unit,
+    private val onFinalize: (VotacionEntity) -> Unit,
 ) : RecyclerView.Adapter<VotacionAdapter.Vh>() {
 
     private var data: List<VotacionEntity> = emptyList()
     private var progress: Map<String, Int> = emptyMap()
     private var options: Map<String, List<OpcionPercent>> = emptyMap()
+    private var counts: Map<String, List<ConteoOpcion>> = emptyMap()
     private var totalUsers: Int = 1
     private var winners: Map<String, String> = emptyMap()
+    private var voted: Map<String, Boolean> = emptyMap()
+    private var votedOptions: Map<String, String?> = emptyMap()
     private val expanded: MutableSet<String> = mutableSetOf()
+    private val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+
+    private fun isActive(v: VotacionEntity): Boolean {
+        val today = LocalDate.now()
+        return v.estado == EstadoVotacion.ABIERTA &&
+            !today.isBefore(v.fechaInicio) &&
+            !today.isAfter(v.fechaFin)
+    }
+
+    private fun isUpcoming(v: VotacionEntity): Boolean {
+        val today = LocalDate.now()
+        return today.isBefore(v.fechaInicio) && v.estado != EstadoVotacion.FINALIZADA
+    }
 
     fun submit(
         list: List<VotacionEntity>,
         progressMap: Map<String, Int>,
         optionsMap: Map<String, List<OpcionPercent>>,
+        countsMap: Map<String, List<ConteoOpcion>>,
         total: Int,
-        winnersMap: Map<String, String> = emptyMap()
+        winnersMap: Map<String, String> = emptyMap(),
+        votedMap: Map<String, Boolean> = emptyMap(),
+        votedOptionMap: Map<String, String?> = emptyMap()
     ) {
         data = list
         progress = progressMap
         options = optionsMap
-        totalUsers = if (total == 0) 1 else total
+        counts = countsMap
+        totalUsers = total
         winners = winnersMap
+        voted = votedMap
+        votedOptions = votedOptionMap
         expanded.clear()
-        expanded.addAll(list.map { it.id })
         notifyDataSetChanged()
     }
 
@@ -52,19 +82,57 @@ class VotacionAdapter(
     override fun onBindViewHolder(holder: Vh, position: Int) {
         val item = data[position]
         holder.title.text = item.titulo
-        holder.estado.text = item.estado
-        holder.estado.setTextColor(
-            if (item.estado == "Abierta") holder.itemView.context.getColor(R.color.primary_blue)
-            else holder.itemView.context.getColor(R.color.black)
+        holder.estado.text = item.estado.label
+        val isOpen = item.estado == EstadoVotacion.ABIERTA
+        val textColorRes = if (isOpen) R.color.success_color else R.color.error_color
+        val backgroundRes = if (isOpen) R.color.success_background else R.color.error_background
+        holder.estado.setTextColor(holder.itemView.context.getColor(textColorRes))
+        holder.estado.chipBackgroundColor = ColorStateList.valueOf(
+            holder.itemView.context.getColor(backgroundRes)
         )
+        holder.estado.chipStrokeColor = ColorStateList.valueOf(
+            holder.itemView.context.getColor(textColorRes)
+        )
+
+        when {
+            isActive(item) -> {
+                holder.dates.visibility = View.VISIBLE
+                holder.dates.text = holder.itemView.context.getString(
+                    R.string.closing_on,
+                    item.fechaFin.format(formatter)
+                )
+            }
+            isUpcoming(item) -> {
+                holder.dates.visibility = View.VISIBLE
+                holder.dates.text = holder.itemView.context.getString(
+                    R.string.starts_and_ends,
+                    item.fechaInicio.format(formatter),
+                    item.fechaFin.format(formatter)
+                )
+            }
+            else -> holder.dates.visibility = View.GONE
+        }
+
         val count = progress[item.id] ?: 0
-        if (item.estado == "Abierta") {
-            holder.progress.visibility = View.VISIBLE
-            holder.progress.max = totalUsers
-            holder.progress.progress = count
+        val percent = if (totalUsers == 0) 0 else count * 100 / totalUsers
+
+        if (item.estado == EstadoVotacion.ABIERTA) {
+            if (shouldShowParticipation(item)) {
+                holder.progressContainer.visibility = View.VISIBLE
+                holder.progress.visibility = View.VISIBLE
+                holder.progressText.visibility = View.VISIBLE
+                holder.progressText.text = "$percent%"
+                holder.progress.max = totalUsers
+                holder.progress.progress = count
+            } else {
+                holder.progressContainer.visibility = View.GONE
+            }
             holder.winner.visibility = View.GONE
         } else {
+            holder.progressContainer.visibility = View.VISIBLE
             holder.progress.visibility = View.GONE
+            holder.progressText.visibility = View.VISIBLE
+            holder.progressText.text = "$percent%"
             val w = winners[item.id]
             if (w != null) {
                 holder.winner.visibility = View.VISIBLE
@@ -78,11 +146,29 @@ class VotacionAdapter(
 
         holder.optionsContainer.removeAllViews()
         val opts = options[item.id] ?: emptyList()
-        opts.forEach { op ->
+        val countsList = counts[item.id] ?: emptyList()
+        val already = voted[item.id] == true
+        val votedDesc = votedOptions[item.id]
+        opts.forEachIndexed { index, op ->
             val view = LayoutInflater.from(holder.itemView.context)
                 .inflate(R.layout.item_result_option, holder.optionsContainer, false)
             view.findViewById<TextView>(R.id.textOption).text = op.descripcion
             view.findViewById<TextView>(R.id.textPercent).text = "${op.porcentaje}%"
+            val votesView = view.findViewById<TextView>(R.id.textVotes)
+            val icon = view.findViewById<ImageView>(R.id.iconChecked)
+            if (already) {
+                val count = countsList.getOrNull(index)?.total ?: 0
+                votesView.visibility = View.VISIBLE
+                votesView.text = holder.itemView.context.getString(R.string.votes_count, count)
+                if (votedDesc != null && votedDesc == op.descripcion) {
+                    icon.visibility = View.VISIBLE
+                } else {
+                    icon.visibility = View.GONE
+                }
+            } else {
+                votesView.visibility = View.GONE
+                icon.visibility = View.GONE
+            }
             holder.optionsContainer.addView(view)
         }
 
@@ -92,7 +178,15 @@ class VotacionAdapter(
             notifyItemChanged(position)
         }
 
-        holder.buttonVote.visibility = if (item.estado == "Abierta") View.VISIBLE else View.GONE
+        holder.buttonVote.visibility = if (isActive(item)) View.VISIBLE else View.GONE
+        holder.buttonVote.isEnabled = !already
+        if (already) {
+            holder.buttonVote.backgroundTintList =
+                ColorStateList.valueOf(holder.itemView.context.getColor(R.color.disabled_gray))
+        } else {
+            holder.buttonVote.backgroundTintList =
+                ColorStateList.valueOf(holder.itemView.context.getColor(R.color.primary_dark))
+        }
         holder.buttonVote.setOnClickListener { onClick(item) }
 
         holder.expandable.visibility = if (isExpanded) View.VISIBLE else View.GONE
@@ -105,10 +199,13 @@ class VotacionAdapter(
         holder.menu.setOnClickListener { v ->
             val popup = PopupMenu(v.context, v)
             popup.inflate(R.menu.menu_votacion_item)
+            popup.menu.findItem(R.id.action_finalize).isVisible =
+                SessionManager.isAdmin() && item.estado == EstadoVotacion.ABIERTA
             popup.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_edit -> { onEdit(item); true }
                     R.id.action_delete -> { onDelete(item); true }
+                    R.id.action_finalize -> { onFinalize(item); true }
                     else -> false
                 }
             }
@@ -120,14 +217,17 @@ class VotacionAdapter(
 
     class Vh(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.textTitle)
-        val estado: TextView = itemView.findViewById(R.id.textEstado)
+        val estado: Chip = itemView.findViewById(R.id.textEstado)
+        val progressContainer: LinearLayout = itemView.findViewById(R.id.progressContainer)
         val progress: ProgressBar = itemView.findViewById(R.id.progressVotos)
+        val progressText: TextView = itemView.findViewById(R.id.textProgress)
         val winner: TextView = itemView.findViewById(R.id.textWinner)
         val optionsContainer: LinearLayout = itemView.findViewById(R.id.layoutOptions)
         val menu: ImageView = itemView.findViewById(R.id.iconInfo)
         val expandIcon: ImageView = itemView.findViewById(R.id.iconExpand)
         val expandable: LinearLayout = itemView.findViewById(R.id.layoutExpandable)
         val buttonVote: View = itemView.findViewById(R.id.buttonVotar)
+        val dates: TextView = itemView.findViewById(R.id.textDates)
     }
 }
 

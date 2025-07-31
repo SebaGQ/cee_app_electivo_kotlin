@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.lifecycle.asLiveData
 import com.kotlin.cee_app.ui.elections.viewmodel.CreateElectionViewModel
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
@@ -23,6 +22,7 @@ import androidx.activity.addCallback
 import com.kotlin.cee_app.R
 import com.kotlin.cee_app.data.SessionManager
 import com.kotlin.cee_app.databinding.FragmentCreateElectionBinding
+import com.kotlin.cee_app.data.entity.EstadoVotacion
 
 class CreateElectionFragment : Fragment() {
 
@@ -58,23 +58,23 @@ class CreateElectionFragment : Fragment() {
             viewModel.cargar(id)
         }
 
-        viewModel.titulo.asLiveData().observe(viewLifecycleOwner) {
+        viewModel.tituloLiveData.observe(viewLifecycleOwner) {
             binding.editTitle.setText(it)
         }
-        viewModel.descripcion.asLiveData().observe(viewLifecycleOwner) {
+        viewModel.descripcionLiveData.observe(viewLifecycleOwner) {
             binding.editDescription.setText(it)
         }
         val formatter = DateTimeFormatter.ISO_DATE
-        viewModel.fechaInicio.asLiveData().observe(viewLifecycleOwner) {
+        viewModel.fechaInicioLiveData.observe(viewLifecycleOwner) {
             binding.editStartDate.setText(it.format(formatter))
         }
-        viewModel.fechaFin.asLiveData().observe(viewLifecycleOwner) {
+        viewModel.fechaFinLiveData.observe(viewLifecycleOwner) {
             binding.editEndDate.setText(it.format(formatter))
         }
-        viewModel.estado.asLiveData().observe(viewLifecycleOwner) {
-            binding.switchEstado.isChecked = it == "Abierta"
+        viewModel.estadoLiveData.observe(viewLifecycleOwner) {
+            binding.switchEstado.isChecked = it == EstadoVotacion.ABIERTA
         }
-        viewModel.opciones.asLiveData().observe(viewLifecycleOwner) { list ->
+        viewModel.opcionesLiveData.observe(viewLifecycleOwner) { list ->
             binding.chipGroup.removeAllViews()
             list.forEach { text ->
                 val chip = Chip(requireContext()).apply {
@@ -149,6 +149,12 @@ class CreateElectionFragment : Fragment() {
             val desc = binding.editDescription.text.toString()
             if (viewModel.opciones.value.size < 2) {
                 Snackbar.make(binding.root, R.string.need_two_options, Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (viewModel.estado.value == EstadoVotacion.ABIERTA &&
+                viewModel.fechaInicio.value.isAfter(LocalDate.now())
+            ) {
+                Snackbar.make(binding.root, R.string.future_open_not_allowed, Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             viewModel.guardar(title, desc,
