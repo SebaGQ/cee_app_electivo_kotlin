@@ -99,6 +99,21 @@ La sección de resultados ahora cuenta con un **dashboard** que resume las princ
 - **Clases:** `TopBar.kt`, `BottomBar.kt`.
 - **Layouts:** `include_top_bar.xml`, `menu_bottom.xml`.
 
+### Flujo de navegación
+
+Se implementó **Navigation Component** con un grafo principal `mobile_navigation.xml` y uno
+para autenticación `auth_navigation.xml`, ambos utilizando *Safe Args* para transferir datos
+entre destinos.
+
+- **AuthActivity.kt** carga `auth_navigation.xml` para mover entre `LoginFragment` y
+  `SignUpFragment`.
+- **MainActivity.kt** vincula el `NavController` del `NavHostFragment` con la
+  `BottomNavigationView`.
+- **ElectionsFragment.kt** permite ir a `CreateElectionFragment`, `VoteDetailFragment` y
+  `ResultsFragment`.
+- **VoteDetailFragment.kt** navega hacia `VoteConfirmationFragment` pasando el `votacionId`.
+- **VoteConfirmationFragment.kt** redirige a `ResultsFragment` con el mismo argumento.
+
 ## Compilación
 
 ```bash
