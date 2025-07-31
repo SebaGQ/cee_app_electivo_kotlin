@@ -84,7 +84,7 @@ fun computeExtendedDashboard(
 }
 
 fun dashboardDataToItems(data: DashboardData): List<ExtendedDashboardItem> {
-    return listOf(
+    val items = mutableListOf(
         ExtendedDashboardItem(
             label = "Total Votaciones",
             value = data.totalVotaciones.toString(),
@@ -121,20 +121,26 @@ fun dashboardDataToItems(data: DashboardData): List<ExtendedDashboardItem> {
             value = data.totalVotos.toString(),
             isPercentage = false
         )
-    ).also { list ->
-        data.votacionMasParticipada?.let {
-            list + ExtendedDashboardItem(
+    )
+
+    data.votacionMasParticipada?.let {
+        items.add(
+            ExtendedDashboardItem(
                 label = "Más Participada",
                 value = it,
                 isPercentage = false
             )
-        }
-        data.votacionMenosParticipada?.let {
-            list + ExtendedDashboardItem(
+        )
+    }
+    data.votacionMenosParticipada?.let {
+        items.add(
+            ExtendedDashboardItem(
                 label = "Menos Participada",
                 value = it,
                 isPercentage = false
             )
-        }
+        )
     }
+
+    return items
 }
