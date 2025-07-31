@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 // Entities
+import com.kotlin.cee_app.data.entity.AdminEntity
 import com.kotlin.cee_app.data.entity.OpcionEntity
 import com.kotlin.cee_app.data.entity.SimpleEntity
 import com.kotlin.cee_app.data.entity.UsuarioEntity
@@ -15,6 +16,7 @@ import com.kotlin.cee_app.data.entity.VotoEntity
 
 // Daos
 import com.kotlin.cee_app.data.dao.UsuarioDao
+import com.kotlin.cee_app.data.dao.AdminDao
 import com.kotlin.cee_app.data.dao.SimpleDao
 import com.kotlin.cee_app.data.dao.VotacionDao
 import com.kotlin.cee_app.data.dao.OpcionDao
@@ -23,16 +25,18 @@ import com.kotlin.cee_app.data.dao.VotoDao
 @Database(
     entities = [
         UsuarioEntity::class,
+        AdminEntity::class,
         SimpleEntity::class,
         VotacionEntity::class,
         OpcionEntity::class,
         VotoEntity::class,
     ],
-    version = 6,
+    version = 5,
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun usuarioDao(): UsuarioDao
+    abstract fun adminDao(): AdminDao
     abstract fun simpleDao(): SimpleDao
     abstract fun votacionDao(): VotacionDao
     abstract fun opcionDao(): OpcionDao
