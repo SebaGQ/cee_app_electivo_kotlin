@@ -34,12 +34,14 @@ app/
     │   │   │   └─ OpcionPercent.kt
     │   │   ├─ entities
     │   │   │   ├─ UsuarioEntity.kt
+    │   │   │   ├─ AdminEntity.kt
     │   │   │   ├─ VotacionEntity.kt
     │   │   │   ├─ OpcionEntity.kt
     │   │   │   ├─ VotoEntity.kt
     │   │   │   └─ SimpleEntity.kt
     │   │   └─ daos
         │   │       ├─ UsuarioDao.kt
+        │   │       ├─ AdminDao.kt
         │   │       ├─ VotacionDao.kt
         │   │       ├─ OpcionDao.kt
         │   │       ├─ VotoDao.kt
@@ -61,8 +63,8 @@ A continuación se listan las funciones implementadas y los archivos más releva
 ### Autenticación
 
 - **Clases:** `AuthActivity.kt`, `ui/auth/*`, `SessionManager.kt`, `UserRepository.kt`.
-- **Entidades:** `UsuarioEntity.kt`.
-- **DAOs:** `UsuarioDao.kt`.
+- **Entidades:** `UsuarioEntity.kt`, `AdminEntity.kt`.
+- **DAOs:** `UsuarioDao.kt`, `AdminDao.kt`.
 - **Layouts:** `fragment_login.xml`, `fragment_sign_up.xml`.
 - **Dimensiones:** `res/values/dimens.xml` y sus variantes.
 
