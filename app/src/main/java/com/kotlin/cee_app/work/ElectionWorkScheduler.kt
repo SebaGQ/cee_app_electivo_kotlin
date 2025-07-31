@@ -33,7 +33,7 @@ object ElectionWorkScheduler {
         val constraints = Constraints.Builder()
             .setRequiresBatteryNotLow(true)
             .build()
-        val request = PeriodicWorkRequestBuilder<CloseExpiredElectionsWorker>(1, TimeUnit.MINUTES)
+        val request = PeriodicWorkRequestBuilder<CloseExpiredElectionsWorker>(15, TimeUnit.MINUTES)
             .setInitialDelay(delay, TimeUnit.MINUTES)
             .setConstraints(constraints)
             .build()
