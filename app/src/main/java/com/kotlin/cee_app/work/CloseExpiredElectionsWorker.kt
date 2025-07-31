@@ -18,7 +18,7 @@ class CloseExpiredElectionsWorker(
         val today = LocalDate.now()
         repo.votaciones
             .first()
-            .filter { it.fechaFin.isAfter(today) && it.estado != EstadoVotacion.FINALIZADA }
+            .filter { !it.fechaFin.isAfter(today) && it.estado != EstadoVotacion.FINALIZADA }
             .forEach { repo.finalizarVotacion(it) }
 
         return Result.success()
