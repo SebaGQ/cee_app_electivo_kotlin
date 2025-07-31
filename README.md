@@ -17,43 +17,45 @@ Las versiones de dependencias se especifican en `gradle/libs.versions.toml` y el
 app/
  └─ src/main/
      ├─ java/com/kotlin/cee_app/
-    │   ├─ AuthActivity.kt
-    │   ├─ ui/auth/
-    │   │   ├─ LoginFragment.kt
-    │   │   └─ SignUpFragment.kt
-    │   ├─ MainActivity.kt
-    │   ├─ data/
-    │   │   ├─ AppDatabase.kt
-    │   │   ├─ ElectionRepository.kt
-    │   │   ├─ UserRepository.kt
-    │   │   ├─ SessionManager.kt
-    │   │   ├─ Converters.kt
-    │   │   ├─ model/
-    │   │   │   ├─ DashboardItem.kt
-    │   │   │   ├─ ConteoOpcion.kt
-    │   │   │   └─ OpcionPercent.kt
-    │   │   ├─ entities
-    │   │   │   ├─ UsuarioEntity.kt
-    │   │   │   ├─ AdminEntity.kt
-    │   │   │   ├─ VotacionEntity.kt
-    │   │   │   ├─ OpcionEntity.kt
-    │   │   │   ├─ VotoEntity.kt
-    │   │   │   └─ SimpleEntity.kt
-    │   │   └─ daos
-        │   │       ├─ UsuarioDao.kt
-        │   │       ├─ AdminDao.kt
-        │   │       ├─ VotacionDao.kt
-        │   │       ├─ OpcionDao.kt
-        │   │       ├─ VotoDao.kt
-        │   │       └─ SimpleDao.kt
-    │   └─ ui/
-    │       ├─ elections/...
-    │       ├─ results/...
-    │       ├─ users/...
-    │       └─ components/
+     │   ├─ AuthActivity.kt
+     │   ├─ MainActivity.kt
+     │   ├─ data/
+     │   │   ├─ AppDatabase.kt
+     │   │   ├─ ElectionRepository.kt
+     │   │   ├─ UserRepository.kt
+     │   │   ├─ SessionManager.kt
+     │   │   ├─ Converters.kt
+     │   │   ├─ model/
+     │   │   │   ├─ DashboardItem.kt
+     │   │   │   ├─ ConteoOpcion.kt
+     │   │   │   └─ OpcionPercent.kt
+     │   │   ├─ entity/
+     │   │   │   ├─ UsuarioEntity.kt
+     │   │   │   ├─ VotacionEntity.kt
+     │   │   │   ├─ OpcionEntity.kt
+     │   │   │   ├─ VotoEntity.kt
+     │   │   │   └─ EstadoVotacion.kt
+     │   │   ├─ dao/
+     │   │   │   ├─ UsuarioDao.kt
+     │   │   │   ├─ VotacionDao.kt
+     │   │   │   ├─ OpcionDao.kt
+     │   │   │   └─ VotoDao.kt
+     │   ├─ ui/
+     │   │   ├─ auth/...
+     │   │   ├─ elections/...
+     │   │   ├─ results/...
+     │   │   ├─ users/...
+     │   │   └─ components/
+     │   └─ work/
+     │       ├─ CloseExpiredElectionsWorker.kt
+     │       ├─ OpenScheduledElectionsWorker.kt
+     │       └─ ElectionWorkScheduler.kt
      └─ res/
-         ├─ layout/ (xml de pantallas y listas)
-         └─ values/dimens.xml
+         ├─ layout/
+         └─ values/
+src/
+ └─ main/resources/db/migration/
+     └─ V1__init.sql
 ```
 
 ## Funcionalidades principales
@@ -63,8 +65,8 @@ A continuación se listan las funciones implementadas y los archivos más releva
 ### Autenticación
 
 - **Clases:** `AuthActivity.kt`, `ui/auth/*`, `SessionManager.kt`, `UserRepository.kt`.
-- **Entidades:** `UsuarioEntity.kt`, `AdminEntity.kt`.
-- **DAOs:** `UsuarioDao.kt`, `AdminDao.kt`.
+- **Entidades:** `UsuarioEntity.kt`.
+- **DAO:** `UsuarioDao.kt`.
 - **Layouts:** `fragment_login.xml`, `fragment_sign_up.xml`.
 - **Dimensiones:** `res/values/dimens.xml` y sus variantes.
 
@@ -79,6 +81,7 @@ A continuación se listan las funciones implementadas y los archivos más releva
 ### Gestión y participación en votaciones
 
 - **Clases:** `ElectionsFragment.kt`, `CreateElectionFragment.kt`, `VoteDialogFragment.kt`, `VoteDetailFragment.kt`, `VoteConfirmationFragment.kt`, `VotacionAdapter.kt`, `VoteDetailViewModel.kt`, `CreateElectionViewModel.kt`, `ElectionsViewModel.kt`.
+- **Tareas programadas:** `ElectionWorkScheduler.kt`, `CloseExpiredElectionsWorker.kt`, `OpenScheduledElectionsWorker.kt`.
 - **Entidades:** `VotacionEntity.kt`, `OpcionEntity.kt`, `VotoEntity.kt`.
 - **DAOs:** `VotacionDao.kt`, `OpcionDao.kt`, `VotoDao.kt`.
 - **Layouts:** `fragment_elections.xml`, `fragment_create_election.xml`, `dialog_vote.xml`, `fragment_vote_detail.xml`, `fragment_vote_confirmation.xml`, `item_votacion.xml`, `item_vote_option.xml`.
