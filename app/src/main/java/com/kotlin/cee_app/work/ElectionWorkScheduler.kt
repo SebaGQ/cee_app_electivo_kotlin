@@ -5,36 +5,29 @@ import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import java.time.Duration
-import java.time.LocalDateTime
+
 import java.util.concurrent.TimeUnit
 
 object ElectionWorkScheduler {
     private const val CLOSE_WORK_NAME = "closeExpiredElections"
     private const val OPEN_WORK_NAME = "openScheduledElections"
 
-    internal fun nextDelayMinutes(now: LocalDateTime = LocalDateTime.now()): Long {
-        val nextRun = now.plusMinutes(1)
-        return Duration.between(now, nextRun).toMinutes()
-    }
+    /** Intervalo fijo para la ejecución periódica de los workers. */
+    internal const val WORK_INTERVAL_MINUTES = 15L
 
-    internal fun nextDayDelayMinutes(now: LocalDateTime = LocalDateTime.now()): Long {
-        val nextRun = now.toLocalDate().plusDays(1).atStartOfDay().plusMinutes(1)
-        return Duration.between(now, nextRun).toMinutes()
-    }
-
-    fun scheduleDailyWork(context: Context) {
+    fun schedulePeriodicWork(context: Context) {
         scheduleCloseWork(context)
         scheduleOpenWork(context)
     }
 
     private fun scheduleCloseWork(context: Context) {
-        val delay = nextDelayMinutes()
         val constraints = Constraints.Builder()
             .setRequiresBatteryNotLow(true)
             .build()
-        val request = PeriodicWorkRequestBuilder<CloseExpiredElectionsWorker>(15, TimeUnit.MINUTES)
-            .setInitialDelay(delay, TimeUnit.MINUTES)
+        val request = PeriodicWorkRequestBuilder<CloseExpiredElectionsWorker>(
+            WORK_INTERVAL_MINUTES,
+            TimeUnit.MINUTES
+        )
             .setConstraints(constraints)
             .build()
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
@@ -45,12 +38,13 @@ object ElectionWorkScheduler {
     }
 
     private fun scheduleOpenWork(context: Context) {
-        val delay = nextDayDelayMinutes()
         val constraints = Constraints.Builder()
             .setRequiresBatteryNotLow(true)
             .build()
-        val request = PeriodicWorkRequestBuilder<OpenScheduledElectionsWorker>(1, TimeUnit.DAYS)
-            .setInitialDelay(delay, TimeUnit.MINUTES)
+        val request = PeriodicWorkRequestBuilder<OpenScheduledElectionsWorker>(
+            WORK_INTERVAL_MINUTES,
+            TimeUnit.MINUTES
+        )
             .setConstraints(constraints)
             .build()
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
